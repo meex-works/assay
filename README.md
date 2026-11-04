@@ -340,6 +340,12 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
   holders actually did. "Went up" isn't a quality.
 - **Nothing rewritten.** Corrections add a new observation; the old one stays on the record.
 
+## Brand
+
+The mark is a hallmark: the stamp an assay office strikes on metal that passes. [brand/logo.png](brand/logo.png)
+(1024², the PNG is canonical; the SVG sets its letter in Georgia) · palette touchstone `#1A1D22`, gold `#D9A441`,
+bone `#ECE6D8`.
+
 ## License
 
 [MIT](LICENSE) © 2026 SHYGUY LLC

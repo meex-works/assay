@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" fill="#1A1D22"/>
+  <!-- a hallmark punch: clipped-corner cartouche -->
+  <path d="M352 262 H672 L762 352 V672 L672 762 H352 L262 672 V352 Z" fill="none" stroke="#D9A441" stroke-width="34" stroke-linejoin="round"/>
+  <text x="512" y="638" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="400" fill="#E2B04F">A</text>
+</svg>
