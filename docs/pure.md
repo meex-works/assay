@@ -42,6 +42,78 @@ Pure as of 0:34 after launch. Not a recommendation: do your own research.
 assay.meex.work/c/<mint>
 ```
 
+## The channel
+
+**Sterling, Fine & Co.** (working name), a Telegram channel whose posts come from **the Assay Office**. Sterling and
+fine are both purity standards (sterling silver, fine gold), and "fine" is also the most deadpan verdict available.
+Handles that looked free on 2026-11-04: `@sterlingfine`, `@sterlingfineco`, `@assayoffice`.
+
+### Voice
+
+A late-90s investment firm that has never once raised its voice: memos, notices, HR language. It's the Hazlett and
+Co. register, and it works because the trenches already run on corporate structure: founders, packages, hires,
+exits. The puns land because they're accurate. Every corporate term stands for exactly one fact, and the number stays
+in the sentence.
+
+| the fact | the Office says |
+|---|---|
+| the dev | the founder |
+| the dev's buy | the founder's stake |
+| a launch bundle | bundled compensation |
+| late-bundle wallets | new hires |
+| wallets funded from one source | referred by the same recruiter |
+| wallets funded within minutes of each other | received their signing bonuses within minutes of each other |
+| independent buyers | organic headcount |
+| buying from the bundle and bots | internal synergy |
+| sniper bots | temps |
+| a predator | a corporate raider |
+| a vamp | an unlicensed franchise |
+| a group selling | offboarding |
+| the dev sold everything | the founder has transitioned out of the role |
+| pure | hallmarked |
+| no longer pure | hallmark withdrawn |
+| still pure at 5:00 | passed probation |
+| watch ended | performance review closed |
+| do your own research | due diligence remains your department |
+
+The post:
+
+```
+MEMO  ·  HALLMARK ISSUED
+$TICKER  Name
+<mint>
+
+The founder took a 2.1% stake at launch and has made no further acquisitions.
+No bundled compensation. No temps or raiders of note among the early hires.
+First venture for this founder. Capital sourced from an exchange.
+Original branding. Website and X account reference the correct mint.
+
+Hallmark issued at 0:34. Under review for 15 minutes.
+This memo is not investment advice. Due diligence remains your department.
+```
+
+The thread:
+
+```
+└ 1:02  Nine new hires in one minute, all of whom received their signing bonuses within three minutes of each
+        other. Combined: 31% of supply. Hallmark withdrawn.
+└ 1:30  Up 14× since launch. Organic headcount growth: 0.8%. The rest is internal synergy.
+└ 3:10  The new hires have begun offboarding: 60% of their position in 40 seconds.
+└ 4:05  The founder has transitioned out of the role, exercising the full exit package.
+└ 15:00 Performance review closed. Organic headcount: 41. The new hires have completed offboarding.
+```
+
+or, for one that holds:
+
+```
+└ 5:00  Passed probation.
+└ 15:00 Performance review closed. Hallmark retained. Organic headcount: 212.
+```
+
+Rules: no emoji, no exclamation marks, no slang, no pronouns for founders. Never mock the people who bought; the joke
+is always on the structure. Never a prediction, never a recommendation, never a price on its own. If a pun would
+blur the fact, drop the pun.
+
 ## Bundles that arrive after the post
 
 The most common way a pure launch dies is a bundle that buys in *after* launch: a group of wallets buys a large share

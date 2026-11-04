@@ -150,21 +150,22 @@ coins, never a prediction about this one. [Lenses →](docs/lenses.md)
 
 ## Pure launches
 
-The Telegram channel doesn't post good coins. It posts **pure launches**: coins whose structure is honest at launch,
+The Telegram channel (working name **Sterling, Fine & Co.**, posts from the Assay Office) doesn't post good coins. It posts **pure launches**: coins whose structure is honest at launch,
 decided within seconds, with **no market details** at all. No price, no market cap, no volume, no holder count. If you
 want those, go and look, and do your own research while you're there.
 
 ```
-PURE LAUNCH  $TICKER  Name
+MEMO  ·  HALLMARK ISSUED
+$TICKER  Name
 <mint>
 
-Dev bought 2.1% in the create transaction, nothing since.
-No bundle. No known bundler or predator wallets among the first buyers.
-Creator's first launch, funded from an exchange.
-Original image and metadata.
-The site and X account show this mint.
+The founder took a 2.1% stake at launch and has made no further acquisitions.
+No bundled compensation. No temps or raiders of note among the early hires.
+First venture for this founder. Capital sourced from an exchange.
+Original branding. Website and X account reference the correct mint.
 
-Pure as of 0:34 after launch. Not a recommendation: do your own research.
+Hallmark issued at 0:34. Under review for 15 minutes.
+This memo is not investment advice. Due diligence remains your department.
 ```
 
 Pure means: a small dev buy and nothing hidden, no bundle, no known bad wallets early, a creator with a clean history,
@@ -180,11 +181,12 @@ pure at 2:14: 9 wallets funded within 3 minutes of each other bought 31% of supp
 Each post carries a **thread** of the coin's history as it happens:
 
 ```
-└ 0:34  Pure: every check passed.
-└ 1:02  Late bundle: 9 wallets funded within 3 minutes of each other bought 31% of supply. No longer pure.
-└ 1:30  Up 14× since launch, and it isn't demand: 0.8% of the buying since 0:34 came from independent wallets.
-└ 3:10  The bundle is selling: 60% of its position in 40 seconds.
-└ 15:00 Watch ended. 41 independent buyers since launch. The bundle has sold 100% of its position.
+└ 1:02  Nine new hires in one minute, all of whom received their signing bonuses within three minutes of each
+        other. Combined: 31% of supply. Hallmark withdrawn.
+└ 1:30  Up 14× since launch. Organic headcount growth: 0.8%. The rest is internal synergy.
+└ 3:10  The new hires have begun offboarding: 60% of their position in 40 seconds.
+└ 4:05  The founder has transitioned out of the role, exercising the full exit package.
+└ 15:00 Performance review closed. Organic headcount: 41. The new hires have completed offboarding.
 ```
 
 A price move appears only next to what made it, and only when what made it isn't demand: it's there to say the chart
