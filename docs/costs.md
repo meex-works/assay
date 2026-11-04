@@ -6,6 +6,31 @@ assay is built to be good and fast, not cheap. Whoever runs it pays their own pr
 **X is first-party** (the official X API) until a measured cost estimate says otherwise. It's the biggest line by far,
 and the one that sets how many coins the sweep can afford to look at closely.
 
+## The stream, measured (2026-11-04)
+
+| feed | rate | size per notification | per month |
+|---|---|---|---|
+| every pump-program transaction, failed included (`logsSubscribe` delivers all) | ~312/s, 85% failed | 4.2 KB successful, 1.2 KB failed | **~1.3 TB** |
+| successful only (a gRPC `failed: false` filter) | ~46/s | ~4 KB | ~0.5 TB |
+| launches only (the mint-authority account) | ~34/min | ~4 KB | ~6 GB |
+
+The tape needs every trade on every coin (the wallet-reputation index is cross-coin), so the full successful stream is the
+requirement. Scripts: `research/pump-verify/stream-size.mjs`, `stream-bytes.mjs`.
+
+## Providers for that stream (prices as published, checked 2026-11-04)
+
+| option | monthly | what it covers | fit |
+|---|---|---|---|
+| **Chainstack Growth + Yellowstone gRPC add-on** | $49 + $49 | gRPC with unlimited stream events, 2 concurrent streams, `failed: false` filtering, 20M request units for RPC calls ($15 per extra 1M) | **fits**: the whole successful stream plus funder lookups. Bandwidth metering isn't stated anywhere; confirm in week one |
+| Helius Developer | $49 | 10M credits; standard and enhanced websockets metered at 20 credits/MB; webhooks 1 credit per event; gRPC mainnet not included | **doesn't fit the full stream** (~26M credits/month on logs); fits a launches-only feed (~0.12M credits) |
+| Helius Business | $499 | 100M credits, LaserStream gRPC on mainnet, autoscaling | fits everything, at 10× the price |
+| Triton | usage-based | reportedly ~$10 per million calls + ~$0.08/GB (a competitor's figures, unverified) | probably ~$40–100 for 0.5 TB plus calls; get a quote |
+| Helius Free | $0 | 1M credits, standard websockets | fits a **launches-only second source** for reconciliation |
+
+**Recommended for the silent week:** Chainstack Growth + the $49 gRPC add-on as the primary stream (failed transactions
+filtered at the source), and Helius Free subscribed to launches only, as the independent second source. About $98 a
+month.
+
 ## By provider
 
 | need | provider | pricing shape | status |
