@@ -14,6 +14,7 @@
   <img alt="lenses: 7" src="https://img.shields.io/badge/lenses-7-8A9099?style=flat-square">
   <a href="https://t.me/assayoffice"><img alt="Telegram: Assay Office" src="https://img.shields.io/badge/telegram-Assay%20Office-5B93C7?style=flat-square"></a>
   <img alt="assumptions: reviewed" src="https://img.shields.io/badge/assumptions-reviewed-8A9099?style=flat-square">
+  <a href="docs/verified.md"><img alt="verified on mainnet" src="https://img.shields.io/badge/verified-mainnet-62A872?style=flat-square"></a>
 </p>
 
 <p align="center">
@@ -292,7 +293,7 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 
 - [x] Design: signals, scoring, layers, bus, API, retention, overlay
 - [x] Assumptions reviewed adversarially; findings in [assumptions](docs/assumptions.md)
-- [ ] Verify the `create_v2` arguments, fee and sharing configs against the current IDL
+- [x] Verify the launch mechanics against the IDL and real launches ([verified](docs/verified.md))
 - [ ] `bus` + `ingest`: pump program listener, decoders, NATS adapter
 - [ ] **Backfill**: every historical launch, creator, image and early-buyer funding cluster
 - [ ] **L0 reflex** + **the tape**: creator lineage, funding clusters, bundles, wallet classes, live entries
@@ -321,6 +322,7 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 | [launch kit](docs/launch-kit.md) | the creators' checklist, preflight, declared launches |
 | [hypotheses](docs/hypotheses.md) | trench beliefs (bundles, predators, callouts, category, pairing, vamps) and the test for each |
 | [assumptions](docs/assumptions.md) | every load-bearing assumption, its verdict, and what changed |
+| [verified](docs/verified.md) | the plan's pump.fun claims checked against the IDL and ~41,500 real launches |
 | [api](docs/api.md) | REST, batch, stream, webhooks, MCP, point-in-time |
 | [retention](docs/retention.md) | what's kept, for how long, and what each platform's terms allow |
 | [overlay](docs/overlay.md) | the extension, the demo, the Telegram channel |

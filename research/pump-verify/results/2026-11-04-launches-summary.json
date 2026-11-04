@@ -1,0 +1,187 @@
+{
+  "rate": {
+    "signatures": 45000,
+    "ok": 41510,
+    "failed": 3490,
+    "span_s": 74693,
+    "per_minute": 33.3,
+    "per_day_extrapolated": 48016,
+    "window": [
+      "2026-11-03T07:10:19.000Z",
+      "2026-11-04T03:55:12.000Z"
+    ],
+    "by_hour_utc": {
+      "2026-11-04T03": 1800,
+      "2026-11-04T02": 2131,
+      "2026-11-04T01": 2112,
+      "2026-11-04T00": 1985,
+      "2026-11-03T23": 2675,
+      "2026-11-03T22": 2528,
+      "2026-11-03T21": 2528,
+      "2026-11-03T20": 2344,
+      "2026-11-03T19": 2723,
+      "2026-11-03T18": 2358,
+      "2026-11-03T17": 2579,
+      "2026-11-03T16": 2421,
+      "2026-11-03T15": 1713,
+      "2026-11-03T14": 2017,
+      "2026-11-03T13": 1734,
+      "2026-11-03T12": 1448,
+      "2026-11-03T11": 1455,
+      "2026-11-03T10": 1314,
+      "2026-11-03T09": 1394,
+      "2026-11-03T08": 1163,
+      "2026-11-03T07": 1088
+    }
+  },
+  "sampled": 400,
+  "decoded": 398,
+  "missing": 0,
+  "create_ix": {
+    "none": 119,
+    "create_v2": 277,
+    "create": 2
+  },
+  "events_found_in": {
+    "logs+cpi": 398
+  },
+  "logs_truncated": 0,
+  "tx_version": {
+    "0": 136,
+    "1": 256,
+    "legacy": 8
+  },
+  "quote_mint": {
+    "11111111111111111111111111111111": 282,
+    "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn": 34,
+    "DJTu7vi8norVzdVAffgvb39VP7wjKeTsgaMBJrzfxvoF": 5,
+    "C5xph2yL6gMdxmuLGxJBkGpmuDFfyi5fqkBNhvL6pump": 2,
+    "WXMRyRZhsa19ety5erZhHg4N3xj3EVN92u94422teJp": 2,
+    "GRNDYDpqwpCm6jVxpbh4xT5AM4r3p391qYsKTHqgaET2": 1,
+    "SPCXxcqXj6e5dJDVNovHN8744zkbhM2bYudU45BimGb": 9,
+    "DoGEV7LASBkQbibMc5k5vKnTZoMg423GpJ5QtJEGfm7R": 6,
+    "9AvytnUKsLxPxFHFqS6VLxaxt5p6BhYNr53SD2Chpump": 1,
+    "86j9yoVzuuCjLAq4hFyaX1cphRc9SJhWhSN4h9Hh79Be": 1,
+    "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN": 1,
+    "DyUR3ZpJj5iu8WBG7zk1YbamJE5k9afZhoM7xYCbpump": 1,
+    "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg": 1,
+    "AMD8XwJXgQ9WV45Wyj9yFLejxzf2J6VM1PJY8bJEjeES": 6,
+    "EfRnwABuWZKxri55se639twy4jy3FRgYfri7wLJ5pump": 1,
+    "RDDTGbhHwVXfyCvQMXzzowKjf5qrYBZAnehoXW83ooh": 1,
+    "FUNtwYkmTzxeHtTJu8hVJZ9nEXXdFh18e32eLZCEyaEM": 1,
+    "DDmGnuvroxVrb7CSyjYcezFU8gnAfhKasg4ZZezmpump": 2,
+    "XsCPL9dNWBMvFtTmwcCA5v3xWPSMEBCszbQdiLLq6aN": 3,
+    "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp": 3,
+    "3ZLekZYq2qkZiSpnSvabjit34tUkjSwD1JFuW9as9wBG": 3,
+    "7aeDqEi2PfoYpJfw2eawzLnRH9NjQJ6jWMZ9FH1Hpump": 1,
+    "TTWofwAge91oFhZs7kpQdyrVRkmevgM88xijGvQFbKo": 3,
+    "BHzH8z58Vx2WiKBR2AGCNfYm54s1YnqHr8Z1YxS3pump": 1,
+    "AxPzkSJKU3ACqZu7qpq8ov29g4BENZBM4SAZwUUUFo8M": 1,
+    "Pren1FvFX6J3E4kXhJuCiAD5aDmGEb7qJRncwA8Lkhw": 2,
+    "3NZ9JMVBmGAqocybic2c7LQCJScmgsAZ6vQqTDzcqmJh": 2,
+    "he1iusmfkpAdwvxLNGV8Y1iSbj4rUy6yMhEA3fotn9A": 1,
+    "Hu5Qdto25NKcUepDxZYRjkJigU1UX4vGrxDeomt2TYo5": 1,
+    "GTBxUiw6wJdmmkCGZgRHLyYxqu1vG4KtRpeox6yDpump": 1,
+    "6GmAFSYs4gk3FDao5FzzySQpPZaWsa4rUJHacpMpUNgx": 1,
+    "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v": 2,
+    "PreweJYECqtQwBtpxHL171nL2K6umo692gTm7Q3rpgF": 2,
+    "XsoBhf2ufR8fTyNSjqfU71DYGaE6Z3SUGAidpzriAA4": 1,
+    "EJAxERvKU4kEVXn3NarjvRtgaMaJyP9ZuMeKA7JJpump": 1,
+    "J3NKxxXZcnNiMjKw9hYb2K4LUxgwB6t1FtPtQVsv3KFr": 1,
+    "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W": 2,
+    "J8PSdNP3QewKq2Z1JJJFDMaqF7KcaiJhR7gbr5KZpump": 1,
+    "RBLXDGRD64AtRamHMFVcjqne3Ar7NLWtFtYNtsrf1cE": 1,
+    "METvsvVRapdj9cFLzq4Tr43xK4tAjQfwX76z3n6mWQL": 1,
+    "98sMhvDwXj1RQi5c5Mndm3vPe9cBqPrbLaufMXFNMh5g": 2,
+    "NTRNDMqQSiwEC2jJs3wJiZS6bpGYQJtMNQJgiX3WyV6": 1,
+    "A7bdiYdS5GjqGFtxf17ppRHtDKPkkRqbKtR27dxvQXaS": 3
+  },
+  "token_program": {
+    "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb": 396,
+    "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA": 2
+  },
+  "mayhem": {
+    "true": 145,
+    "false": 253
+  },
+  "cashback": {
+    "false": 398
+  },
+  "holder_reward": {
+    "false": 320,
+    "true": 78
+  },
+  "creator_fee_bps": {
+    "0": 301,
+    "1": 1,
+    "5": 1,
+    "30": 5,
+    "50": 1,
+    "100": 13,
+    "125": 1,
+    "160": 1,
+    "200": 1,
+    "225": 1,
+    "300": 72
+  },
+  "depth": {
+    "0": 384,
+    "1": 14
+  },
+  "supply": {
+    "1000000000000000": 398
+  },
+  "creator_is_signer": {
+    "true": 319,
+    "false": 79
+  },
+  "buys_in_create_tx": {
+    "0": 77,
+    "1": 319,
+    "2": 1,
+    "5": 1
+  },
+  "distinct_buyers_in_create_tx": {
+    "0": 77,
+    "1": 320,
+    "5": 1
+  },
+  "dev_buy_pct": {
+    "zero": "22.9%",
+    "p50": 0.35,
+    "p90": 12.62,
+    "max": 79.31
+  },
+  "uri_hosts": {
+    "ipfs.io": 247,
+    "metadata.j7tracker.io": 77,
+    "meta.uxento.io": 12,
+    "m.rapidlaunch.io": 9,
+    "sleetheron-static.vercel.app": 1,
+    "metadata.levitatingbananatree.xyz": 6,
+    "xyzzzzzzzzzzzzzzzzzz.com": 1,
+    "ipfs2.extraction.live": 3,
+    "ipfs.launchblitz.ai": 5,
+    "raw.githubusercontent.com": 1,
+    "fast-ipfs.com": 2,
+    "metadata.pumper.ink": 2,
+    "example.com": 1,
+    "pump.mypinata.cloud": 4,
+    "m.c2bd808.workers.dev": 1,
+    "aqua-careful-guan-911.mypinata.cloud": 2,
+    "ipfs.filebase.io": 2,
+    "meta.lqsgqxmvlk.uk": 1,
+    "storage.googleapis.com": 1,
+    "md.sdfgsdfsdf.uk": 3,
+    "gg.sc": 5,
+    "sdfsgsdfsdf.uk": 1,
+    "100kdaily.top": 1,
+    "gateway.pinata.cloud": 3,
+    "meta.mwmwmwmwmwmwmwmwmw.uk": 1,
+    "lime-large-manatee-214.mypinata.cloud": 1,
+    "any.mypinata.cloud": 1,
+    "gateway.irys.xyz": 2,
+    "meta.notrandom.fun": 1,
+    "meta.thecompanysol.fun": 1
+  }
+}

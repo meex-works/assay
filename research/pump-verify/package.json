@@ -1,0 +1,3 @@
+{ "name": "pump-verify", "private": true, "type": "module",
+  "description": "Read-only checks of assay's pump.fun assumptions against mainnet. No keys.",
+  "dependencies": { "@solana/web3.js": "^1.98.0", "@coral-xyz/anchor": "^0.31.1", "bs58": "^6.0.0" } }

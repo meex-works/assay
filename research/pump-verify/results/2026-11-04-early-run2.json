@@ -1,0 +1,2396 @@
+{
+ "summary": {
+  "coins": 40,
+  "analysed": 36,
+  "skipped": 4,
+  "with_slot0_buyers": 9,
+  "with_creator_funded_buyers": 1,
+  "with_shared_funder_group_2plus": 5,
+  "with_shared_group_over_10pct": 2,
+  "median_buyers_first_minute": 3,
+  "median_fresh_pct": 0,
+  "rpc_calls_per_coin": {
+   "median": 55,
+   "max": 215
+  },
+  "funder_cache_hits_possible": 117,
+  "distinct_funders": 79
+ },
+ "results": [
+  {
+   "mint": "8a62LUPzmb3YQDLd7E8SduhAd5myNxMfeGbmHV2mpump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "m.rapidlaunch.io",
+   "early_txs": 2,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "A7t542qQKKyU3zcYc6MjaheT5xBoq83kMbH39Hfvpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 46,
+   "buys": 25,
+   "buyers": 3,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 11.15,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 67,
+   "buyer_detail": [
+    {
+     "wallet": "8UN881KsS33fQJnEtC2B1XDMWQzvJBiAqfLsKzr5g67",
+     "net_pct": 0,
+     "first_slot_offset": 6,
+     "s_after": 1,
+     "funder": null,
+     "first_seen_s_before": 39759,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 11.15,
+     "first_slot_offset": 11,
+     "s_after": 2,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "BcBn5VaKfd9onzYjBBHJRH6RRGazvAYGzyVQTh2g5PuX",
+     "net_pct": 0,
+     "first_slot_offset": 47,
+     "s_after": 10,
+     "funder": null,
+     "first_seen_s_before": 96221,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "AMASgB18JFdKJFFfBZdAc4et4ojaqr7XgFFWgoDrpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 107,
+   "buys": 31,
+   "buyers": 6,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 8.82,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 103,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 8.82,
+     "first_slot_offset": 3,
+     "s_after": 1,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "F1kdabAvnbE5iHZ33nkwNoBn423Cmo9KW8tUrTJgjLHs",
+     "net_pct": 0,
+     "first_slot_offset": 16,
+     "s_after": 4,
+     "funder": "8DfHuYFv7VQ6wgcGtVDN2vtFn5ezF52hHNtPWYcqm8hU",
+     "first_seen_s_before": 10777,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "8EE2GFrDwWCTZLejAmtGMidXBEKSMe5wigBahvjdYybp",
+     "net_pct": 0.07,
+     "first_slot_offset": 28,
+     "s_after": 7,
+     "funder": "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT",
+     "first_seen_s_before": 846495,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "FESQpa3JnuEwJ4p8pbAaPGbJzBmRFqHkYh7375i9XM8E",
+     "net_pct": 0,
+     "first_slot_offset": 74,
+     "s_after": 17,
+     "funder": "5F1seMKUqSNhv45f6FhB2cFmgJbk8U1avJw7M6TexUq1",
+     "first_seen_s_before": 125772,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "2QEWu5CSpUczP2TcWqjcHX2Nr2NNax9m7zZFd3QDbnVW",
+     "net_pct": 1.45,
+     "first_slot_offset": 75,
+     "s_after": 17,
+     "funder": "Q4Z9SPEnqw4vdTcQehSbQppEpXfBhimZAUXRktYMHnD",
+     "first_seen_s_before": 3778129,
+     "ix": "buy"
+    },
+    {
+     "wallet": "DwmtuG8ishAjbva2q6fS1HZc77b7Ehq2f6nNDCxEYHHg",
+     "net_pct": 4.35,
+     "first_slot_offset": 130,
+     "s_after": 29,
+     "funder": null,
+     "first_seen_s_before": 7406006,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "48uMmK13AAp7UHo63RyPhvyc1VJfBhxTADQh1Avepump",
+   "skipped": "more than 4000 transactions; first minute not reached"
+  },
+  {
+   "mint": "EmoJ4JFxsZErzjWiJWm3QzToVeKXjHqhg5TbbkTFpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 13,
+   "buys": 6,
+   "buyers": 1,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 16,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": -0.03,
+     "first_slot_offset": 23,
+     "s_after": 5,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    }
+   ]
+  },
+  {
+   "mint": "DiYHK8xiJPsiVBNGSgYHrZ8rqecW1z4YWNQt8FXNpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 62,
+   "buys": 31,
+   "buyers": 4,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0.41,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 88,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 0.41,
+     "first_slot_offset": 5,
+     "s_after": 2,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "AwLrEFp98aKcRiHQBPdKBF1ci2cYSoQBCZqKbkUmDiMR",
+     "net_pct": -0.01,
+     "first_slot_offset": 24,
+     "s_after": 6,
+     "funder": null,
+     "first_seen_s_before": 359912,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "62H6MA4FNREoceRvGSFvj2fXiLu6EHUaJwgRaVqh4zDJ",
+     "net_pct": 0,
+     "first_slot_offset": 37,
+     "s_after": 9,
+     "funder": "ByBqWzRHJhNGGCj1eNRdgq6tUxJ718zHakqTPCeTCrFn",
+     "first_seen_s_before": 1742063,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3X1FYfhocNoM57jWMmHarRyoLsnGhZHf6omVgVaKNL1a",
+     "net_pct": 0.03,
+     "first_slot_offset": 106,
+     "s_after": 23,
+     "funder": null,
+     "first_seen_s_before": 22422,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "7TBJDv89gqvYTHfkMgqy2YD1ydRgQVYjRysMDSh8pump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "metadata.j7tracker.io",
+   "early_txs": 4,
+   "buys": 1,
+   "buyers": 1,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0.35,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 16,
+   "buyer_detail": [
+    {
+     "wallet": "5tJ45yYXqCG2D2jScKukB3kt3isbaFdpAFFdrUaPTKTT",
+     "net_pct": 0.35,
+     "first_slot_offset": 2,
+     "s_after": 0,
+     "funder": "6yzZEb16ES3gxTpzxn7LWzSgeByPPSm5VRx2aL3KsT5d",
+     "first_seen_s_before": 1078872,
+     "ix": "buy_exact_sol_in"
+    }
+   ]
+  },
+  {
+   "mint": "CPA6pb1Zqbua1dZx8pzvkynyun9c5dDcjt9ZQm2gpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 46,
+   "buys": 29,
+   "buyers": 6,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0.93,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 104,
+   "buyer_detail": [
+    {
+     "wallet": "GqF3nhzSStdGHuM4erGDGzA6e8heDcN1Nc3rUkNCZ5a2",
+     "net_pct": -1.23,
+     "first_slot_offset": 11,
+     "s_after": 2,
+     "funder": null,
+     "first_seen_s_before": 35511,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 0.93,
+     "first_slot_offset": 12,
+     "s_after": 2,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "ACSzfEnXbGaxBN1iD2pR1C6tQYSiBvqGPx8Wx1ZTbV2o",
+     "net_pct": 0,
+     "first_slot_offset": 15,
+     "s_after": 3,
+     "funder": null,
+     "first_seen_s_before": 882685,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6toPSUrEgdVfh2CPoG1JiWDtPfJNkeyi2peAaFqWzogU",
+     "net_pct": 0,
+     "first_slot_offset": 42,
+     "s_after": 9,
+     "funder": "AgmLJBMDCqWynYnQiPCuj9ewsNNsBJXyzoUhD9LJzN51",
+     "first_seen_s_before": 454626,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "9FGFdJooreqv3fEQatXLDRM3fPbTSUigWbD9TqzVundQ",
+     "net_pct": 0,
+     "first_slot_offset": 53,
+     "s_after": 11,
+     "funder": "J81mUN9Dgn4eNTgjwLz6hNRUAXabTzXaAjxz2BxAMaM7",
+     "first_seen_s_before": 15836036,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "AV9shYhAGgaUkd4eACV8xpz7Nyf6AuEJnvbYg5r9f4HD",
+     "net_pct": 0,
+     "first_slot_offset": 77,
+     "s_after": 17,
+     "funder": "Cc3bpPzUvgAzdW9Nv7dUQ8cpap8Xa7ujJgLdpqGrTCu6",
+     "first_seen_s_before": 375014,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "92TGvXKcu3cmcMNtbakXsuq9A1tYspwwPS2nR1QJ6FQv",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "metadata.levitatingbananatree.xyz",
+   "early_txs": 43,
+   "buys": 10,
+   "buyers": 10,
+   "slot0_buyers": 4,
+   "slot0_2_pct": 0.01,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [
+    {
+     "funder": "iGdFcQoyR2MwbXMHQskhmNsqddZ6rinsipHc4TNSdwu",
+     "wallets": 2,
+     "pct": 0,
+     "is_creator": false
+    }
+   ],
+   "rpc_calls": 115,
+   "buyer_detail": [
+    {
+     "wallet": "AG9E49eux4V4BdPUAvDJTeeVnb951Sreg9mF3yaRFnWB",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "8DfHuYFv7VQ6wgcGtVDN2vtFn5ezF52hHNtPWYcqm8hU",
+     "first_seen_s_before": 37311,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "CLbgzbXTHMpy9oLeSeHEnVBj1dQh68tGmDrup5QkZFpe",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "iGdFcQoyR2MwbXMHQskhmNsqddZ6rinsipHc4TNSdwu",
+     "first_seen_s_before": 37339,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "CWNAJ1ZTPxWpKH3CTGpZPAtFpTzsVuuXabCw16RbaVjp",
+     "net_pct": 0.01,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 1469150,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "7cp6zxvhxbfS7QgYTB7ts2RqFf7zDYwtjfuHcEHhKLAz",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "4bvVMihaSeyhcvPGsh4KkXY9ndf6J3JaRfJ4ChVCvHHN",
+     "first_seen_s_before": 434459,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "3AQdXebpBNc27ALQLd1ytey2M63wh2FtTRsT5Ym8T4XC",
+     "net_pct": 0,
+     "first_slot_offset": 13,
+     "s_after": 3,
+     "funder": "54Pz1e35z9uoFdnxtzjp7xZQoFiofqhdayQWBMN7dsuy",
+     "first_seen_s_before": 1233632,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "EAhvuBdNn7i5q8Rns1CZJ5b7rFXfcra3eHLUeZQiGNzb",
+     "net_pct": 0,
+     "first_slot_offset": 13,
+     "s_after": 3,
+     "funder": "5ndLnEYqSFiA5yUFHo6LVZ1eWc6Rhh11K5CfJNkoHEPs",
+     "first_seen_s_before": 37335,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "8Qv8M8tmbR6MLnDDLruaSQ58wmt9rxxYr2ZHbfCHjk7a",
+     "net_pct": 0,
+     "first_slot_offset": 21,
+     "s_after": 5,
+     "funder": "iGdFcQoyR2MwbXMHQskhmNsqddZ6rinsipHc4TNSdwu",
+     "first_seen_s_before": 37339,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "6eVWZbj5AhMFQjcXSh9A3tw2MP6SHBHvSSa5hQbsfFw2",
+     "net_pct": 0,
+     "first_slot_offset": 32,
+     "s_after": 7,
+     "funder": null,
+     "first_seen_s_before": 191815,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6Weygqd9fBi3TnBkPwnDeUrGkTd83RCFPL7E6sc2EjSW",
+     "net_pct": 1.01,
+     "first_slot_offset": 32,
+     "s_after": 7,
+     "funder": "Akg4EgAiWUV21CcGGyUWyDX74yJfbUC7jzBu6ysWU7xM",
+     "first_seen_s_before": 26583,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "4YFxqXCxKmnanYqguywbKL36PMWWBXVpod8t1Lv2wQ7n",
+     "net_pct": 0,
+     "first_slot_offset": 41,
+     "s_after": 9,
+     "funder": "3DMAbf2gYqLpW6ffdduH1aT14DTVawmJ2RLA3iKk7nqp",
+     "first_seen_s_before": 2926754,
+     "ix": "buy"
+    }
+   ]
+  },
+  {
+   "mint": "5LHsBjKooZ6tUxMAbATM4GAbBnr8MkWfHsAYzGEpump",
+   "skipped": "more than 4000 transactions; first minute not reached"
+  },
+  {
+   "mint": "2UTKjFPBFoWSRsVQkhsrkmuCNV3cwShKYB5Gpnb2pump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 37,
+   "buys": 21,
+   "buyers": 2,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0.14,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0.14,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 65,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 0.14,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "8KDzKw9vNUNfMc1KJoY4K2ppkEPuXyt7F56EJHshVvt4",
+     "net_pct": 0,
+     "first_slot_offset": 106,
+     "s_after": 23,
+     "funder": "6NZ3JXFawyUM4wPzZ1RYYAqXLcqYVdtSuwU7RKuqFZB",
+     "first_seen_s_before": 101524,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "GTsgWsSUy3dbZnxwLLVEMBryExfTfpHmdMfpoBeJpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 31,
+   "buys": 13,
+   "buyers": 3,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 47,
+   "buyer_detail": [
+    {
+     "wallet": "BuHzBPfEYNMUFKr77yNp5dMuLZaTBni8vw9FoKCm2GSi",
+     "net_pct": 0,
+     "first_slot_offset": 2,
+     "s_after": 1,
+     "funder": "FACC76n4SAcXatFhe1Bf4LogxJEiyUuTtvpMvX7BbJDf",
+     "first_seen_s_before": 1235814,
+     "ix": "buy"
+    },
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": -1.47,
+     "first_slot_offset": 5,
+     "s_after": 1,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "5g66Tci2Pmg6NdyaP2traAfXqAs9nWgypAhBG3gvgHC8",
+     "net_pct": 8.3,
+     "first_slot_offset": 89,
+     "s_after": 20,
+     "funder": "Er3CvWypN3RZjX5jhGRpFwLGA9grwizTMLDRgJC3dDYf",
+     "first_seen_s_before": 767023,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "EuyJX95THDB3DwfuFkVy1zK5j39CA7eA6n657iCgpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 100,
+   "buys": 34,
+   "buyers": 5,
+   "slot0_buyers": 1,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 1.44,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 96,
+   "buyer_detail": [
+    {
+     "wallet": "HXmyTxHbUPrnsuViPFsefuGTYbAk9BjStGQDaLCjh18e",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "84eUQNQgXZJGipC3fQbak5XE4VHhVHBXwpVE65Ly7x2d",
+     "first_seen_s_before": 20201881,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 1.44,
+     "first_slot_offset": 3,
+     "s_after": 0,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "GunF7JwjJcc5JuP2guiz4N5PMA4roiehaXiYi55W6yQK",
+     "net_pct": 0,
+     "first_slot_offset": 36,
+     "s_after": 8,
+     "funder": "82MMAooKk1riSuF8NjeVUywrWAUyWCpKhb5Xc1yofVDE",
+     "first_seen_s_before": 107341,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "C6TWvLX4ZhykjCPGiD1X2cofeZKCNBUCvmKrLnKg3vFQ",
+     "net_pct": 0,
+     "first_slot_offset": 60,
+     "s_after": 13,
+     "funder": "4WwNRySWxvjaHM7n1v4f6qXqDYQxSLwSGXxqQGDR7Y5Z",
+     "first_seen_s_before": 347822,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "9AD7vGTrUUgRr7GL5dkqbTVFAzSov2A9bn1T5nHuAzjQ",
+     "net_pct": 0,
+     "first_slot_offset": 90,
+     "s_after": 19,
+     "funder": "CBN29gXhMvh9Zzj9WWHy97atNTkk9cr7rmbvabU5i2Po",
+     "first_seen_s_before": 246762,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "By46Bfwr4CN7wSqgptcFTFHttgcsfgtJwwAHQna6pump",
+   "mayhem": false,
+   "quote": "DDmGnuvroxVrb7CSyjYcezFU8gnAfhKasg4ZZezmpump",
+   "uri_host": "metadata.j7tracker.io",
+   "early_txs": 7,
+   "buys": 3,
+   "buyers": 3,
+   "slot0_buyers": 2,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 36,
+   "buyer_detail": [
+    {
+     "wallet": "2s36NmRtg48gDiGP64n9q71DMxB7MWm3HeQnY7Hvxhgv",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "GDUTA51kCoUus3UTr7s5k9LrQt5sfBB5EbL3cSa9reA6",
+     "first_seen_s_before": 4075892,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "Jhrcjcdn1UuNFve7SXtnGy6MShZQRx9ymc1rBDNPtdE",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "CuU5xzeJrJeFduxNt6eUfSTR45ShU7r2DeDsY2tLKC4Z",
+     "first_seen_s_before": 4075843,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "9dVSVwrUJfnFqRZ8ChaGExowQbxWBSRgQbtgEQecCkis",
+     "net_pct": 0,
+     "first_slot_offset": 128,
+     "s_after": 28,
+     "funder": "CnTeYCBA7Hzj9r2s99SaEXKYpiWixtMUkqZWHwyNbm3g",
+     "first_seen_s_before": 61003,
+     "ix": "multi_hop_swap"
+    }
+   ]
+  },
+  {
+   "mint": "FYD7GaDUnduQNUREW69w3fhgsPK8Rmomgp1PQRoupump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 12,
+   "buys": 5,
+   "buyers": 5,
+   "slot0_buyers": 4,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 2,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 55,
+   "buyer_detail": [
+    {
+     "wallet": "ApLvVoMK1dtvyP6PXgr3d5bRGaNFvrVqmc72eQMiL4DA",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "EAujuTL2KVnJPydugkiikf6dipVUmGXumeGqMpM2RF94",
+     "first_seen_s_before": 85,
+     "ix": "buy"
+    },
+    {
+     "wallet": "2EsRiaPazhbDCEsx8pztTfRPSkVG4TU8UpmGSYrWAnHJ",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "2QrrxZ2ggZPUuUxgDM5QbhFWxW2cWPZAEYQ8RHN4wv4M",
+     "first_seen_s_before": 222700,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6Z91Dgiz9E44bMW11rQuMBjt1NwwPoQGXFNZieGfVtAb",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": -19850,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "5PuQCemC51X2fFaY5Tqq8kPbw6x1pUvaGasA1zYD5VuB",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "8rXPssQ6JAba88vrYvxCJUVTPiqyURaKRkbJPQ6XA6rr",
+     "first_seen_s_before": 942411,
+     "ix": "buy"
+    },
+    {
+     "wallet": "BQD1gcWsBDLUhMXGLyo9UKZcJoZSXJugbVp1o9kQmJG9",
+     "net_pct": 0.03,
+     "first_slot_offset": 18,
+     "s_after": 3,
+     "funder": null,
+     "first_seen_s_before": 1331745,
+     "ix": "buy"
+    }
+   ]
+  },
+  {
+   "mint": "GbwM42KRbvx9t7WTFHSM6qkiU61Q9siAA4X5LxgNpump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "metadata.j7tracker.io",
+   "early_txs": 28,
+   "buys": 14,
+   "buyers": 13,
+   "slot0_buyers": 3,
+   "slot0_2_pct": 12.12,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 113,
+   "buyer_detail": [
+    {
+     "wallet": "26YrALaqCGtV7pha7NPBiZ5hyExFn8xRvxWhiwUDs4yw",
+     "net_pct": 12.12,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "BfbvDvYfLmiSHy88C6t5Z6Z8Zxr6U2fMFM6fu6zoqqSu",
+     "first_seen_s_before": 5417563,
+     "ix": "buy,buy_exact_quote_in"
+    },
+    {
+     "wallet": "8ptvshQRZPRaRQBSCRxhHwbJFr6ktyUQ1SATDCLijkBW",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "DeFG8i8zoJ3hN155nmvLq266ZVxWmNgRaTz5KQVHfe2S",
+     "first_seen_s_before": 513161,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "2YprUs8nVsxuMNjVFvt8JEEUJmuSwTWy9rch2SxgwQPR",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 806903,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "4cVj8PzS7WiZtDRPE4921QqeXyUyxVasR6rc3anWQQuR",
+     "net_pct": 0,
+     "first_slot_offset": 5,
+     "s_after": 1,
+     "funder": "A77HErqtfN1hLLpvZ9pCtu66FEtM8BveoaKbbMoZ4RiR",
+     "first_seen_s_before": 4141451,
+     "ix": "buy"
+    },
+    {
+     "wallet": "BGUJYkqg7Qh1XZeUh739EbPeozgseeBnqeTLcFogKBEX",
+     "net_pct": 0,
+     "first_slot_offset": 5,
+     "s_after": 1,
+     "funder": "HKAXTxaJQuSCztHEAhckaXdYQbV7FaFref4NvhUy4T3Z",
+     "first_seen_s_before": 7582539,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "AzUviTRrzU7dgq8sBw6Yg2BJQsQLFWtwj9agzPLR3GWr",
+     "net_pct": 3.46,
+     "first_slot_offset": 40,
+     "s_after": 8,
+     "funder": "F7p3dFrjRTbtRp8FRF6qHLomXbKRBzpvBLjtQcfcgmNe",
+     "first_seen_s_before": 256047,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "2k6aaxszxwHpbg9CuYTZgb326V1xmp18HrXyru7Adjva",
+     "net_pct": 0,
+     "first_slot_offset": 40,
+     "s_after": 8,
+     "funder": null,
+     "first_seen_s_before": 430122,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3gAdBY2sEoHn7tRRsuS1SCBU46jAMKpQp1i91V1i1UxV",
+     "net_pct": 0,
+     "first_slot_offset": 44,
+     "s_after": 9,
+     "funder": "6LY1JzAFVZsP2a2xKrtU6znQMQ5h4i7tocWdgrkZzkzF",
+     "first_seen_s_before": 256109,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "nya666pQkP3PzWxi7JngU3rRMHuc7zbLK8c8wxQ4qpT",
+     "net_pct": 0,
+     "first_slot_offset": 45,
+     "s_after": 9,
+     "funder": null,
+     "first_seen_s_before": 110701,
+     "ix": "buy"
+    },
+    {
+     "wallet": "winQcSPxum9ZUDkfxsyH7Z6gTYuQr38ACvm9uw7LDQy",
+     "net_pct": 0,
+     "first_slot_offset": 46,
+     "s_after": 10,
+     "funder": "9nTKC9XWV3w6wADCqj9v5etJeBGMDrJFBvtAE25aAFg2",
+     "first_seen_s_before": 1587191,
+     "ix": "buy"
+    },
+    {
+     "wallet": "26Yr3KKcYKHvXhvbYPnTfPYjCzvnwwNaqvPppdJ9djyw",
+     "net_pct": 0,
+     "first_slot_offset": 49,
+     "s_after": 10,
+     "funder": "2kN7WfKEiiNkF7QkjHqQf5ftd5dMJSmNqpiMdFK58qMm",
+     "first_seen_s_before": 255219,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3aCW8bSbaVdF39btnRSL2naqqyLYx56MvMBnByNCtJPo",
+     "net_pct": 1.27,
+     "first_slot_offset": 89,
+     "s_after": 19,
+     "funder": "AaZkwhkiDStDcgrU37XAj9fpNLrD8Erz5PNkdm4k5hjy",
+     "first_seen_s_before": 258704,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6vRS6vj4q4SFQcfthhNwCugY7fz1W9hDHfnTiE3D9gv6",
+     "net_pct": 0,
+     "first_slot_offset": 105,
+     "s_after": 22,
+     "funder": "9YoPPRxsSJJiWBVXomEf3JhpkeHsBtSxUYDnfe9Whdme",
+     "first_seen_s_before": 35205067,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "3EydZqwStDtnu7PUpmvErZfqC7wVw5pLVrBEJup2pump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 66,
+   "buys": 31,
+   "buyers": 11,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 2,
+   "fresh_pct": 4.79,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 166,
+   "buyer_detail": [
+    {
+     "wallet": "B1yDKNXXKxJDwALcYEGszcoH4RUXzV3LdtiMx6bnTkX9",
+     "net_pct": -0.36,
+     "first_slot_offset": 19,
+     "s_after": 4,
+     "funder": "FpwQQhQQoEaVu3WU2qZMfF1hx48YyfwsLoRgXG83E99Q",
+     "first_seen_s_before": 1000833,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "GJaPbZ1216yMsrdgruXBw6Q8Nmc9myNsRntcTjdPCozF",
+     "net_pct": -0.01,
+     "first_slot_offset": 19,
+     "s_after": 4,
+     "funder": null,
+     "first_seen_s_before": 47899,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 4.76,
+     "first_slot_offset": 25,
+     "s_after": 5,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "4brN1Tq76a8Jfj8qBDpWqddHA11PrMXG4WmPK4q83Xvs",
+     "net_pct": 0,
+     "first_slot_offset": 32,
+     "s_after": 7,
+     "funder": "4bGBfH5aDZKeH1oXCDjsRc9d9iQvJsDPk56SmqzjZ1PW",
+     "first_seen_s_before": 2529928,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "Afk8s2ZTuzeEKyysZ2cSWNpVRsjD6DQ8Mq8B3BMbLEoc",
+     "net_pct": 0.03,
+     "first_slot_offset": 53,
+     "s_after": 11,
+     "funder": "9HhRo2UtmpiuQ4pSWV5gvEVVGoyyByosTboLH9aHp9oQ",
+     "first_seen_s_before": 66,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6d4RLJp9st2fxrbzrR52kQGgMQ8Es6i6yybQKEuxWDic",
+     "net_pct": 0,
+     "first_slot_offset": 55,
+     "s_after": 12,
+     "funder": "67FcipNNYgpTGhQ1GaQmTG5Ys4LmiP6AxxCfZLpKXmgV",
+     "first_seen_s_before": 4474885,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "FbyEdJyMihNWt1W3hUwy5fmwsbhHLF7quMJXYz3zvU9K",
+     "net_pct": 0,
+     "first_slot_offset": 80,
+     "s_after": 17,
+     "funder": "4L3rMqeghjEWXUdCTfQgYRPNomApfaeDw5QhroJYZiDL",
+     "first_seen_s_before": 660103,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "8wUyVYcdvr2SVvbgjYLPwK45rxW7NYZb76BhUSBEMLqy",
+     "net_pct": 0.01,
+     "first_slot_offset": 81,
+     "s_after": 17,
+     "funder": "38kbqr6X9HnCzdt6qhnsbEtR4pcaR4XmXNi84tz7gjhY",
+     "first_seen_s_before": 419966,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "DW63bSHdoRdwNpQ52havrpiqcD2axjg4GrdgYqXoZFL9",
+     "net_pct": 0.5,
+     "first_slot_offset": 104,
+     "s_after": 22,
+     "funder": null,
+     "first_seen_s_before": 799020,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "2P1tb3pC7XxqbHgKtQGPFc8VsyypAGGF75aEQNn7jYoD",
+     "net_pct": 0,
+     "first_slot_offset": 114,
+     "s_after": 24,
+     "funder": "5F1seMKUqSNhv45f6FhB2cFmgJbk8U1avJw7M6TexUq1",
+     "first_seen_s_before": 1403533,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3Pht2iQwZRYv7JkBanVGv6E4rdLkrQFNgcEqVGUdc2Mr",
+     "net_pct": 1.04,
+     "first_slot_offset": 124,
+     "s_after": 26,
+     "funder": "GviiXg2Xc1xCpyNY36r7h1EAy7uvse5UMkiiyHjRDU6Z",
+     "first_seen_s_before": 1219799,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "HMz4TDnMsWAzbRtp7mi8VGD7D1pu9CtWShqYp26sSLnm",
+   "mayhem": false,
+   "quote": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "uri_host": "ipfs.io",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 4,
+   "buyer_detail": []
+  },
+  {
+   "mint": "5Hbu24atRSYG4J2BzmVuRkNUR9EYSMtNYrYHVbcrpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 21,
+   "buys": 7,
+   "buyers": 2,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 30,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": -0.27,
+     "first_slot_offset": 5,
+     "s_after": 1,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "AwLrEFp98aKcRiHQBPdKBF1ci2cYSoQBCZqKbkUmDiMR",
+     "net_pct": 0,
+     "first_slot_offset": 54,
+     "s_after": 12,
+     "funder": null,
+     "first_seen_s_before": 359912,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "DKHchDkYFABdReZ7mpL78YoUeqMDXvp5HhqiDUaDA376",
+   "mayhem": false,
+   "quote": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "uri_host": "metadata.j7tracker.io",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 2,
+   "buyer_detail": []
+  },
+  {
+   "mint": "8Rj3P516ZhPSQg4g5KSMjQrc9Pi6MehaExwCS4r5x7YP",
+   "mayhem": false,
+   "quote": "SPCXxcqXj6e5dJDVNovHN8744zkbhM2bYudU45BimGb",
+   "uri_host": "gg.sc",
+   "early_txs": 75,
+   "buys": 26,
+   "buyers": 21,
+   "slot0_buyers": 3,
+   "slot0_2_pct": 1.36,
+   "fresh_buyers_lt_1h": 13,
+   "fresh_pct": 18.54,
+   "creator_funded_buyers": 13,
+   "creator_funded_pct": 18.54,
+   "shared_funder_groups": [
+    {
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "wallets": 13,
+     "pct": 18.54,
+     "is_creator": true
+    },
+    {
+     "funder": "5cMKyZ58Z3nCMPenf1HiANGkbBfZE8GCtPD1kzZwo2jb",
+     "wallets": 2,
+     "pct": 0,
+     "is_creator": false
+    }
+   ],
+   "rpc_calls": 190,
+   "buyer_detail": [
+    {
+     "wallet": "5uX6WbrTZJYyGL8LvgPgRhVnTYPMsTcXk3EYPiZF9YfE",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2087,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "8KBgbWQmaNQSriRTKwUmwDnBWJNQEQKZP8gXE6xSGFxK",
+     "net_pct": 1.35,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2087,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "4Lb3bcQAwAqGDwNZ2D2At3RQGztBZ9pJLNYyaxMZfPQ2",
+     "net_pct": 0.01,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2087,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "Anubis512ho5t7S6LNSwoxUWdeQmX2kf3RvZ8ApHHF5w",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "96qb1LwiJ59fzTysgLhDv2QtnhxjwRZkyYynHzjBwWt1",
+     "first_seen_s_before": 169146,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "AoV3YgwecNqisQeauPFbSAqFQ4b67yTkt6LossmdBLhK",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "is6MTRHEgyFLNTfYcuV4QBWLjrZBfmhVNYR6ccgr8KV",
+     "first_seen_s_before": 10387,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "C3p8ZUSXXUQ93m6yd6kULYuRTYfqsqrUrhHeiWgowb9i",
+     "net_pct": 0,
+     "first_slot_offset": 2,
+     "s_after": 0,
+     "funder": "6LY1JzAFVZsP2a2xKrtU6znQMQ5h4i7tocWdgrkZzkzF",
+     "first_seen_s_before": 1002160,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "DocbY8PL11Y53eaNFjDqdXRoEpJHoNSjShTK3XXBQqFK",
+     "net_pct": 0,
+     "first_slot_offset": 2,
+     "s_after": 0,
+     "funder": "5cMKyZ58Z3nCMPenf1HiANGkbBfZE8GCtPD1kzZwo2jb",
+     "first_seen_s_before": 152060,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "DLFmeiQ6kJrGnFqsv7ZEAUBdE3PPfooJTD9vyUm1MAFy",
+     "net_pct": 0,
+     "first_slot_offset": 3,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 4281,
+     "ix": "buy"
+    },
+    {
+     "wallet": "5RvyGVXhBdqyrrMSZoGJa5SYEqPuA1nfq2BwuegMo4k4",
+     "net_pct": 0,
+     "first_slot_offset": 3,
+     "s_after": 0,
+     "funder": "5cMKyZ58Z3nCMPenf1HiANGkbBfZE8GCtPD1kzZwo2jb",
+     "first_seen_s_before": 150077,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "AW4qBcJfdxXWLvzVF5Fsfw53VFQPaZbNgS5qjCSFjexM",
+     "net_pct": 1.74,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3PhYyBibkFfCeJPAmcuFh49cY1WEDCF53mhyAX22arV7",
+     "net_pct": 1.66,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "GHkY85baZHh7yLCKanuYVgZAn8FRiihk2WRN88wcGyDL",
+     "net_pct": 1.6,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "A1S4DV5b6shW2sg2i5HQTk9ezJQYW7YwVapZk6PcL2sS",
+     "net_pct": 1.53,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "8FNXC1numbeSYRqjaaDJs5d36Z4ijw37DCxMZnsPjHKG",
+     "net_pct": 1.47,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3PhkMRi59gsdkS5RSPbuHcpkbVdUYbpXqVNeggmHMJ2g",
+     "net_pct": 0,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": null,
+     "first_seen_s_before": 11930,
+     "ix": "buy"
+    },
+    {
+     "wallet": "7Tf6tpv9yY3g43grWFNFaLgAeaJznpkoorL6bo8SsgAf",
+     "net_pct": 0,
+     "first_slot_offset": 10,
+     "s_after": 2,
+     "funder": "2c6WsqUG9nDc4mh7Svsjm6e9Q2XRfqdUJWn2B7yD7SXb",
+     "first_seen_s_before": 4856,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "4xLudFfU4se9fBQG68gFZXosWaqdsnz71zNQB86imqZA",
+     "net_pct": 1.93,
+     "first_slot_offset": 22,
+     "s_after": 4,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "8J5yaq916bSGNUct1WjCHYFw3wmLyLZr1cfEfbUvmsn6",
+     "net_pct": 1.84,
+     "first_slot_offset": 22,
+     "s_after": 4,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "FkYTj57JYmvgBMy7SEnT9wPH1ZEGTNN4Y5rNGfXGy8uS",
+     "net_pct": 1.83,
+     "first_slot_offset": 22,
+     "s_after": 4,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "FGb3MQTA1TzZBLjnKgraZuJhLEdN8KTKh6PhaPShuu3n",
+     "net_pct": 1.77,
+     "first_slot_offset": 22,
+     "s_after": 4,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "EMcYCScy5bGjz92754hwypX9hTKEJbHm26b2BYDvMnMg",
+     "net_pct": 1.81,
+     "first_slot_offset": 22,
+     "s_after": 4,
+     "funder": "9yg57cFdiUoszxspvceVcZgMbw6H1LeXVBzAV6cXd6Xg",
+     "first_seen_s_before": 2074,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "9nGAGV38eKMgPyQoijaFpKtxs7K2VLfp8SMw6xw6pump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "100kdaily.top",
+   "early_txs": 23,
+   "buys": 17,
+   "buyers": 17,
+   "slot0_buyers": 4,
+   "slot0_2_pct": 14.17,
+   "fresh_buyers_lt_1h": 2,
+   "fresh_pct": 0.24,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [
+    {
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "wallets": 12,
+     "pct": 27.56,
+     "is_creator": false
+    },
+    {
+     "funder": "B48kNVXs4YK4amkBCH2XokQiv1SeiVQGHDR17xDeKAAn",
+     "wallets": 2,
+     "pct": 3.78,
+     "is_creator": false
+    }
+   ],
+   "rpc_calls": 102,
+   "buyer_detail": [
+    {
+     "wallet": "GU1UVjTCmbS6rzBZiuiTsFUtxYzt6VJHEU37LwXqF5Be",
+     "net_pct": 5.46,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1013115,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "Bhu5LNybAyQF3Lq3XMujCxa2UWqpuhFa96kav53EM4gs",
+     "net_pct": 4.99,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136290,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "ANAX4JPgkTn8Tga3VSrZYk4g2nwhf8eNLb7ybwvGRZb",
+     "net_pct": 3.72,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136361,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "AoV3YgwecNqisQeauPFbSAqFQ4b67yTkt6LossmdBLhK",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "is6MTRHEgyFLNTfYcuV4QBWLjrZBfmhVNYR6ccgr8KV",
+     "first_seen_s_before": 10387,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "HoGgnTVUnSwJyQvsPVgx8Eti6B2K3vNTZ1yQQLFyH7HX",
+     "net_pct": 3.78,
+     "first_slot_offset": 43,
+     "s_after": 9,
+     "funder": "B48kNVXs4YK4amkBCH2XokQiv1SeiVQGHDR17xDeKAAn",
+     "first_seen_s_before": 268258,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "97inxiRTWmebCrX2apMdYHz2jAxvr64bYPnd4n9ci1Kd",
+     "net_pct": 0.62,
+     "first_slot_offset": 47,
+     "s_after": 10,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 960973,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "9pQQc1xyqwPzYdHztDHEYkgNucYWSQsZTrzNRzdCrRdN",
+     "net_pct": 0,
+     "first_slot_offset": 48,
+     "s_after": 10,
+     "funder": null,
+     "first_seen_s_before": -25354,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "845DACamovQSNPxdSAg7FAdTCXSeMvpoyJDH8QTGESTV",
+     "net_pct": 1.11,
+     "first_slot_offset": 50,
+     "s_after": 11,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 960994,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "5SR5inKg54r7h3uEoFuXxJuGKU7nmj1mDsjJLSSpQbTH",
+     "net_pct": 0,
+     "first_slot_offset": 65,
+     "s_after": 14,
+     "funder": "B48kNVXs4YK4amkBCH2XokQiv1SeiVQGHDR17xDeKAAn",
+     "first_seen_s_before": 267272,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "HSRs878bwei1MfSwGmp9zNhH6xPmv2jaa7TTMtRiM1f7",
+     "net_pct": 0.16,
+     "first_slot_offset": 73,
+     "s_after": 15,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1036528,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "7JCe3GHwkEr3feHgtLXnmuJ1yB3A7coSeyynxTBgdG8k",
+     "net_pct": 0.24,
+     "first_slot_offset": 113,
+     "s_after": 24,
+     "funder": "5pVN5XZB8cYBjNLFrsBCPWkCQBan5K5Mq2dWGzwPgGJV",
+     "first_seen_s_before": -12534,
+     "ix": "buy"
+    },
+    {
+     "wallet": "GwwSxSbZx59bE5yMAhzezwxkyB2CevCb8vPwB2FyPsqf",
+     "net_pct": 2.02,
+     "first_slot_offset": 117,
+     "s_after": 25,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136233,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "DBmTyeMQ8uzTQDJoNdpBuV8NDbt9zjV2BoNfsWnGPUco",
+     "net_pct": 0.37,
+     "first_slot_offset": 121,
+     "s_after": 26,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136211,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "4E2mEUKTRbyYAXfJ28LxDn7TaxC8iJbm2vBdrETaPWzt",
+     "net_pct": 2.37,
+     "first_slot_offset": 275,
+     "s_after": 59,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136272,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "5DVHyy291sgv6hiSsFctKEa92jDK96KDpryjtYC6jshe",
+     "net_pct": 2.32,
+     "first_slot_offset": 275,
+     "s_after": 59,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136254,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "3oDnwmwduihFDuF15rzf52EmpeRquBFu9duyW1UYNaH8",
+     "net_pct": 2.17,
+     "first_slot_offset": 275,
+     "s_after": 59,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136307,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "Am2qf7ZE7vdWK7MCstGzw3zDFv12u9SqsaSoC9ycpDEW",
+     "net_pct": 2.25,
+     "first_slot_offset": 275,
+     "s_after": 59,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 1136195,
+     "ix": "buy_exact_sol_in"
+    }
+   ]
+  },
+  {
+   "mint": "6CZkCGTuaaqTZqiMETW57XwHrkoCXgqyZqtLvSV9pump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 52,
+   "buys": 26,
+   "buyers": 19,
+   "slot0_buyers": 7,
+   "slot0_2_pct": 5.55,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 1.75,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [
+    {
+     "funder": "791eGAi3H3KjFPq9Fg9nwLk46UxYACcPGLJKtAzvx87Y",
+     "wallets": 2,
+     "pct": 1.23,
+     "is_creator": false
+    }
+   ],
+   "rpc_calls": 215,
+   "buyer_detail": [
+    {
+     "wallet": "H9kuqGKNYgPFYCA17uUTkaqXGum7MK8y1GwbS7cxsjDg",
+     "net_pct": 2.21,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 81280,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "9Dmsi7mZqDJ8GcSNDFByKPKLSPDn5KhxENGTWfZ9FdMy",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 58892,
+     "ix": "buy"
+    },
+    {
+     "wallet": "8QvkXm4V7wSg9CTfqdM5sLu2aji3qZTV5AXwJDoZL7ec",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "DeFG8i8zoJ3hN155nmvLq266ZVxWmNgRaTz5KQVHfe2S",
+     "first_seen_s_before": 660566,
+     "ix": "buy"
+    },
+    {
+     "wallet": "7orR1J2t42CZ1FVMf5k341mVdb3KM5LMz7mKFcefpvj4",
+     "net_pct": 0.46,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "791eGAi3H3KjFPq9Fg9nwLk46UxYACcPGLJKtAzvx87Y",
+     "first_seen_s_before": 66965,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "6Us8oi5bSN6eJgY9RndjWCyN113RwLDQxDESDdDQ9sZy",
+     "net_pct": 0.81,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 1031568,
+     "ix": "buy"
+    },
+    {
+     "wallet": "DjcoMKQTawQxVvWzkrA9kNEMxNAcg9pfDJLGGqH47ZZC",
+     "net_pct": 0.28,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 224886,
+     "ix": "buy"
+    },
+    {
+     "wallet": "4VfKyL8JiSoymQ1Fb6ewcv3VWNv2c5fWP4xuE8MXQdCN",
+     "net_pct": 0.27,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 291933,
+     "ix": "buy"
+    },
+    {
+     "wallet": "77777WQgaojntw7a2LogaHJ4EWmHJWxnujCneLfKsJBZ",
+     "net_pct": 1.52,
+     "first_slot_offset": 1,
+     "s_after": 1,
+     "funder": "Bpr7BqbEXsVYpHQqpefkef51hAi6yiWugwNPxQcMvcnD",
+     "first_seen_s_before": 503015,
+     "ix": "buy"
+    },
+    {
+     "wallet": "GuSv8FpuWiuqYKik5LU92XUYG9w6P2xCB4qoWM2WS3ks",
+     "net_pct": 0.14,
+     "first_slot_offset": 8,
+     "s_after": 2,
+     "funder": null,
+     "first_seen_s_before": 317375,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "B7A4wooms5zAvWs48eTN358iVm2mVsLiepFGiJ22ofaf",
+     "net_pct": 0.28,
+     "first_slot_offset": 9,
+     "s_after": 2,
+     "funder": null,
+     "first_seen_s_before": 634618,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "5UkWfJRAnuzj3iNBH7k32eKasNsSatgjzYa33nggmyx4",
+     "net_pct": 0.05,
+     "first_slot_offset": 18,
+     "s_after": 4,
+     "funder": "GZWkfW4cMdmy4eHTN9qXn7HC3pAZdWpE6uPKDC3DK3ak",
+     "first_seen_s_before": 15141900,
+     "ix": "buy"
+    },
+    {
+     "wallet": "7FctdKHRnq3ydMJXP2ekBJEMupTHp1X41GEpD1dMjFyn",
+     "net_pct": 0.77,
+     "first_slot_offset": 37,
+     "s_after": 9,
+     "funder": "791eGAi3H3KjFPq9Fg9nwLk46UxYACcPGLJKtAzvx87Y",
+     "first_seen_s_before": 66964,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "355W7dnfHhNAQpocyaExCqNwPLxNJhZxJpFYWgptQQQx",
+     "net_pct": 0,
+     "first_slot_offset": 43,
+     "s_after": 10,
+     "funder": null,
+     "first_seen_s_before": 418417,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "EZuFSWHdPuguUVrzKXeqnkKZmq9tLFLFi4ANQAU436dA",
+     "net_pct": 0,
+     "first_slot_offset": 43,
+     "s_after": 10,
+     "funder": null,
+     "first_seen_s_before": 586506,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "GDRS2UQfxxzDtjSNFChFiUG4E3Eie8RNeb5dRHWTvBDN",
+     "net_pct": 3.94,
+     "first_slot_offset": 151,
+     "s_after": 33,
+     "funder": "FHpcNSe6tb2n15bAdq4BkeYWGyZKFD7yLYrH92ng7wCT",
+     "first_seen_s_before": 156680,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "8PgC4ngpx6zUG3KFQAQHqSeePDFA7kGyEaA2yMoZ4HUk",
+     "net_pct": 1.75,
+     "first_slot_offset": 152,
+     "s_after": 33,
+     "funder": "CEnBSCwhv1Umqc1wenjyhGBg4hWFjM7kv5LfVrgxooVp",
+     "first_seen_s_before": -16101,
+     "ix": "buy"
+    },
+    {
+     "wallet": "HVE8996rtqG8N2sCNaTJZdLBbKW2SrSg2uXjJtNqPGDJ",
+     "net_pct": 0.26,
+     "first_slot_offset": 152,
+     "s_after": 33,
+     "funder": null,
+     "first_seen_s_before": 70641,
+     "ix": "buy"
+    },
+    {
+     "wallet": "H6obhoSNUbQhLNUoYFCBiKS4CMRC1qQYoBsms7y81HtG",
+     "net_pct": 0.43,
+     "first_slot_offset": 152,
+     "s_after": 33,
+     "funder": null,
+     "first_seen_s_before": 124849,
+     "ix": "buy"
+    },
+    {
+     "wallet": "4L69zf2AD3jEJVYuYrC4kbPMMVLsi9aKwBctFveiTFsp",
+     "net_pct": 0.17,
+     "first_slot_offset": 195,
+     "s_after": 42,
+     "funder": "2zVaJhzZcbx2e3T8aRLULkdgnqZB23Nc9Quvb9TXPmFv",
+     "first_seen_s_before": 687374,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "8JLzRKW2SKywE5qjEvndQZoFPT64tsJsBeVmpxeVpump",
+   "skipped": "more than 4000 transactions; first minute not reached"
+  },
+  {
+   "mint": "55PKvdf2zyL62Up7NuetBmx8eaVMv2DTGXgTopzoGLkK",
+   "mayhem": false,
+   "quote": "DoGEV7LASBkQbibMc5k5vKnTZoMg423GpJ5QtJEGfm7R",
+   "uri_host": "metadata.j7tracker.io",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "8FA2kJjrL6rJFd4XLC9XTKAKXtwDYYodB8UmaSMWpump",
+   "mayhem": false,
+   "quote": "DoGEV7LASBkQbibMc5k5vKnTZoMg423GpJ5QtJEGfm7R",
+   "uri_host": "m.rapidlaunch.io",
+   "early_txs": 17,
+   "buys": 11,
+   "buyers": 5,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0.02,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 68,
+   "buyer_detail": [
+    {
+     "wallet": "AmN88ff21osxR5CWnawN3GWDbpKtReCzDABdGWQvdLyB",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 95590,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "4L1a3i5DtnCga9hGi4QHvsHvubNTtaD3SZDCFHT9BEHk",
+     "net_pct": 0,
+     "first_slot_offset": 15,
+     "s_after": 3,
+     "funder": null,
+     "first_seen_s_before": 4479052,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "fuFvT1v2B7TtMe4BcdavPtfJ5bHDtP51U2j39wxUgV1",
+     "net_pct": 0,
+     "first_slot_offset": 15,
+     "s_after": 3,
+     "funder": null,
+     "first_seen_s_before": 4477574,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "CiiQFUmFP6LnA3Xxk8YdFHC7PqssxTYLngkajFV8mNb8",
+     "net_pct": 0,
+     "first_slot_offset": 15,
+     "s_after": 3,
+     "funder": "DQyrAcCrDXQ7NeoqGgDCZwBvWDcYmFCjSb9JtteuvPpz",
+     "first_seen_s_before": 4481201,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "7iVCXQn4u6tiTEfNVqbWSEsRdEi69E9oYsSMiepuECwi",
+     "net_pct": 0.02,
+     "first_slot_offset": 79,
+     "s_after": 17,
+     "funder": "ATRsNGv2nDw7hSMfkUTBoVUDsFDwN7po7KbecyiGWNB4",
+     "first_seen_s_before": -17291,
+     "ix": "buy"
+    }
+   ]
+  },
+  {
+   "mint": "6kUi2ZSUtGAPfne5PLYGwUZWBNZaSXmrZEipvCsXpump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "gateway.pinata.cloud",
+   "early_txs": 23,
+   "buys": 9,
+   "buyers": 9,
+   "slot0_buyers": 6,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 92,
+   "buyer_detail": [
+    {
+     "wallet": "3CVGqxA6YX9L4RxRV61kXTdx5xxspNmGXFoZSVA6nVpa",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "C4Ad4uNig94KD6vw1P7HbsrBtyy4yTifdtavoaw9KNve",
+     "first_seen_s_before": 2218188,
+     "ix": "buy"
+    },
+    {
+     "wallet": "HjUZT9WuCVAC1FUAYqtyicZmUpjqzU51vG32RJ2ejrwo",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "FpwQQhQQoEaVu3WU2qZMfF1hx48YyfwsLoRgXG83E99Q",
+     "first_seen_s_before": 15052186,
+     "ix": "buy"
+    },
+    {
+     "wallet": "DsGJkPzFEQZuwy7JjZzPcJEyEfdC6StV7rarXG4ftRSA",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 524990,
+     "ix": "buy"
+    },
+    {
+     "wallet": "CR7atYruEefK39VysMCSZi5pNfFcMh9WNRpsJwzbJHYE",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": "DgXqVqS92AJKgjRqNbvYV6UYoS8n1QRRTRWkmZjuSgyv",
+     "first_seen_s_before": 2933586,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "DN5UtoAZJBQMXEi2R56G6yEYiWPLmEeVWSp2pGsMZ1XY",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 2449180,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "6zXLbQu7TPC18FANiiTVpFmokLHUgp33nC6NR8WFWknA",
+     "net_pct": 0,
+     "first_slot_offset": 0,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 139393,
+     "ix": "buy_exact_sol_in"
+    },
+    {
+     "wallet": "4KFXXNQkLYbjDg3DkTkjBin3qMmkMXyfcRPcGhgP8B3S",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "5vcokVaaAm37zoJkTvmMYFfNhfw3fu4KKEDpvePY9x4Y",
+     "first_seen_s_before": 1015698,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "3uF9pg4zqsfmmiQ1RgsUQugLH3Xb6DspiMf9gKu2zSY3",
+     "net_pct": 0.21,
+     "first_slot_offset": 5,
+     "s_after": 1,
+     "funder": "EYbcSa5ofb9Fv2zdcvxYVETMadi3ZczCZRS2GkBt74Q6",
+     "first_seen_s_before": 40840,
+     "ix": "buy"
+    },
+    {
+     "wallet": "93YSA6huMKV43CwtSvWiSz9okTstdemcHzFrw5j6F1rb",
+     "net_pct": 0,
+     "first_slot_offset": 108,
+     "s_after": 24,
+     "funder": "B48kNVXs4YK4amkBCH2XokQiv1SeiVQGHDR17xDeKAAn",
+     "first_seen_s_before": 216213,
+     "ix": "buy_exact_sol_in"
+    }
+   ]
+  },
+  {
+   "mint": "6kFhq1VLvatacvH9aUksbU9Y1gz8ja77zBsp9QE7iMDB",
+   "mayhem": false,
+   "quote": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "uri_host": "gg.sc",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "CZMs4JjpvWiUyzdQRLrGvDm3pTWGzY8PVBs4k54hpump",
+   "mayhem": false,
+   "quote": "J8PSdNP3QewKq2Z1JJJFDMaqF7KcaiJhR7gbr5KZpump",
+   "uri_host": "ipfs.io",
+   "early_txs": 15,
+   "buys": 7,
+   "buyers": 7,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0.64,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0.64,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [
+    {
+     "funder": "5cMKyZ58Z3nCMPenf1HiANGkbBfZE8GCtPD1kzZwo2jb",
+     "wallets": 2,
+     "pct": 0,
+     "is_creator": false
+    }
+   ],
+   "rpc_calls": 55,
+   "buyer_detail": [
+    {
+     "wallet": "53DnQU1dJZNHfKBpv2Lhsd4EBGNpwsF4tS13Egc1m6Tv",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "Gp3z7HZE6XAJUvbgDfi875Rt1TDXUujJc3rFtEATF1uF",
+     "first_seen_s_before": 418810,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "AMDEmVocLtN5ji2gBY7BrmSHEyM5vt6TGszBbg4crMXg",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "E1P82BGSMRn7zfVtE88wWRXe1XTcNqERddsYfpYrigwQ",
+     "first_seen_s_before": 107448,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "GPV5BRKC5ramfk5c8CivccoDKjZW9Acz3dBqtCGemnUo",
+     "net_pct": 0.64,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 3429,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "DocbY8PL11Y53eaNFjDqdXRoEpJHoNSjShTK3XXBQqFK",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "5cMKyZ58Z3nCMPenf1HiANGkbBfZE8GCtPD1kzZwo2jb",
+     "first_seen_s_before": 152060,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "5RvyGVXhBdqyrrMSZoGJa5SYEqPuA1nfq2BwuegMo4k4",
+     "net_pct": 0,
+     "first_slot_offset": 2,
+     "s_after": 0,
+     "funder": "5cMKyZ58Z3nCMPenf1HiANGkbBfZE8GCtPD1kzZwo2jb",
+     "first_seen_s_before": 150077,
+     "ix": "multi_hop_swap"
+    },
+    {
+     "wallet": "GuSv8FpuWiuqYKik5LU92XUYG9w6P2xCB4qoWM2WS3ks",
+     "net_pct": 0,
+     "first_slot_offset": 3,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": 317375,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "FmgJJ5McWkGW13BbZP2y3KxeKRVs6gwsRycahMoVBdyQ",
+     "net_pct": 0,
+     "first_slot_offset": 70,
+     "s_after": 15,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 24171618,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "5mvkMWeoHEV7mZhmo3ySYfmWpL18TgdRGSMSdDxxpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 220,
+   "buys": 34,
+   "buyers": 12,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 2,
+   "fresh_pct": 5.15,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 144,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 3.05,
+     "first_slot_offset": 3,
+     "s_after": 1,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "EFRrYBTb83mYAAtNfeT3jMAceCbksyWLWUH17RLoc2F3",
+     "net_pct": 0.56,
+     "first_slot_offset": 14,
+     "s_after": 3,
+     "funder": "3TferNUjeRa4JogcRHAQWPwUXVt1ig447EjZV7jpcuUD",
+     "first_seen_s_before": 548217,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "QGVrUdr2wkEN4okrTKNa7Qr3uRtDfEtg582PqVZJsCe",
+     "net_pct": 0,
+     "first_slot_offset": 27,
+     "s_after": 6,
+     "funder": "7ZmFpiPREPk2VhsohFwNvGeSMf5CMGtxJ5nEGUXMy7MT",
+     "first_seen_s_before": 320872,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "68PBTPgtbjZw1SggtnbxthAzWScv3iC3fHhVEDLehFdQ",
+     "net_pct": 0,
+     "first_slot_offset": 32,
+     "s_after": 7,
+     "funder": "8ArYHZ4ZgTeh7Rt6ZHtaisxDhRB5HVHKKfaNGtuvF5Xk",
+     "first_seen_s_before": 34365921,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "7YonP5e7sSYQKkUUHBZLS9bvnpfdSZ1urZjqWBA8Sjwh",
+     "net_pct": 0.47,
+     "first_slot_offset": 36,
+     "s_after": 8,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 7709851,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "D6cMggwfxBjftHCja7KHBytsMsGR9am3rxFv7VWfVN8e",
+     "net_pct": 3.46,
+     "first_slot_offset": 42,
+     "s_after": 9,
+     "funder": "74z3kKVdn8sF2SGDPbiT2gL6gFz4gQJqacpVpCwy4uAj",
+     "first_seen_s_before": 2406724,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "GJaPbZ1216yMsrdgruXBw6Q8Nmc9myNsRntcTjdPCozF",
+     "net_pct": 0,
+     "first_slot_offset": 48,
+     "s_after": 11,
+     "funder": null,
+     "first_seen_s_before": 47899,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "ANB3qUu9p3Sc9jFAvciKtDGVi7atR638wX1gi8NvpQ88",
+     "net_pct": 0,
+     "first_slot_offset": 80,
+     "s_after": 17,
+     "funder": "5pVN5XZB8cYBjNLFrsBCPWkCQBan5K5Mq2dWGzwPgGJV",
+     "first_seen_s_before": 95991,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "2RML1dVWKBK54dn2o5CQp15BVt4y2t5Ns94155UpwqkA",
+     "net_pct": 0.4,
+     "first_slot_offset": 93,
+     "s_after": 20,
+     "funder": "5n7cn7PXuzUcggfAubmTbBRBQmuChbSMHrJ2h1iyskWS",
+     "first_seen_s_before": 1721978,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "EUeQuq88q8Z9gecDY2vEGAaupZdif22V2JGzfcJpHD69",
+     "net_pct": 2.1,
+     "first_slot_offset": 101,
+     "s_after": 22,
+     "funder": "AFUHWSRcVhshowHLHt8SV4VETmqXRUpAwv7RNxABvYv8",
+     "first_seen_s_before": 352,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "B9LwKidP6Tg1w9zqvTkACK2UKGwZYatGv7FqkqvLUSLE",
+     "net_pct": 0.23,
+     "first_slot_offset": 101,
+     "s_after": 22,
+     "funder": null,
+     "first_seen_s_before": 73812,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "97xDPwTBvdqb2W7c6DN1JUAnZ5kJ5cTCyQWTAr5CYVEx",
+     "net_pct": 0.21,
+     "first_slot_offset": 106,
+     "s_after": 23,
+     "funder": null,
+     "first_seen_s_before": 377165,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "FDafGWwkjxpTKgw3bdyCVG1cLsQ7gWXdLJFgufoMpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 32,
+   "buys": 22,
+   "buyers": 6,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 2,
+   "fresh_pct": 0.45,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 64,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 0.45,
+     "first_slot_offset": 9,
+     "s_after": 2,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "2fU8Xj4cMAHGcs6DGr1FHQjtABbNdq8hBkSnQcQBQWkk",
+     "net_pct": 0,
+     "first_slot_offset": 28,
+     "s_after": 6,
+     "funder": "CJ1fhvsz9FwFM54JyXpNvAj6dvxtiRQjMhYmG1aQVVX8",
+     "first_seen_s_before": 598655,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "5uZW2tDFp9QTE5gHT9BePWVT5USS1q87fwnaZD2t2WKq",
+     "net_pct": 0,
+     "first_slot_offset": 70,
+     "s_after": 15,
+     "funder": "5HtYA3B1bkhELJodzC68PiVFJW1REZ3HCghKQbPYkrsS",
+     "first_seen_s_before": 243285,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6pJph9v6nRTAnCocVimDs9vq6xsL7Y678i6pxL4mDbKE",
+     "net_pct": 0,
+     "first_slot_offset": 74,
+     "s_after": 15,
+     "funder": null,
+     "first_seen_s_before": -36003,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "5vBiZRxLx7kDsmbozipSFSdAsbPUAXqvuhZcX7BvSmUZ",
+     "net_pct": 0,
+     "first_slot_offset": 83,
+     "s_after": 17,
+     "funder": null,
+     "first_seen_s_before": 52288,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "ANB3qUu9p3Sc9jFAvciKtDGVi7atR638wX1gi8NvpQ88",
+     "net_pct": 0,
+     "first_slot_offset": 111,
+     "s_after": 23,
+     "funder": "5pVN5XZB8cYBjNLFrsBCPWkCQBan5K5Mq2dWGzwPgGJV",
+     "first_seen_s_before": 95991,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "3MTXeua4ARmHvH5vMyVoQbGdn7Yiz6zXqdByp61Ypump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "8UQRVQFMYVcjzHGdPbtbDEb3Qp8nSXq6ytgGJexkMB37",
+   "mayhem": false,
+   "quote": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "uri_host": "ipfs.io",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "HoSmAyAeXzoakPNyGkhXBSYC3aTpR7B67uZsVBSYqoLn",
+   "mayhem": false,
+   "quote": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "uri_host": "any.mypinata.cloud",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "7ccVybMESHTbF8rbSuCb96qyVA8YuejEAeJK3GhzTeTT",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "gateway.irys.xyz",
+   "early_txs": 1,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 4,
+   "buyer_detail": []
+  },
+  {
+   "mint": "Fnk8CdrZ7EZwkctq5PNXeVTgu1GrJUzsZJA39RQDpump",
+   "skipped": "more than 4000 transactions; first minute not reached"
+  },
+  {
+   "mint": "H1vbUqGGTgRu7o1TzyvCbGKsFyDjroSozPaSnCtFpump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 4,
+   "buys": 3,
+   "buyers": 1,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 2.23,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 2.23,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 7,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 2.23,
+     "first_slot_offset": 2,
+     "s_after": 0,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    }
+   ]
+  },
+  {
+   "mint": "EfdAGpuLBsEhHbJHn4fMn4sji4gbTCC3osTzMqTWyH3b",
+   "mayhem": false,
+   "quote": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+   "uri_host": "metadata.j7tracker.io",
+   "early_txs": 0,
+   "buys": 0,
+   "buyers": 0,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 0,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 3,
+   "buyer_detail": []
+  },
+  {
+   "mint": "DDyPfAYa7e9AZFj5PRmAE2d66vGyFQ4XajPGTaDRpump",
+   "mayhem": false,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 7,
+   "buys": 4,
+   "buyers": 4,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 0,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 42,
+   "buyer_detail": [
+    {
+     "wallet": "2o4kGDTqkixSHzd2rXAAToqBPhkfGNXxCXVCuPRCbptY",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": "2sR1nbEfwxMdbzgjfn7kaQ7LTGMGPZ9rMpupqoErtuJq",
+     "first_seen_s_before": 21238,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "GQhp1metiEge237QfN6rLtFENiz9BW2RCV3s3KPEbWdJ",
+     "net_pct": 0,
+     "first_slot_offset": 1,
+     "s_after": 0,
+     "funder": null,
+     "first_seen_s_before": -5143,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "popsP556X4XMXK5m8P39axrL7QayAGPDU8AKYVE8kxS",
+     "net_pct": 0.03,
+     "first_slot_offset": 3,
+     "s_after": 1,
+     "funder": null,
+     "first_seen_s_before": 2079950,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "937QBpMyV928qELRu3Px12QLiGt8edurjF5Dyy3v3nTw",
+     "net_pct": 0,
+     "first_slot_offset": 92,
+     "s_after": 19,
+     "funder": "iGdFcQoyR2MwbXMHQskhmNsqddZ6rinsipHc4TNSdwu",
+     "first_seen_s_before": 6627796,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  },
+  {
+   "mint": "qc5kB7p5t34vsB7YZDrYEA8pYWeh98zpqTN5Buopump",
+   "mayhem": true,
+   "quote": "11111111111111111111111111111111",
+   "uri_host": "ipfs.io",
+   "early_txs": 39,
+   "buys": 24,
+   "buyers": 6,
+   "slot0_buyers": 0,
+   "slot0_2_pct": 0,
+   "fresh_buyers_lt_1h": 1,
+   "fresh_pct": 3.6,
+   "creator_funded_buyers": 0,
+   "creator_funded_pct": 0,
+   "shared_funder_groups": [],
+   "rpc_calls": 75,
+   "buyer_detail": [
+    {
+     "wallet": "BwWK17cbHxwWBKZkUYvzxLcNQ1YVyaFezduWbtm2de6s",
+     "net_pct": 3.6,
+     "first_slot_offset": 8,
+     "s_after": 1,
+     "funder": "615aVtCK6hdBUhkK6wCU42Ayzy7HLkbWmGC76kS4Q9Pg",
+     "first_seen_s_before": -5071,
+     "ix": "buy"
+    },
+    {
+     "wallet": "45kyjKdw7AmQ8j6pCYk7DTufBL7ghMNa8QPYzG2in3e7",
+     "net_pct": 0,
+     "first_slot_offset": 30,
+     "s_after": 6,
+     "funder": "C2kfZzkgkDMrXkPPd2KbXzrYHRiPGkWdprmzQytmU7nQ",
+     "first_seen_s_before": 156120,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "GSqcJ7nHZxckm9VvKfZ7V8rQg9vEuL7YEqaZLThoK37D",
+     "net_pct": 0,
+     "first_slot_offset": 39,
+     "s_after": 8,
+     "funder": "845Aj3mtgr9K2xWgZt3hwYAY8WQF3GyUPZyaFkxm39cF",
+     "first_seen_s_before": 7959407,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "7YonP5e7sSYQKkUUHBZLS9bvnpfdSZ1urZjqWBA8Sjwh",
+     "net_pct": 0,
+     "first_slot_offset": 50,
+     "s_after": 10,
+     "funder": "5tzFkiKscXHK5ZXCGbXZxdw7gTjjD1mBwuoFbhUvuAi9",
+     "first_seen_s_before": 7709851,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "6QnU8CHoBoXUhybZ24u31uy6dnLexjf9XpVxYmfgwTo9",
+     "net_pct": -0.02,
+     "first_slot_offset": 59,
+     "s_after": 12,
+     "funder": null,
+     "first_seen_s_before": 66652,
+     "ix": "buy_exact_quote_in"
+    },
+    {
+     "wallet": "7RFitJPaEVoeJXsL5uNjdBws74EDKTM44FBxkkSn32oy",
+     "net_pct": 0,
+     "first_slot_offset": 114,
+     "s_after": 24,
+     "funder": "Hmc2dLxZZ4xfHqn2wFCTBu11oCpYiuwsj23JBjJmD4ni",
+     "first_seen_s_before": 247908,
+     "ix": "buy_exact_quote_in"
+    }
+   ]
+  }
+ ]
+}

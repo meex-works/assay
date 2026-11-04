@@ -1,5 +1,8 @@
 # Assumptions
 
+> Checked against mainnet on 2026-11-04: see [verified.md](verified.md). Where that page and this one disagree,
+> that page wins.
+
 The design's load-bearing assumptions, each given a verdict by an adversarial review (Nov 2026), and what changed
 because of it. Claims about pump.fun's program marked **verify** come from the review and get checked against the
 current IDL and on-chain accounts before any code depends on them.

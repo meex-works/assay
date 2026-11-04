@@ -178,7 +178,7 @@ Read straight from Solana. Cheap compared with the rest, and the hardest to argu
 | creator funding source, traced back to a CEX hot wallet, a bridge, a mixer, or another creator wallet | transfer tracing, N hops | high |
 | **bundle at launch**: a funding cluster that bought early, with similar wallet ages and amounts and no prior selling. Not "same slot": the dev's own buy in the create tx is normal, and sniper bots hit every launch. Reported separately: bundle share, wallets, funding sources, sold-down over time | funding trace + wallet classes | medium to hide (bundlers fund from several CEX withdrawals) |
 | sniper share in the first N slots | same | n/a |
-| holder distribution: top-10 share **net of every program-held balance** (curve, pool, fee and mode vaults), the Gini coefficient | holders snapshot | low to fake *wide*, high to fake *diverse* |
+| holder distribution, from the **mint's real supply** (mayhem coins have 2B, not the 1B their create event says): top-10 share **net of every program-held balance** (curve, pool, fee and mode vaults), the Gini coefficient | holders snapshot | low to fake *wide*, high to fake *diverse* |
 | **holder funding diversity**: how many independent funding sources the top 100 holders trace back to | funding trace | **high** |
 | fresh-wallet share among holders (wallets with no history before this coin) | wallet first-seen | medium |
 | volume authenticity: wash patterns (A→B→A, round sizes, self-trades across a funded cluster) | trade graph | medium |
@@ -213,6 +213,9 @@ Every **funding cluster** gets a class from its behaviour across coins (fresh wa
 | `bundler` | buys in the create transaction or slot, funded from the creator's cluster |
 | `predator` | enters after launch, takes a large share of supply (often split across a funding cluster), and exits into the buyers it attracted; the coins it touches lose holders after it leaves. Three variants: farm clusters that pump with their own wallets and dump; callers' clusters that enter minutes before the call; and bots that enter everything (classed `sniper`, since they carry no information) |
 | `farmer` | many tiny buys across many coins: volume and holder-count padding |
+| `disperser` | funds many fresh wallets that buy early across many coins: bundle infrastructure (verified on mainnet: one funded 15 early buyers in a 40-coin sample) |
+| `mayhem_agent` | pump's own mayhem trading agent, known by address; buys most mayhem coins in their first seconds. Never counts against purity |
+| `mixer_funded` | funded from an account owned by a mixing program |
 | `organic` | none of the above |
 
 | signal | method | cost to fake |
