@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         assay overlay for pump.fun
 // @namespace    https://assay.meex.work
-// @version      0.1.0
+// @version      0.2.0
 // @description  assay's verdict on every pump.fun coin: a badge on each coin link, and the evidence on each coin page. Read-only: no wallet access, no prices.
 // @author       SHYGUY LLC
 // @license      MIT
@@ -35,8 +35,19 @@
   const TTL = 30_000;                       // re-ask about a mint after 30 s (verdicts change during the watch)
   const cache = new Map();                  // mint → { at, data|null }
   let badgesOn = GM_getValue("badges", true);
+  let showUnseen = GM_getValue("unseen", false);   // coins assay hasn't seen (most of pump.fun's front page) get no badge by default
 
   GM_registerMenuCommand(`${badgesOn ? "Hide" : "Show"} assay badges`, () => { GM_setValue("badges", !badgesOn); location.reload(); });
+  GM_registerMenuCommand(`${showUnseen ? "Hide" : "Show"} "not seen" badges`, () => { GM_setValue("unseen", !showUnseen); location.reload(); });
+
+  // The glow on a pure coin's card lives in the page (the card is pump.fun's element), under one prefixed attribute.
+  const PAGE_CSS = `
+    [data-assay-card="pure"] { box-shadow: 0 0 0 2px #22c55e, 0 0 22px 2px rgba(34,197,94,.55) !important; border-radius: 10px; }
+    [data-assay-card="watch"] { box-shadow: 0 0 0 2px #22c55e, 0 0 22px 2px rgba(34,197,94,.55) !important; border-radius: 10px; animation: assay-glow 2.4s ease-in-out infinite; }
+    [data-assay-card="broken"] { box-shadow: 0 0 0 1px rgba(239,68,68,.75) !important; border-radius: 10px; }
+    @keyframes assay-glow { 50% { box-shadow: 0 0 0 2px #4ade80, 0 0 34px 6px rgba(74,222,128,.75); } }
+    @media (prefers-reduced-motion: reduce) { [data-assay-card="watch"] { animation: none; } }`;
+  document.head.append(Object.assign(document.createElement("style"), { textContent: PAGE_CSS }));
 
   // ── data ──────────────────────────────────────────────────────────────────────────────────────────────────────────
   const get = (url) => new Promise((resolve) => {
@@ -67,12 +78,17 @@
   // ── look ──────────────────────────────────────────────────────────────────────────────────────────────────────────
   const CSS = `
     :host { all: initial; }
-    .b { font: 600 10px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .05em; text-transform: uppercase;
-         padding: 3px 6px; border-radius: 999px; border: 1px solid; white-space: nowrap; display: inline-flex; gap: 4px; align-items: center;
-         background: #1a1d22; cursor: help; }
-    .b::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
-    .pure { color: #9fd3ab; border-color: #62a87288; } .impure, .broken { color: #f0a193; border-color: #d6604a88; }
-    .dead, .not_alive, .pending, .unseen { color: #9aa1ab; border-color: #59606a; } .watch { color: #e8c47a; border-color: #d9a44188; }
+    .b { font: 800 11.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .04em; text-transform: uppercase;
+         padding: 5px 9px; border-radius: 999px; white-space: nowrap; display: inline-flex; gap: 5px; align-items: center;
+         cursor: help; box-shadow: 0 1px 3px rgba(0,0,0,.5); }
+    .b::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+    .pure, .watch { background: #22c55e; color: #052e14; box-shadow: 0 0 12px 2px rgba(34,197,94,.7), 0 1px 3px rgba(0,0,0,.5); }
+    .watch { animation: g 2.4s ease-in-out infinite; }
+    @keyframes g { 50% { box-shadow: 0 0 20px 5px rgba(74,222,128,.85), 0 1px 3px rgba(0,0,0,.5); } }
+    .broken { background: #dc2626; color: #fff; } .impure { background: #f97316; color: #1c0a00; }
+    .pending { background: #d9a441; color: #1a1d22; }
+    .dead, .not_alive { background: #374151; color: #cbd5e1; opacity: .8; } .unseen { background: #1f2937; color: #9ca3af; opacity: .7; }
+    @media (prefers-reduced-motion: reduce) { .watch { animation: none; } }
     .p { position: fixed; right: 16px; bottom: 16px; width: 340px; max-height: 70vh; overflow: auto; z-index: 2147483647;
          background: #1c2025; color: #ece6d8; border: 1px solid #d9a44180; border-radius: 12px; box-shadow: 0 10px 40px #0008;
          font: 13px/1.5 -apple-system, system-ui, "Segoe UI", sans-serif; }
@@ -92,8 +108,8 @@
 
   function label(d) {
     if (d === undefined) return null;                       // the request failed: draw nothing rather than guess
-    if (d === null) return ["unseen", "not seen", "assay hasn't seen this coin (launched before assay started, or just now)"];
-    if (d.post?.state === "dead") return ["dead", "died", d.post.reason];
+    if (d === null) return showUnseen ? ["unseen", "not seen", "assay hasn't seen this coin (launched before assay started, or just now)"] : null;
+    if (d.post?.state === "dead") return ["broken", "died", d.post.reason];
     if (d.post?.state === "broken") return ["broken", "broke", d.post.reason];
     if (d.post && Date.now() - d.launched < 15.5 * 60_000) return ["watch", "pure · watching", "Pure at 0:30, watched for 15 minutes"];
     const map = { pure: ["pure", "pure", "Pure at 0:30"], impure: ["impure", "not pure", d.reason], dead: ["dead", "dead", d.reason], not_alive: ["not_alive", "few buyers", "Under 10 independent buyers at 0:30"], pending: ["pending", "judging", "Judged 30 s after launch"] };
@@ -116,6 +132,8 @@
       const m = mintOf(a); if (!m) continue;
       const c = cache.get(m); if (!c) continue;
       const lab = label(c.data);
+      const card = lab && (lab[0] === "pure" || lab[0] === "watch" || lab[0] === "broken") ? lab[0] : null;
+      if (card) a.setAttribute("data-assay-card", card); else a.removeAttribute("data-assay-card");
       let host = a.querySelector(`:scope > [${BADGE}]`);
       if (!lab) { host?.remove(); continue; }
       if (!host) {

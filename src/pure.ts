@@ -60,7 +60,7 @@ export async function evaluate(c: Coin): Promise<Verdict> {
   const dispersed = fs.filter(({ f }) => f.funder && isDisperser(f.funder));
   const dispShare = c.share(dispersed.reduce((a, { h }) => a + (c.net(h.wallet) > 0n ? c.net(h.wallet) : 0n), 0n));
   if (on("known_actors") && mod.funding) checks.push({ check: "no_known_actors", result: dispShare >= 0.01 ? "fail" : "pass",
-    fact: dispShare >= 0.01 ? `${dispersed.length} early buyers funded by a wallet that has funded early buyers in other coins, holding ${pct(dispShare)}.` : "No known bundler or disperser wallets among the first buyers." });
+    fact: dispShare >= 0.01 ? `${dispersed.length} early ${dispersed.length === 1 ? "buyer" : "buyers"} funded by a wallet that has funded early buyers in other coins, holding ${pct(dispShare)}.` : "No known bundler or disperser wallets among the first buyers." });
 
   // creator
   const seen = (creatorLaunches.get(l.creator, l.signer, l.seenMs - DAY, l.mint) as any)?.n ?? 0;
