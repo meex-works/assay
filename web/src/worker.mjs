@@ -4,8 +4,8 @@ import { hygiene, securityTxt } from "./hygiene.mjs";
 
 const ORIGIN = "https://assay.meex.work";
 const CSP = [
-  "default-src 'self'", "script-src 'self'", "style-src 'self' https://fonts.googleapis.com", "font-src https://fonts.gstatic.com",
-  "img-src 'self' data:", "connect-src 'self'", "base-uri 'none'", "form-action 'none'", "frame-ancestors 'none'", "object-src 'none'",
+  "default-src 'self'", "script-src 'self' https://static.cloudflareinsights.com", "style-src 'self' https://fonts.googleapis.com", "font-src https://fonts.gstatic.com",
+  "img-src 'self' data:", "connect-src 'self' https://cloudflareinsights.com", "base-uri 'none'", "form-action 'none'", "frame-ancestors 'none'", "object-src 'none'",
 ].join("; ");
 const TTL = { summary: 15, tape: 5, posts: 5, coin: 10 };
 
@@ -51,9 +51,8 @@ export default {
     else if (p === "/sitemap.xml") res = new Response(SITEMAP, { headers: { "content-type": "application/xml; charset=utf-8" } });
     else if (p === "/llms.txt") res = new Response(LLMS, { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (p === "/.well-known/security.txt") res = new Response(securityTxt({ contact: "security@meex.work", policy: "https://github.com/meex-works/assay", canonical: `${ORIGIN}/.well-known/security.txt` }), { headers: { "content-type": "text/plain; charset=utf-8" } });
-    else if (/^\/c\/[1-9A-HJ-NP-Za-km-z]{32,44}\/?$/.test(p)) res = await env.ASSETS.fetch(new Request(new URL("/coin.html", url), req));
-    else if (p === "/how" || p === "/how/") res = await env.ASSETS.fetch(new Request(new URL("/how.html", url), req));
-    else res = await env.ASSETS.fetch(req);
+    else if (/^\/c\/[1-9A-HJ-NP-Za-km-z]{32,44}\/?$/.test(p)) res = await env.ASSETS.fetch(new Request(new URL("/coin", url), req));   // "/coin.html" would 307 to "/coin" and the browser would follow it
+      else res = await env.ASSETS.fetch(req);
     return hygiene(res, { csp: CSP });
   },
 };

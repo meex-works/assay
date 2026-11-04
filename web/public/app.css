@@ -60,6 +60,7 @@ nav a:hover, nav a[aria-current] { color: var(--ink); }
 .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 28px; align-items: start; padding-bottom: 40px; }
 @media (max-width: 900px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 h2 { font: 500 21px/1.2 var(--display); margin: 0 0 4px; }
+h2.gap { margin-top: 32px; }
 .sub { color: var(--muted); font-size: 13px; margin: 0 0 14px; }
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
 
@@ -135,3 +136,4 @@ footer { border-top: 1px solid var(--line); padding: 22px 0 40px; color: var(--m
 footer .wrap { display: flex; gap: 10px 22px; flex-wrap: wrap; }
 footer .grow { flex: 1 1 320px; }
 @media (prefers-reduced-motion: reduce) { .live.on i { animation: none; } }
+.checks li.empty, .timeline li.empty { display: block; }

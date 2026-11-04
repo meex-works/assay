@@ -67,7 +67,8 @@ function renderPosts(ps) {
 function renderTape(rows) {
   if (!rows.length) { $("#tape").replaceChildren(el("tr", {}, el("td", { colspan: "4", class: "empty", text: "Nothing judged yet." }))); return; }
   $("#tape").replaceChildren(...rows.map((r) => {
-    const why = r.verdict === "dead" ? `${r.buyers ?? 0} outside buyers` : r.verdict === "pure" ? `${r.independent} independent buyers` : r.verdict === "not_alive" ? `${r.independent ?? 0} independent buyers` : r.fails[0]?.fact ?? "";
+    const n = r.buyers ?? 0;
+    const why = r.verdict === "dead" ? `${n} outside ${n === 1 ? "buyer" : "buyers"}` : r.verdict === "pure" ? `${r.independent} independent buyers` : r.verdict === "not_alive" ? `${r.independent ?? 0} independent buyers` : r.fails[0]?.fact ?? "";
     const tr = el("tr", { class: "go", tabindex: "0" },
       el("td", { class: "t", text: ago(r.at) }),
       el("td", { class: "sym" }, el("a", { href: `/c/${r.mint}`, text: ticker(r.symbol) })),
