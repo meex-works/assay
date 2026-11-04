@@ -24,11 +24,11 @@ catch { fail(`can't write ${dirname(mod.dbPath)}`, "change store.path in the con
 // ── keys ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 console.log("\nkeys (from .env or the Keychain)");
 const need: [KeyName, boolean, string][] = [
-  ["grpc", mod.grpc, "feeds.grpc"], ["websocket", mod.websocket, "feeds.websocket"], ["rpc", mod.funding, "funding"],
-  ["telegram", mod.telegram && !mod.dry, "post.telegram (and not --dry)"], ["api", process.argv.includes("--api"), "the API (pass --api to check)"],
+  ["grpc", mod.grpc, "feeds.grpc is off"], ["websocket", mod.websocket, "feeds.websocket is off"], ["rpc", mod.funding, "funding is off"],
+  ["telegram", mod.telegram && !mod.dry, mod.dry ? "a dry run" : "post.telegram is off"], ["api", process.argv.includes("--api"), "pass --api to check it"],
 ];
-for (const [k, needed, by] of need) {
-  if (!needed) { skip(KEYS[k].what, `${by} is off`); continue; }
+for (const [k, needed, why] of need) {
+  if (!needed) { skip(KEYS[k].what, why); continue; }
   const f = lookup(k);
   f ? ok(KEYS[k].what, `from ${f.from}`) : fail(`missing: ${KEYS[k].what}`, `add to .env → ${KEYS[k].how}`);
 }
