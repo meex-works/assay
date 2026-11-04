@@ -1,12 +1,13 @@
 // The silent run: both feeds → coins → the pure checklist at min_age → Assay Office posts (or a held-out control) →
 // the tape's 15-minute watch. Everything is written to data/assay.db for the week's analysis (src/report.ts).
 //
-//   node src/run.ts               posts to Assay Office
-//   ASSAY_POST=0 node src/run.ts  dry: prints posts instead of sending them
+//   npm run silent                     everything config/assay.yaml switches on
+//   npm run silent -- --dry            prints posts, edits and comments instead of sending them
+//   npm run silent -- --set feeds.websocket=false --set checks.links=false     any setting, for this run only
 import { createHash } from "node:crypto";
-import { cfg } from "./config.ts";
+import { cfg, mod } from "./config.ts";
 import { Coin, fundStats, fundingOf } from "./coin.ts";
-import { feedStats, runGrpc, runHelius } from "./feeds.ts";
+import { feedStats, runGrpc, runWebsocket } from "./feeds.ts";
 import { fetchMeta, metaStats } from "./meta.ts";
 import { KNOWN, type Decoded, type Launch } from "./pump.ts";
 import { evaluate, postText } from "./pure.ts";
@@ -18,7 +19,7 @@ import * as tg from "./telegram.ts";
 const coins = new Map<string, Coin>();
 const stats = { launches: 0, grpcLaunches: 0, heliusLaunches: 0, evaluated: 0, dead: 0, pure: 0, alive: 0, posted: 0, control: 0, capped: 0 };
 const postTimes: number[] = [];
-const CONTROL_SHARE = 0.2;    // one pure coin in five is watched but not posted: the comparison set for H7
+const CONTROL_SHARE = mod.controlShare;   // this share of pure coins is watched but not posted: the comparison set for H7
 const isControl = (mint: string) => createHash("sha256").update(mint).digest()[0] < 256 * CONTROL_SHARE;
 
 // ── launches ─────────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -32,7 +33,7 @@ function onLaunch(l: Launch, source: "grpc" | "helius") {
   stats.launches++;
   const c = new Coin(l);
   coins.set(l.mint, c);
-  c.metaDone = fetchMeta(l.uri, l.mint).then((m) => { c.meta = m; setMeta.run(m.imageSha, JSON.stringify({ links: m.links, website: m.website, telegram: m.telegram, twitter: m.twitterShape }), l.mint); });
+  if (mod.metadata) c.metaDone = fetchMeta(l.uri, l.mint).then((m) => { c.meta = m; setMeta.run(m.imageSha, JSON.stringify({ links: m.links, website: m.website, telegram: m.telegram, twitter: m.twitterShape }), l.mint); });
   setTimeout(() => judge(c).catch((e) => console.error(`[judge] ${l.mint}: ${e.message}`)), cfg.minAge);
 }
 
@@ -45,11 +46,11 @@ function onTx(d: Decoded) {
     if (!c) continue;
     c.add(t);
     // start tracing funders once a coin has three outside buyers: below that it can't pass the alive gate
-    if (!c.tracing && c.age(t.seenMs) <= cfg.earlyWindow && c.early().length >= 3) {
+    if (mod.funding && !c.tracing && c.age(t.seenMs) <= cfg.earlyWindow && c.early().length >= 3) {
       c.tracing = true;
       for (const h of c.early()) void fundingOf(h.wallet);
       void fundingOf(c.launch.signer);
-    } else if (c.tracing && t.isBuy && c.age(t.seenMs) <= cfg.earlyWindow && !KNOWN[t.user] && !c.devWallets.has(t.user)) void fundingOf(t.user);
+    } else if (mod.funding && c.tracing && t.isBuy && c.age(t.seenMs) <= cfg.earlyWindow && !KNOWN[t.user] && !c.devWallets.has(t.user)) void fundingOf(t.user);
     const w = watches.get(t.mint);
     if (w) onTrade(w, t.seenMs);
   }
@@ -65,7 +66,7 @@ setInterval(() => {
 async function judge(c: Coin) {
   const l = c.launch;
   if (c.early().length < 3) { stats.dead++; insCheck.run(l.mint, Date.now(), "t30", 0, JSON.stringify({ dead: true, buyers: c.early().length })); return; }
-  await Promise.race([c.metaDone, new Promise((r) => setTimeout(r, 5000))]);
+  if (c.metaDone) await Promise.race([c.metaDone, new Promise((r) => setTimeout(r, 5000))]);
   const v = await evaluate(c);
   const at = Date.now();
   stats.evaluated++; if (v.pure) stats.pure++; if (v.alive) stats.alive++;
@@ -77,13 +78,13 @@ async function judge(c: Coin) {
   if (isControl(l.mint) || capped) {
     capped ? stats.capped++ : stats.control++;
     insPost.run(l.mint, at, null, null, text, capped ? "capped" : "control");
-    startWatch(c, false, null, text, at);
+    if (mod.watch) startWatch(c, false, null, text, at);
     return;
   }
-  const msg = await tg.post(cfg.channel, text);
+  const msg = await tg.post(cfg.channel, text);   // null when post.telegram is off
   postTimes.push(at); stats.posted++;
-  insPost.run(l.mint, at, msg, null, text, "pure");
-  startWatch(c, true, msg, text, at);
+  insPost.run(l.mint, at, msg, null, text, msg == null ? "unposted" : "pure");
+  if (mod.watch) startWatch(c, msg != null, msg, text, at);
   console.log(`[post] ${l.symbol} ${l.mint} at ${((at - l.seenMs) / 1000).toFixed(1)}s, ${v.independent} independent buyers`);
 }
 
@@ -92,8 +93,9 @@ setInterval(() => { tick().catch((e) => console.error(`[tick] ${e.message}`)); }
 setInterval(() => {
   const now = Date.now();
   for (const [m, c] of coins) if (c.age(now) > cfg.trackFor && !watches.has(m)) coins.delete(m);
-  // reconciliation: a launch one feed saw and the other didn't within 30 s
+  // reconciliation: a launch one feed saw and the other didn't within 30 s (only when both feeds run)
   for (const [m, s] of seenBy) {
+    if (!(mod.grpc && mod.websocket)) { seenBy.delete(m); continue; }
     const first = Math.min(s.grpc ?? Infinity, s.helius ?? Infinity);
     if (now - first < 30_000) continue;
     if (!s.grpc) insGap.run(now, "helius_only", m, "");
@@ -101,7 +103,7 @@ setInterval(() => {
     seenBy.delete(m);
   }
 }, 10_000);
-setInterval(() => pruneTrades.run(Date.now() - 8 * 86_400_000), 3_600_000);
+setInterval(() => pruneTrades.run(Date.now() - mod.keepTradesDays * 86_400_000), 3_600_000);
 setInterval(() => {
   const m = { ...stats, coins: coins.size, watches: watches.size, feeds: feedStats, rpc: rpcStats, funding: fundStats, meta: metaStats, telegram: tg.tgStats, rssMb: Math.round(process.memoryUsage().rss / 1e6) };
   insMetric.run(Date.now(), JSON.stringify(m));
@@ -123,7 +125,7 @@ function resume() {
     coins.set(r.mint, c);
     if (c.age() < cfg.minAge) {       // not judged yet when the process stopped
       c.tracing = false; c.evaluated = false;
-      c.metaDone = fetchMeta(l.uri, l.mint).then((m) => { c.meta = m; });
+      if (mod.metadata) c.metaDone = fetchMeta(l.uri, l.mint).then((m) => { c.meta = m; });
       setTimeout(() => judge(c).catch((e) => console.error(`[judge] ${l.mint}: ${e.message}`)), cfg.minAge - c.age());
     }
   }
@@ -145,6 +147,11 @@ function resume() {
 // ── start ────────────────────────────────────────────────────────────────────────────────────────────────────────────
 resume();
 await tg.init(cfg.channel);
-console.log(`assay silent run · ${tg.DRY ? "DRY (not posting)" : `posting to ${cfg.channel}`} · min_age ${cfg.minAge / 1000}s · watch ${cfg.watchFor / 60_000}m`);
-void runGrpc(onTx);
-void runHelius((d) => { for (const l of d.launches) onLaunch(l, "helius"); });
+const onoff = (b: boolean) => (b ? "on" : "off");
+console.log(`assay silent run · config ${mod.file} · ${!mod.telegram ? "posting OFF" : tg.DRY ? "DRY (printing posts)" : `posting to ${cfg.channel}`}`);
+console.log(`  feeds: grpc ${onoff(mod.grpc)}, websocket ${onoff(mod.websocket)} · funding ${onoff(mod.funding)} · metadata ${onoff(mod.metadata)} · watch ${onoff(mod.watch)} · control ${mod.controlShare * 100}%`);
+console.log(`  checks off: ${Object.entries(mod.checks).filter(([, v]) => !v).map(([k]) => k).join(", ") || "none"} · min_age ${cfg.minAge / 1000}s · watch ${cfg.watchFor / 60_000}m`);
+if (!mod.grpc && !mod.websocket) { console.error("both feeds are off: nothing to do (feeds.grpc / feeds.websocket in the config)"); process.exit(1); }
+if (!mod.grpc) console.warn("feeds.grpc is off: launches only, no trades. Every coin will read as dead at 0:30.");
+if (mod.grpc) void runGrpc(onTx);
+if (mod.websocket) void runWebsocket((d: Decoded) => { for (const l of d.launches) onLaunch(l, "helius"); });

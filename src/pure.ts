@@ -1,11 +1,12 @@
 // The pure checklist (docs/pure.md), evaluated at min_age after launch, and the post it produces.
 // Every check returns pass / fail / unknown with the fact behind it. A coin is pure when nothing fails; "unknown" is
 // allowed only where the cause is a slow fetch, never for the chain checks.
-import { cfg } from "./config.ts";
+import { cfg, mod, on } from "./config.ts";
 import { clusters, fundingOf, isDisperser, isHub, type Cluster, type Coin } from "./coin.ts";
 import { SOL_QUOTE } from "./pump.ts";
 import { rpc } from "./rpc.ts";
 import { creatorLaunches, sameImage, sameTicker, sameUri } from "./store.ts";
+import { feedbackLine } from "./telegram.ts";
 
 export type Check = { check: string; result: "pass" | "fail" | "unknown"; fact: string };
 export type Verdict = { pure: boolean; alive: boolean; checks: Check[]; clusters: Cluster[]; facts: string[]; independent: number };
@@ -46,25 +47,25 @@ export async function evaluate(c: Coin): Promise<Verdict> {
 
   // dev buy
   const devBought = c.share(c.devBought()), devNet = c.share(c.devNet());
-  checks.push({ check: "dev_buy", result: devBought <= cfg.devBuyMax ? "pass" : "fail",
+  if (on("dev_buy")) checks.push({ check: "dev_buy", result: devBought <= cfg.devBuyMax ? "pass" : "fail",
     fact: devBought === 0 ? "No dev buy." : `Dev bought ${pct(devBought)}${devNet < devBought * 0.99 ? `, and has sold ${pct(1 - devNet / devBought)} of it` : ", nothing sold"}.` });
-  if (devBought > 0 && devNet < devBought * 0.5) checks.push({ check: "dev_holding", result: "fail", fact: `Dev sold ${pct(1 - devNet / devBought)} of their buy.` });
+  if (on("dev_holding") && devBought > 0 && devNet < devBought * 0.5) checks.push({ check: "dev_holding", result: "fail", fact: `Dev sold ${pct(1 - devNet / devBought)} of their buy.` });
 
   // bundle
-  checks.push({ check: "no_bundle", result: bundles.length ? "fail" : "pass",
+  if (on("bundle")) checks.push({ check: "no_bundle", result: bundles.length ? "fail" : "pass",
     fact: bundles.length ? describeCluster(bundles.sort((a, b) => b.share - a.share)[0], c) : "No bundle among the first buyers." });
 
   // known bad actors: early buyers funded by a disperser
   const fs = await Promise.all(early.map(async (h) => ({ h, f: await fundingOf(h.wallet) })));
   const dispersed = fs.filter(({ f }) => f.funder && isDisperser(f.funder));
   const dispShare = c.share(dispersed.reduce((a, { h }) => a + (c.net(h.wallet) > 0n ? c.net(h.wallet) : 0n), 0n));
-  checks.push({ check: "no_known_actors", result: dispShare >= 0.01 ? "fail" : "pass",
+  if (on("known_actors") && mod.funding) checks.push({ check: "no_known_actors", result: dispShare >= 0.01 ? "fail" : "pass",
     fact: dispShare >= 0.01 ? `${dispersed.length} early buyers funded by a wallet that has funded early buyers in other coins, holding ${pct(dispShare)}.` : "No known bundler or disperser wallets among the first buyers." });
 
   // creator
   const seen = (creatorLaunches.get(l.creator, l.signer, l.seenMs - DAY, l.mint) as any)?.n ?? 0;
-  const cf = await fundingOf(l.signer);
-  checks.push({ check: "clean_creator", result: seen >= cfg.serialCreatorLaunches ? "fail" : "pass",
+  const cf = mod.funding ? await fundingOf(l.signer) : { class: null, funder: null, firstActiveS: null };
+  if (on("clean_creator")) checks.push({ check: "clean_creator", result: seen >= cfg.serialCreatorLaunches ? "fail" : "pass",
     fact: seen ? `${seen} other launches by this creator in the last 24 hours.` : "No other launch by this creator in assay's record." });
   if (cf.class === "busy") facts.push("Creator wallet has a long history.");
   else if (cf.firstActiveS) facts.push(`Creator wallet first active ${ago(l.seenMs / 1000 - cf.firstActiveS)} before launch.`);
@@ -74,8 +75,10 @@ export async function evaluate(c: Coin): Promise<Verdict> {
   const img = c.meta?.imageSha ? (sameImage.get(c.meta.imageSha, l.mint) as any) : null;
   const tick = sameTicker.get(l.symbol, l.name, l.mint, l.seenMs - DAY) as any;   // a reused ticker older than a day is normal
   const copy = uri ? "the same metadata" : img ? "the same image" : tick ? "the same name or ticker" : null;
-  checks.push({ check: "original", result: copy ? "fail" : c.meta?.ok ? "pass" : "unknown",
-    fact: copy ? `An earlier coin (${short((uri ?? img ?? tick).mint)}) has ${copy}.` : c.meta?.ok ? "No earlier coin with this image, metadata, or name and ticker." : "Metadata didn't load in time." });
+  // with metadata off, originality rests on the metadata URI and the name/ticker, which are on-chain
+  const checked = c.meta?.ok || !mod.metadata;
+  if (on("original")) checks.push({ check: "original", result: copy ? "fail" : checked ? "pass" : "unknown",
+    fact: copy ? `An earlier coin (${short((uri ?? img ?? tick).mint)}) has ${copy}.` : checked ? `No earlier coin with this ${mod.metadata ? "image, " : ""}metadata, or name and ticker.` : "Metadata didn't load in time." });
 
   // links
   const m = c.meta;
@@ -83,7 +86,7 @@ export async function evaluate(c: Coin): Promise<Verdict> {
     if (m.website === "shows_mint") facts.push("The website shows this mint.");
     else facts.push("Website linked.");
   }
-  if (m?.links.telegram) {
+  if (on("links") && m?.links.telegram) {
     checks.push({ check: "telegram", result: m.telegram === "missing" ? "fail" : m.telegram === "resolves" ? "pass" : "unknown", fact: m.telegram === "missing" ? "The linked Telegram doesn't exist." : "Telegram linked." });
   }
   if (m?.links.twitter) facts.push(m.twitterShape === "community" ? "X Community linked." : m.twitterShape === "post" ? "An X post linked." : "X account linked.");
@@ -91,14 +94,14 @@ export async function evaluate(c: Coin): Promise<Verdict> {
 
   // config honesty: a description that promises holder rewards needs the holder-reward flag
   const promises = /(fees?|rewards?)\s+(go(es)?\s+)?(to|for)\s+holders|holder\s+rewards?/i.test(m?.description ?? "");
-  if (promises) checks.push({ check: "honest_config", result: l.holderReward ? "pass" : "fail", fact: l.holderReward ? "Holder rewards on, as described." : "The description promises holder rewards; holder rewards are off." });
+  if (on("honest_config") && promises) checks.push({ check: "honest_config", result: l.holderReward ? "pass" : "fail", fact: l.holderReward ? "Holder rewards on, as described." : "The description promises holder rewards; holder rewards are off." });
   if (l.mayhem) facts.push("Mayhem mode.");
   if (l.quoteMint !== SOL_QUOTE) facts.push(`Quoted in ${await quoteName(l.quoteMint)}.`);
   if (l.holderReward && !promises) facts.push("Holder rewards on.");
   if (l.creatorFeeBps) facts.push(`Creator fee ${+(l.creatorFeeBps / 100).toFixed(2)}%.`);
 
   const independent = await independentOf(c, bundles);
-  const alive = independent >= cfg.independentBuyersMin;
+  const alive = !on("alive") || independent >= cfg.independentBuyersMin;
   // Unknown is allowed only for links. Originality that couldn't be checked blocks the post: "pure" means checked.
   const pure = !checks.some((x) => x.result === "fail" || (x.result === "unknown" && x.check === "original"));
   return { pure, alive, checks, clusters: cl, facts, independent };
@@ -134,5 +137,6 @@ export function postText(c: Coin, v: Verdict, atMs: number): string {
     ...body, "",
     `Pure as of ${clock(atMs - l.seenMs)} after launch. Watched for ${Math.round(cfg.watchFor / 60_000)} minutes; this message updates if that changes.`,
     "Not a recommendation. Do your own research.",
+    ...(feedbackLine() ? [feedbackLine()!] : []),
   ].join("\n");
 }

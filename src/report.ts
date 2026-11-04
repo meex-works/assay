@@ -2,8 +2,9 @@
 //   node src/report.ts            the summary since the run started
 //   node src/report.ts --posts    plus every post, its state and its timeline
 import { DatabaseSync } from "node:sqlite";
+import { mod } from "./config.ts";
 
-const db = new DatabaseSync(new URL("../data/assay.db", import.meta.url).pathname, { readOnly: true });
+const db = new DatabaseSync(mod.dbPath, { readOnly: true });
 const one = (sql: string, ...a: any[]) => db.prepare(sql).get(...a) as any;
 const all = (sql: string, ...a: any[]) => db.prepare(sql).all(...a) as any[];
 const pct = (n: number, d: number) => (d ? `${((100 * n) / d).toFixed(1)}%` : "n/a");

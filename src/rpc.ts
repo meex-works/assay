@@ -1,9 +1,9 @@
 // JSON-RPC over HTTPS (raw: @solana/web3.js 1.x can't deserialize version-1 transactions, 64% of launches), with a
 // concurrency cap and backoff on 429. Plus the one-hop funder lookup.
-import { secret } from "./keys.ts";
+import { rpcUrl } from "./keys.ts";
 import { cfg } from "./config.ts";
 
-const URL_ = `https://solana-mainnet.g.alchemy.com/v2/${secret("assay-alchemy")}`;
+let URL_: string | null = null;   // resolved on first use: only modules that call RPC need the key
 const MAX = 8;
 let active = 0;
 const queue: (() => void)[] = [];
@@ -20,6 +20,7 @@ export async function rpc<T = any>(method: string, params: unknown[]): Promise<T
   try {
     for (let i = 0; ; i++) {
       rpcStats.calls++;
+      URL_ ??= rpcUrl();
       const r = await fetch(URL_, { method: "POST", headers: { "content-type": "application/json" },
         body: JSON.stringify({ jsonrpc: "2.0", id: 1, method, params }), signal: AbortSignal.timeout(10_000) }).catch((e) => e as Error);
       if (r instanceof Error) { if (i < 3) continue; rpcStats.errors++; throw r; }

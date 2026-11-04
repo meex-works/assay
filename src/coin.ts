@@ -1,5 +1,5 @@
 // A coin in its first minutes: every trade, every wallet's net position, and the funding behind its buyers.
-import { cfg } from "./config.ts";
+import { cfg, mod } from "./config.ts";
 import { KNOWN, type Launch, type Trade } from "./pump.ts";
 import { funderOf, rpc, type Funding } from "./rpc.ts";
 import { bumpEarly, funderCoins, getWallet, insEarly, setFunder } from "./store.ts";
@@ -12,7 +12,9 @@ const funding = new Map<string, Promise<Funding>>();
 const hubs = new Map<string, Promise<boolean>>();
 export const fundStats = { lookups: 0, cached: 0, hubChecks: 0 };
 
+const NONE: Funding = { class: null, funder: null, firstActiveS: null };
 export function fundingOf(wallet: string): Promise<Funding> {
+  if (!mod.funding) return Promise.resolve(NONE);   // funding: false — no lookups, no funder-based rules
   let p = funding.get(wallet);
   if (p) return p;
   const row = getWallet.get(wallet) as any;
@@ -117,9 +119,9 @@ export async function clusters(c: Coin, hs: Holder[], opts: { sameSlot: boolean 
   for (const [f, ws] of byFunder) if (ws.length >= 2 && !(await isHub(f))) out.push({ kind: "shared_funder", wallets: ws, share: shareOf(ws), funder: f });
   // fresh = first active less than an hour before its first buy, and not a busy wallet
   const fresh = hs.filter((h) => { const f = fs.get(h.wallet); return f?.class !== "busy" && f?.firstActiveS != null && h.firstMs / 1000 - f.firstActiveS < cfg.freshWallet / 1000; });
-  // 3. fresh wallets buying in the launch's first slots
+  // 3. fresh wallets buying in the launch's first slots (any wallets, when funding lookups are off)
   if (opts.sameSlot) {
-    const ss = fresh.filter((h) => h.firstSlotOffset <= 2).map((h) => h.wallet);
+    const ss = (mod.funding ? fresh : hs.filter((h) => !KNOWN[h.wallet])).filter((h) => h.firstSlotOffset <= 2).map((h) => h.wallet);
     if (ss.length >= 2) out.push({ kind: "same_slot_fresh", wallets: ss, share: shareOf(ss) });
   }
   // 4. fresh wallets funded within a few minutes of each other. Three or more: two fresh wallets funded minutes apart

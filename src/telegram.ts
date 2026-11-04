@@ -3,14 +3,17 @@
 // so the poster reads the group's updates to learn each copy's message id.
 // Plain text only (no Markdown, nothing to escape). Each chat is paced to stay inside Telegram's limits.
 import { secret } from "./keys.ts";
+import { mod } from "./config.ts";
 
-const TOKEN = secret("desk-telegram-bot", "desk");   // @meexplexbot: admin in @assayoffice and in its discussion group
-const API = `https://api.telegram.org/bot${TOKEN}/`;
-export const DRY = process.env.ASSAY_POST === "0";
-export const tgStats = { sent: 0, edited: 0, comments: 0, errors: 0, dry: DRY };
+// post.telegram off → nothing is sent or printed; post.dry → printed instead of sent.
+export const ENABLED = mod.telegram;
+export const DRY = mod.dry;
+let API: string | null = null;   // resolved on first real call: dry runs need no token
+export const tgStats = { sent: 0, edited: 0, comments: 0, errors: 0, dry: DRY, enabled: ENABLED };
 
 async function call(method: string, body: Record<string, unknown>): Promise<any> {
   for (let i = 0; ; i++) {
+    API ??= `https://api.telegram.org/bot${secret("telegram")}/`;
     const r = await fetch(API + method, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(15_000) }).catch((e) => e as Error);
     if (r instanceof Error) { if (i < 3) continue; tgStats.errors++; throw r; }
     const j = await r.json();
@@ -37,7 +40,7 @@ const copies = new Map<number, number>();            // channel message id → i
 const waiting = new Map<number, ((id: number) => void)[]>();
 
 export async function init(channel: string) {
-  if (DRY) return;
+  if (DRY || !ENABLED) return;
   const chat = await call("getChat", { chat_id: channel });
   groupId = chat.linked_chat_id ?? null;
   if (!groupId) console.error("[telegram] the channel has no linked discussion group: comments disabled");
@@ -74,17 +77,25 @@ function copyOf(channelMsg: number, ms = 20_000): Promise<number | null> {
   });
 }
 
+// "Disagree with a rule or finding? Let's chat": URL buttons under every post. Edits must resend them or they vanish.
+function buttons() {
+  const f = mod.feedback, row = [f.x && { text: "Chat on X", url: f.x }, f.telegram && { text: "Chat on Telegram", url: f.telegram }].filter(Boolean);
+  return row.length ? { inline_keyboard: [row] } : undefined;
+}
+export const feedbackLine = () => (mod.feedback.text && (mod.feedback.x || mod.feedback.telegram) ? mod.feedback.text : null);
+
 let dryId = 1;
-export async function post(channel: string, text: string): Promise<number> {
+export async function post(channel: string, text: string): Promise<number | null> {
+  if (!ENABLED) return null;
   if (DRY) { console.log(`[dry post]\n${text}\n`); return dryId++; }
-  const m = await paced(channel, () => call("sendMessage", { chat_id: channel, text, link_preview_options: { is_disabled: true } }));
+  const m = await paced(channel, () => call("sendMessage", { chat_id: channel, text, link_preview_options: { is_disabled: true }, reply_markup: buttons() }));
   tgStats.sent++;
   return m.message_id;
 }
 
 export async function edit(channel: string, msg: number, text: string): Promise<void> {
   if (DRY) { console.log(`[dry edit ${msg}]\n${text}\n`); return; }
-  await paced(channel, () => call("editMessageText", { chat_id: channel, message_id: msg, text, link_preview_options: { is_disabled: true } }));
+  await paced(channel, () => call("editMessageText", { chat_id: channel, message_id: msg, text, link_preview_options: { is_disabled: true }, reply_markup: buttons() }));
   tgStats.edited++;
 }
 

@@ -4,7 +4,8 @@
 // Both reconnect with backoff; A resumes from the last slot it saw (Alchemy replays up to 6000 slots).
 import ClientModule, { CommitmentLevel } from "@triton-one/yellowstone-grpc";
 import WebSocket from "ws";
-import { secret } from "./keys.ts";
+import { secret, websocketUrl } from "./keys.ts";
+import { mod } from "./config.ts";
 import { EVENT_AUTHORITY, MINT_AUTHORITY, decodeGrpc, decodeLogs, type Decoded } from "./pump.ts";
 
 export const feedStats = { grpc: { txs: 0, reconnects: 0, lastSlot: 0, lastMs: 0 }, helius: { notes: 0, reconnects: 0, lastMs: 0 } };
@@ -13,10 +14,10 @@ const Client: any = (ClientModule as any).default ?? ClientModule;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export async function runGrpc(onTx: (d: Decoded) => void): Promise<never> {
-  const token = secret("assay-alchemy");
+  const token = secret("grpc");
   for (let attempt = 0; ; attempt++) {
     try {
-      const client = new Client("https://solana-mainnet.streaming.alchemy.com", token, { "grpc.max_receive_message_length": 64 * 1024 * 1024 });
+      const client = new Client(mod.providers.grpc_endpoint, token, { "grpc.max_receive_message_length": 64 * 1024 * 1024 });
       const stream = await client.subscribe();
       const done = new Promise<void>((resolve) => {
         stream.on("error", (e: Error) => { console.error(`[grpc] ${e.message.slice(0, 160)}`); resolve(); });
@@ -51,8 +52,8 @@ export async function runGrpc(onTx: (d: Decoded) => void): Promise<never> {
   }
 }
 
-export async function runHelius(onLaunch: (d: Decoded) => void): Promise<never> {
-  const url = `wss://mainnet.helius-rpc.com/?api-key=${secret("assay-helius")}`;
+export async function runWebsocket(onLaunch: (d: Decoded) => void): Promise<never> {
+  const url = websocketUrl(mod.providers.websocket);
   for (let attempt = 0; ; attempt++) {
     await new Promise<void>((resolve) => {
       const ws = new WebSocket(url);

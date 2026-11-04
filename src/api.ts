@@ -6,10 +6,11 @@
 import { createServer } from "node:http";
 import { DatabaseSync } from "node:sqlite";
 import { secret } from "./keys.ts";
+import { mod } from "./config.ts";
 
-const PORT = Number(process.env.PORT ?? 8791);
-const KEY = secret("assay-api-key");
-const db = new DatabaseSync(new URL("../data/assay.db", import.meta.url).pathname, { readOnly: true });
+const PORT = Number(process.env.PORT ?? mod.api.port);
+const KEY = secret("api");
+const db = new DatabaseSync(mod.dbPath, { readOnly: true });
 const all = (sql: string, ...a: any[]) => db.prepare(sql).all(...a) as any[];
 const one = (sql: string, ...a: any[]) => db.prepare(sql).get(...a) as any;
 const med = (a: number[]) => (a.length ? a.sort((x, y) => x - y)[Math.floor((a.length - 1) / 2)] : null);
@@ -37,6 +38,7 @@ function summary() {
     launches: l.n, bothFeeds: l.n ? l.both / l.n : null, gaps, leadMs: med(lead),
     judged: j.n, dead: j.dead ?? 0, pureAlive: j.pure ?? 0, fails,
     posted: watched(true), control: watched(false), editLatencyMs: med(lat),
+    feedback: mod.feedback,
     health: { lastMetric, rssMb: m?.rssMb ?? null, grpcReconnects: m?.feeds?.grpc?.reconnects ?? null, metaOk: m?.meta ? m.meta.ok / Math.max(1, m.meta.ok + m.meta.failed) : null },
   };
 }
@@ -103,4 +105,4 @@ createServer((req, res) => {
     console.error(`[api] ${(e as Error).message}`);
     json(res, 500, { error: "internal" });
   }
-}).listen(PORT, "127.0.0.1", () => console.log(`assay api on 127.0.0.1:${PORT}`));
+}).listen(PORT, mod.api.host, () => console.log(`assay api on ${mod.api.host}:${PORT}`));

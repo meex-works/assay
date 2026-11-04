@@ -12,7 +12,8 @@
     "silent": "node src/run.ts",
     "report": "node src/report.ts",
     "check": "tsc --noEmit",
-    "api": "node src/api.ts"
+    "api": "node src/api.ts",
+    "doctor": "node src/doctor.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.1",

@@ -137,3 +137,12 @@ footer .wrap { display: flex; gap: 10px 22px; flex-wrap: wrap; }
 footer .grow { flex: 1 1 320px; }
 @media (prefers-reduced-motion: reduce) { .live.on i { animation: none; } }
 .checks li.empty, .timeline li.empty { display: block; }
+
+/* feedback */
+.feedback { display: flex; align-items: center; justify-content: space-between; gap: 14px 24px; flex-wrap: wrap; margin: 8px 0 40px; padding: 18px 20px; border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line)); border-radius: 10px; background: color-mix(in srgb, var(--gold) 6%, var(--surface)); }
+.feedback p { margin: 0; font: 400 19px/1.3 var(--display); }
+.fb-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.fb { font: 600 13px/1 var(--body); color: var(--bg); background: var(--gold); text-decoration: none; padding: 10px 14px; border-radius: 8px; }
+.fb:hover { background: var(--gold-ink); }
+.fb + .fb { color: var(--ink); background: transparent; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); }
+.fb + .fb:hover { border-color: var(--gold); background: transparent; }

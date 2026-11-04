@@ -1,0 +1,67 @@
+# assay instance config. Every module can be switched off here.
+#
+# Any value can also be overridden without editing this file:
+#   environment:  ASSAY_<SECTION>_<KEY>=value      e.g.  ASSAY_POST_DRY=true   ASSAY_CHECKS_LINKS=false
+#   command line: --set section.key=value          e.g.  npm run silent -- --set feeds.helius=false
+#   shortcuts:    --dry  (= post.dry=true)   --config <file>  (use another config file)
+# Precedence: command line > environment > this file. Thresholds for the pure checklist live in config/lenses/pure.yaml.
+
+feeds:
+  # Yellowstone gRPC: every successful pump.fun transaction. Needed for trades, bundles and the watch.
+  # Off = launches only (from the websocket feed), nothing after launch is seen.
+  grpc: true
+  # Websocket on pump.fun's mint-authority account: launches only. A second, independent source for launches.
+  # Off = no reconciliation between feeds (the gRPC feed alone).
+  websocket: true
+
+# One-hop funding lookups for early buyers (RPC calls). Powers the shared-funder, funded-together, creator-funded
+# and fresh-wallet bundle rules and the known-disperser check. Off = cheaper, but bundles funded from different
+# wallets are only caught when they buy in the launch's first slots.
+funding: true
+
+# Fetch each launch's metadata JSON, its image and its links. Off = originality is checked on the metadata URI only,
+# and no link checks run.
+metadata: true
+
+# Each check in the pure checklist (docs/pure.md). A check that's off is skipped, never counted as failed.
+checks:
+  dev_buy: true          # the creator bought dev_buy_max of supply or less
+  dev_holding: true      # the creator hasn't sold half or more of their buy
+  bundle: true           # no bundle among the first buyers
+  known_actors: true     # no early buyers funded by a known disperser (needs funding: true)
+  clean_creator: true    # not a serial creator or signer
+  original: true         # no earlier coin with the same metadata, image, or name/ticker in the last day
+  links: true            # linked Telegram exists (needs metadata: true)
+  honest_config: true    # a promise of holder rewards matches the launch's settings (needs metadata: true)
+  alive: true            # at least independent_buyers_min independent buyers (keeps the channel readable)
+
+# Where pure launches go.
+post:
+  telegram: true         # post to the channel below. Off = judge and watch, never post.
+  dry: false             # print every post, edit and comment to the console instead of sending it
+  channel: "@assayoffice"
+  control_share: 0.2     # this share of pure coins is watched but never posted: the comparison set
+
+# The 15-minute watch after a post (edits, the thread, confirmations). Off = post once, never edit.
+watch: true
+
+store:
+  path: data/assay.db    # SQLite; created on first run. Never delete it on a running instance: originality needs history.
+  keep_trades_days: 8
+
+# The read-only JSON API the front end uses (src/api.ts). Runs as its own process.
+api:
+  port: 8791
+  host: 127.0.0.1
+
+# "Disagree with a rule or finding? Let's chat" — shown as buttons under every Telegram post and on the site.
+# Leave a link empty to drop that button; set both empty to drop the line.
+feedback:
+  text: "Disagree with a rule or finding? Let's chat"
+  x: https://x.com/meexworks
+  telegram: https://t.me/meex_the_dev
+
+# Providers. Keys are never in this file: see .env.example.
+providers:
+  grpc_endpoint: https://solana-mainnet.streaming.alchemy.com   # any Yellowstone gRPC endpoint
+  websocket: wss://mainnet.helius-rpc.com                       # any Solana websocket supporting logsSubscribe

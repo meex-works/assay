@@ -5,9 +5,11 @@ import { DatabaseSync } from "node:sqlite";
 import { mkdirSync } from "node:fs";
 import type { Launch, Trade } from "./pump.ts";
 
-const dir = new URL("../data/", import.meta.url);
-mkdirSync(dir, { recursive: true });
-export const db = new DatabaseSync(new URL("assay.db", dir).pathname);
+import { dirname } from "node:path";
+import { mod } from "./config.ts";
+
+mkdirSync(dirname(mod.dbPath), { recursive: true });
+export const db = new DatabaseSync(mod.dbPath);
 db.exec(`
 PRAGMA journal_mode = WAL;
 PRAGMA synchronous = NORMAL;
