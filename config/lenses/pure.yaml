@@ -22,3 +22,10 @@ post:
   watch_for: 15m
   confirm_at: [5m, 15m]
   late_bundle_share_max: 0.10
+thread:
+  where: comments
+  edit_post_on_break: true
+  move_min: 3
+  independent_share_max: 0.10
+  coalesce: 10s
+  max_events: 12

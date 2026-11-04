@@ -85,6 +85,15 @@ isn't fee-sharing; the version that is has 4× the holders".
 **Test:** vamp launches per hour around a coin's peak, and the vamps' own outcome history. **Becomes:** the beta lens,
 and the `vamp_of` trait linked both ways (a runner's report lists its vamps).
 
+## H8. Independent buy share separates demand from a pump
+
+**Belief:** a move made by bundles and bots looks the same on a chart as one made by buyers, and the share of buying
+that came from independent wallets tells them apart.
+
+**Test:** for moves of 3× or more in the first hour, independent buy share during the move against what followed
+(holder count and the movers' positions 15 minutes later). **Becomes:** the threshold that decides when the thread
+names a move.
+
 ## H7. Pure launches die to late bundles
 
 **Belief:** many pure launches die within five minutes because a bundle buys in after launch, runs the price, and

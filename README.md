@@ -175,7 +175,20 @@ Pure launches often die in the first five minutes because a bundle buys in *afte
 arrived. So a posted coin is watched for 15 minutes. The tape clusters late buyers by funding, by when they were
 funded, by slot and amount, and if a group crosses the line the post is **edited in place within seconds**: *"No longer
 pure at 2:14: 9 wallets funded within 3 minutes of each other bought 31% of supply."* A coin that gets through says so:
-*"Still pure at 5:00."* [Pure launches →](docs/pure.md)
+*"Still pure at 5:00."*
+
+Each post carries a **thread** of the coin's history as it happens:
+
+```
+└ 0:34  Pure: every check passed.
+└ 1:02  Late bundle: 9 wallets funded within 3 minutes of each other bought 31% of supply. No longer pure.
+└ 1:30  Up 14× since launch, and it isn't demand: 0.8% of the buying since 0:34 came from independent wallets.
+└ 3:10  The bundle is selling: 60% of its position in 40 seconds.
+└ 15:00 Watch ended. 41 independent buyers since launch. The bundle has sold 100% of its position.
+```
+
+A price move appears only next to what made it, and only when what made it isn't demand: it's there to say the chart
+is fake, never that it's going up. [Pure launches →](docs/pure.md)
 
 ## Launch kit
 

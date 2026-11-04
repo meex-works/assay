@@ -182,6 +182,7 @@ Read straight from Solana. Cheap compared with the rest, and the hardest to argu
 | **holder funding diversity**: how many independent funding sources the top 100 holders trace back to | funding trace | **high** |
 | fresh-wallet share among holders (wallets with no history before this coin) | wallet first-seen | medium |
 | volume authenticity: wash patterns (A→B→A, round sizes, self-trades across a funded cluster) | trade graph | medium |
+| **independent buy share**: the share of buy volume in a window from wallets in no cluster and of no bot class, each from a distinct funding source. The difference between demand and a manufactured move | the tape, per window | high: faking it takes many wallets with unrelated funding and histories |
 | **late bundle**: a group of wallets that buys a large share *after* launch, clustered by shared funding, funding received in the same few minutes, adjacent slots, similar amounts and ages, no history ([pure.md](pure.md#bundles-that-arrive-after-the-post)) | the tape, every trade | medium to hide |
 | creator behaviour: dev sold (how much, when), creator fees claimed vs left, any buyback | creator wallet + vault | high to hide |
 | curve progress, graduation to PumpSwap, time to graduate | pump program accounts | n/a |

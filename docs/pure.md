@@ -82,6 +82,68 @@ The confirmations carry no market details either. They say the structure held, n
 to sell to. The tape measures late bundles on posted coins against pure coins that weren't posted, and the demo
 publishes the difference. If posting draws bundles, `min_age` and `stay_pure_for` go up.
 
+## The thread
+
+Every posted coin gets a **thread**: its history, told as it happens, under the original post. The post is the
+headline; the thread is the record.
+
+```
+PURE LAUNCH  $TICKER  Name                                   ← the post, edited to show the current state
+<mint>
+...
+Now: no longer pure at 1:02. 6 updates below.
+
+  └ 0:00  Launched. Dev bought 2.1% in the create transaction.
+  └ 0:34  Pure: every check passed.
+  └ 1:02  Late bundle: 9 wallets funded within 3 minutes of each other bought 31% of supply. No longer pure.
+  └ 1:30  Up 14× since launch, and it isn't demand: 0.8% of the buying since 0:34 came from independent
+          wallets. The rest came from the bundle and 3 sniper clusters.
+  └ 3:10  The bundle is selling: 60% of its position in 40 seconds.
+  └ 4:05  Dev sold their whole buy.
+  └ 15:00 Watch ended. 41 independent buyers since launch. The bundle has sold 100% of its position.
+```
+
+### When price appears
+
+The post carries no market details, and neither does the thread, with one exception: **a move is named only together
+with what made it, and only when what made it isn't demand.** "Up 14×, and 0.8% of the buying was independent" is a
+fact about a manufactured move; it tells a reader that the chart they're about to look at is fake. "Up 14×" on its own,
+or on a move driven by real buyers, is a call, and the channel doesn't make calls.
+
+The measure that decides it is **independent buy share**: the share of buy volume in a window that came from wallets
+not in any cluster (not the creator's, not a bundle, not classed `sniper`, `bundler`, `predator` or `farmer`), each
+from a distinct funding source. A move is named when it's above `move_min` (say 3×) *and* independent buy share is
+under `independent_share_max` (say 10%).
+
+### What goes in the thread
+
+| event | when |
+|---|---|
+| launched (dev buy) | at launch, posted together with the pure post |
+| pure | the post itself |
+| late bundle, predator entered, a known cluster preparing wallets | as the tape sees it |
+| manufactured move | a move ≥ `move_min` with independent buy share under `independent_share_max` |
+| bundle selling, predator exiting, dev selling | as the tape sees it |
+| a vamp of this coin launched | from the vamp pipeline (the thread links it) |
+| still pure at 5:00 / 15:00 | the confirmations |
+| watch ended | a one-line summary: independent buyers since launch, what each group did |
+
+Events within `coalesce` seconds of each other are merged into one message, and a coin's thread never runs past
+`max_events`, so the channel stays readable on a busy hour.
+
+### Where the thread lives
+
+Two options, set per instance:
+
+- **Replies in the channel**: each event is posted as a reply to the original post. Everyone sees it in the feed;
+  a busy coin makes a busy channel.
+- **Comments**: the channel has a linked discussion group, every post gets a comment thread automatically, and the bot
+  posts events as comments. The channel stays one post per coin, and the history is one tap away. Events that break
+  purity also edit the original post, so nobody misses those.
+
+The default is **comments, plus edits to the original for anything that breaks purity.** The same timeline is on the
+coin's page on the demo, and on the bus as `assay.timeline`.
+
 ## Purity can break, and the post says so
 
 Purity is measured at launch. A patient operator can launch clean and buy in later from wallets that don't link back,
@@ -124,4 +186,11 @@ post:
   watch_for: 15m               # keep checking, and edit, for this long after posting
   confirm_at: [5m, 15m]        # "Still pure at 5:00"
   late_bundle_share_max: 0.10  # a late group's combined share that breaks purity
+thread:
+  where: comments              # comments (linked discussion group) | replies (in the channel)
+  edit_post_on_break: true
+  move_min: 3                  # name a move only at 3x or more…
+  independent_share_max: 0.10  # …and only when under 10% of the buying was independent
+  coalesce: 10s
+  max_events: 12
 ```

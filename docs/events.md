@@ -37,6 +37,7 @@ exists. If it can't, `/v1/stream` (SSE) and webhooks carry the same events.
 | `assay.note` | L4, operator | the review note |
 | `assay.demand` | API, overlay | someone looked this coin up; L2 bumps its priority |
 | `assay.sweep` | L2 | per window: seen, skipped, X reads, tokens, median data age |
+| `assay.timeline` | the tape, pure lens | one event in a coin's history (launched, pure, late bundle, manufactured move, dev sold, watch ended), the same lines the Telegram thread posts |
 | `assay.declared` | API | a plan was declared for a mint that doesn't exist yet |
 | `assay.plan_match` | L0 | a declared mint launched: matched its plan, or which fields differed |
 
