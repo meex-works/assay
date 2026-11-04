@@ -1,0 +1,68 @@
+{
+  "_comment": "A fictional coin. Every value here is invented to show the shape.",
+  "mint": "EXAMPLE_MINT_NOT_A_REAL_ADDRESS",
+  "chain": "solana",
+  "launchpad": "pump.fun",
+  "name": "Lantern",
+  "ticker": "LANTERN",
+  "tier": "flagged",
+  "as_of": "2026-11-03T14:10:00Z",
+  "scoring": "2026.11.1",
+  "pending": [],
+  "composite": 41,
+  "dimensions": {
+    "presence": {
+      "score": 78,
+      "confidence": 0.9,
+      "top": [
+        { "id": "ob_01", "signal": "site.domain_age", "text": "lantern-coin.xyz was registered 2026-11-02, the day before launch.", "value": 1, "cost_to_fake": "medium", "observed_at": "2026-11-03T09:02:00Z", "source": "rdap", "method": "api", "capture": "sha256:…", "supersedes": null },
+        { "id": "ob_02", "signal": "site.mint_match", "text": "The website shows this coin's mint.", "value": true, "cost_to_fake": "low", "observed_at": "2026-11-03T09:02:10Z", "source": "lantern-coin.xyz", "method": "fetch", "capture": "sha256:…", "supersedes": null }
+      ]
+    },
+    "authenticity": {
+      "score": 31,
+      "confidence": 0.8,
+      "top": [
+        { "id": "ob_03", "signal": "x.follower_overlap", "text": "62% of a 400-follower sample also follow 410 other coin accounts in the index.", "value": 0.62, "cost_to_fake": "high", "observed_at": "2026-11-03T11:40:00Z", "source": "x", "method": "api", "capture": null, "supersedes": null }
+      ]
+    },
+    "mindshare": {
+      "score": 52,
+      "confidence": 0.7,
+      "top": [
+        { "id": "ob_04", "signal": "mindshare.distinct_authors_24h", "text": "41 distinct non-team authors mentioned the mint or a link to it in 24 hours.", "value": 41, "cost_to_fake": "high", "observed_at": "2026-11-03T14:00:00Z", "source": "x", "method": "api", "capture": null, "supersedes": null }
+      ]
+    },
+    "coverage": {
+      "score": 10,
+      "confidence": 0.9,
+      "top": [
+        { "id": "ob_05", "signal": "news.outlet_class", "text": "Two articles, both press-release wires.", "value": { "wire": 2, "editorial": 0 }, "cost_to_fake": "low", "observed_at": "2026-11-03T12:00:00Z", "source": "news", "method": "api", "capture": null, "supersedes": null }
+      ]
+    },
+    "chain": {
+      "score": 60,
+      "confidence": 1,
+      "top": [
+        { "id": "ob_06", "signal": "chain.creator_lineage", "text": "The creator wallet launched 3 earlier coins; 1 graduated.", "value": { "launched": 3, "graduated": 1 }, "cost_to_fake": "high", "observed_at": "2026-11-03T08:15:00Z", "source": "solana", "method": "chain", "capture": null, "supersedes": null }
+      ]
+    }
+  },
+  "flags": [
+    {
+      "code": "handle_renamed_near_launch",
+      "text": "The linked X account (created 2021) was @otherhandle until 2026-11-01.",
+      "raised_at": "2026-11-03T09:05:00Z",
+      "evidence": ["ob_07", "ob_08"],
+      "cleared": null
+    }
+  ],
+  "links": {
+    "x": { "claimed": "https://x.com/lanterncoin", "kind": "profile", "resolves": true, "id": "1400000000000000000" },
+    "telegram": { "claimed": "https://t.me/lanterncoin", "kind": "group", "resolves": true, "id": null },
+    "website": { "claimed": "https://lantern-coin.xyz", "kind": "site", "resolves": true, "id": null }
+  },
+  "affiliation": null,
+  "narrative": "lights / cozy",
+  "note": null
+}

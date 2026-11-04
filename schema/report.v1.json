@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://assay/schema/report.v1.json",
+  "title": "assay report v1",
+  "type": "object",
+  "required": ["mint", "chain", "launchpad", "tier", "as_of", "scoring", "dimensions", "flags"],
+  "properties": {
+    "mint": { "type": "string", "description": "base58 mint address" },
+    "chain": { "const": "solana" },
+    "launchpad": { "type": "string", "examples": ["pump.fun"] },
+    "name": { "type": "string" },
+    "ticker": { "type": "string" },
+    "tier": { "enum": ["unchecked", "checked", "curated", "flagged"] },
+    "as_of": { "type": "string", "format": "date-time", "description": "the latest observed_at this report includes" },
+    "scoring": { "type": "string", "description": "scoring version, e.g. 2026.11.1" },
+    "pending": { "type": "array", "items": { "enum": ["t1", "t2", "t3"] }, "description": "passes queued but not yet run" },
+    "composite": { "type": ["number", "null"], "minimum": 0, "maximum": 100, "description": "for sorting only; never the headline" },
+    "dimensions": {
+      "type": "object",
+      "required": ["presence", "authenticity", "mindshare", "coverage", "chain"],
+      "properties": {
+        "presence": { "$ref": "#/$defs/dimension" },
+        "authenticity": { "$ref": "#/$defs/dimension" },
+        "mindshare": { "$ref": "#/$defs/dimension" },
+        "coverage": { "$ref": "#/$defs/dimension" },
+        "chain": { "$ref": "#/$defs/dimension" }
+      }
+    },
+    "flags": { "type": "array", "items": { "$ref": "#/$defs/flag" } },
+    "links": {
+      "type": "object",
+      "description": "what the coin's metadata claims, and what assay resolved it to",
+      "properties": {
+        "x": { "$ref": "#/$defs/link" },
+        "telegram": { "$ref": "#/$defs/link" },
+        "website": { "$ref": "#/$defs/link" }
+      }
+    },
+    "affiliation": {
+      "type": ["object", "null"],
+      "properties": {
+        "claimed": { "type": "string" },
+        "status": { "enum": ["confirmed", "unofficial", "denied", "unknown"] },
+        "evidence": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "narrative": { "type": ["string", "null"] },
+    "note": {
+      "type": ["object", "null"],
+      "description": "the reviewer's note; present on curated coins",
+      "properties": {
+        "text": { "type": "string" },
+        "reviewer": { "type": "string" },
+        "discloses_holding": { "type": "boolean" },
+        "written_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["text", "reviewer", "discloses_holding", "written_at"]
+    }
+  },
+  "$defs": {
+    "dimension": {
+      "type": "object",
+      "required": ["score", "confidence", "top"],
+      "properties": {
+        "score": { "type": ["number", "null"], "minimum": 0, "maximum": 100 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "top": { "type": "array", "maxItems": 3, "items": { "$ref": "#/$defs/observation" } }
+      }
+    },
+    "observation": {
+      "type": "object",
+      "required": ["id", "signal", "text", "observed_at", "source", "method"],
+      "properties": {
+        "id": { "type": "string" },
+        "signal": { "type": "string", "examples": ["x.handle_history", "chain.creator_lineage"] },
+        "text": { "type": "string", "description": "one plain sentence, quotable" },
+        "value": {},
+        "cost_to_fake": { "enum": ["low", "medium", "high"] },
+        "observed_at": { "type": "string", "format": "date-time" },
+        "source": { "type": "string" },
+        "method": { "enum": ["api", "fetch", "chain", "model", "reviewer"] },
+        "capture": { "type": ["string", "null"], "description": "sha256 of the raw capture, or null where terms forbid keeping it" },
+        "supersedes": { "type": ["string", "null"] }
+      }
+    },
+    "flag": {
+      "type": "object",
+      "required": ["code", "text", "raised_at", "evidence"],
+      "properties": {
+        "code": { "type": "string", "examples": ["mint_mismatch", "handle_renamed_near_launch", "serial_creator", "launch_bundle", "copied_image", "affiliation_unofficial", "deleted_promise"] },
+        "text": { "type": "string" },
+        "raised_at": { "type": "string", "format": "date-time" },
+        "evidence": { "type": "array", "items": { "type": "string", "description": "observation ids" } },
+        "cleared": {
+          "type": ["object", "null"],
+          "properties": { "by": { "type": "string" }, "reason": { "type": "string" }, "at": { "type": "string", "format": "date-time" } }
+        }
+      }
+    },
+    "link": {
+      "type": "object",
+      "properties": {
+        "claimed": { "type": "string" },
+        "kind": { "enum": ["profile", "post", "community", "channel", "group", "site", "other"] },
+        "resolves": { "type": "boolean" },
+        "id": { "type": ["string", "null"], "description": "stable platform id where one exists (X user id)" }
+      }
+    }
+  }
+}
