@@ -29,9 +29,17 @@ flag. Scripts: `research/pump-verify/stream-size.mjs`, `stream-bytes.mjs`.
 | Triton | usage-based | reportedly ~$10 per million calls + ~$0.08/GB (a competitor's figures, unverified) | probably ~$40–100 for 0.5 TB plus calls; get a quote |
 | Helius Free | $0 | 1M credits, standard websockets | fits a **launches-only second source** for reconciliation |
 
-**Recommended for the silent week:** Chainstack Growth + the $49 gRPC add-on as the primary stream (failed transactions
-filtered at the source), and Helius Free subscribed to launches only, as the independent second source. About $98 a
-month.
+| **Alchemy Solana gRPC** | **$75 per TB streamed**, pay-as-you-go, no monthly minimum (not on the free tier) | Yellowstone-compatible gRPC, billed by bytes delivered; RPC calls separately (30M compute units free, then $0.52 per 1M) | **fits, and buys only the stream**: ~0.5 TB ≈ $38/month (an estimate from JSON sizes; gRPC is binary, so likely less) |
+
+**Chosen mix for the silent week (2026-11-04):** pay only for the stream.
+
+| job | provider | cost |
+|---|---|---|
+| the trade stream (gRPC, `failed: false`) | Alchemy Solana gRPC, on an app of its own | ~$38 |
+| the second, independent launch feed | Helius Free, websocket on the mint-authority account only | $0 (~0.12M of 1M credits) |
+| funder lookups, metadata, supply | Alchemy (free compute units first), Helius Free as overflow | $0–20, measured in week one |
+
+Roughly $40–60 a month. The stream has one paid provider; a second stream is worth adding before the channel goes live.
 
 ## By provider
 
