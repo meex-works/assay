@@ -12,6 +12,7 @@
   <img alt="keys: bring your own" src="https://img.shields.io/badge/keys-bring%20your%20own-8A9099?style=flat-square">
   <img alt="contracts: none" src="https://img.shields.io/badge/contracts-none-8A9099?style=flat-square">
   <img alt="lenses: 7" src="https://img.shields.io/badge/lenses-7-8A9099?style=flat-square">
+  <a href="https://t.me/assayoffice"><img alt="Telegram: Assay Office" src="https://img.shields.io/badge/telegram-Assay%20Office-5B93C7?style=flat-square"></a>
   <img alt="assumptions: reviewed" src="https://img.shields.io/badge/assumptions-reviewed-8A9099?style=flat-square">
 </p>
 
@@ -150,7 +151,7 @@ coins, never a prediction about this one. [Lenses →](docs/lenses.md)
 
 ## Pure launches
 
-The Telegram channel doesn't post good coins. It posts **pure launches**: coins whose structure is honest at launch,
+**[Assay Office](https://t.me/assayoffice)**, the Telegram channel, doesn't post good coins. It posts **pure launches**: coins whose structure is honest at launch,
 decided within seconds, with **no market details** at all. No price, no market cap, no volume, no holder count. If you
 want those, go and look, and do your own research while you're there.
 

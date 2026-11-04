@@ -44,7 +44,7 @@ assay.meex.work/c/<mint>
 
 ## The channel
 
-**Assay Office** (working name; `@assayoffice` looked free on 2026-11-04).
+**Assay Office**: [t.me/assayoffice](https://t.me/assayoffice).
 
 ### Voice
 
