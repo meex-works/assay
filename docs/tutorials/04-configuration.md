@@ -89,6 +89,18 @@ Each rule of the [pure checklist](../pure.md) has its own switch. **A check that
 | `post.channel` | `"@assayoffice"` | your channel's `@username` or numeric id |
 | `post.control_share` | `0.2` | the share of pure coins held back as a comparison set: watched exactly the same, never posted. `0` posts all of them |
 
+### `dead`
+
+| setting | default | does |
+|---|---|---|
+| `dead.enabled` | `true` | the dead-on-arrival rule |
+| `dead.mc_usd` | `2750` | under this market cap (USD) a coin is dead: not posted at 0:30, and a posted coin's watch ends with an edit ("Dead at 4:10 after launch: market cap fell under $2.75K.") |
+
+Market cap = the last trade's price × the coin's real supply (2 billion for mayhem coins) × the quote coin's USD price,
+from Jupiter's free price API. If a USD price isn't available, the rule is skipped, never guessed. The bonding curve's
+floor is fixed in SOL: a fresh launch is worth about $2,600 at SOL = $93 and about $4,200 at $150, so revisit the
+threshold if SOL moves a lot.
+
 ### `watch`
 
 `true`: each pure coin is watched for `watch_for` (15 minutes), its post edited if purity breaks, events threaded as

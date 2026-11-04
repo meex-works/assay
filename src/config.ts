@@ -57,6 +57,7 @@ export const mod = {
   api: { port: Number(inst.api.port), host: String(inst.api.host) },
   providers: inst.providers as { grpc_endpoint: string; websocket: string },
   feedback: (inst.feedback ?? {}) as { text?: string; x?: string; telegram?: string },
+  dead: { enabled: !!inst.dead?.enabled, mcUsd: Number(inst.dead?.mc_usd ?? 2750) },
   file,
 };
 export const on = (check: string) => mod.checks[check] !== false;

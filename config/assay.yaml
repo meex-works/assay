@@ -42,6 +42,15 @@ post:
   channel: "@assayoffice"
   control_share: 0.2     # this share of pure coins is watched but never posted: the comparison set
 
+# Dead on arrival. Most coins never leave the bonding curve's floor, or fall back to it within minutes. Under this
+# market cap (USD, from the last trade and the coin's real supply) a coin is dead: not posted at 0:30, and a posted
+# coin's watch ends with an edit saying so. USD prices come from Jupiter's free price API; if a price isn't known, the
+# rule is skipped, never guessed.
+# Note: the curve's floor is fixed in SOL, so its USD value moves with SOL (about $2,600 at SOL = $93).
+dead:
+  enabled: true
+  mc_usd: 2750
+
 # The 15-minute watch after a post (edits, the thread, confirmations). Off = post once, never edit.
 watch: true
 

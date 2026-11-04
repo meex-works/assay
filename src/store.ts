@@ -87,6 +87,7 @@ export const insCheck = db.prepare(`INSERT INTO checks VALUES (?,?,?,?,?)`);
 export const insPost = db.prepare(`INSERT OR REPLACE INTO posts (mint, posted_ms, channel_msg, group_msg, text, state) VALUES (?,?,?,?,?,?)`);
 export const setPostGroup = db.prepare(`UPDATE posts SET group_msg = ? WHERE channel_msg = ?`);
 export const setPostBroke = db.prepare(`UPDATE posts SET state = 'broken', broke_ms = ?, broke_reason = ?, text = ? WHERE mint = ?`);
+export const setPostDead = db.prepare(`UPDATE posts SET state = 'dead', broke_ms = COALESCE(broke_ms, ?), broke_reason = COALESCE(broke_reason, ?), text = ? WHERE mint = ?`);
 export const bumpPostEvents = db.prepare(`UPDATE posts SET events = events + 1 WHERE mint = ?`);
 export const insTimeline = db.prepare(`INSERT INTO timeline VALUES (?,?,?,?,?,?)`);
 export const insGap = db.prepare(`INSERT INTO gaps VALUES (?,?,?,?)`);

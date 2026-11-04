@@ -4,6 +4,7 @@ import { KNOWN, type Launch, type Trade } from "./pump.ts";
 import { funderOf, rpc, type Funding } from "./rpc.ts";
 import { bumpEarly, funderCoins, getWallet, insEarly, setFunder } from "./store.ts";
 import type { Meta } from "./meta.ts";
+import { mcUsd } from "./price.ts";
 
 export type Holder = { wallet: string; firstMs: number; firstSlotOffset: number; bought: bigint; sold: bigint; peak: bigint; buyQuote: bigint };
 
@@ -96,6 +97,8 @@ export class Coin {
   early(): Holder[] { return this.buyers(cfg.earlyWindow); }
   devNet(): bigint { let n = 0n; for (const w of this.devWallets) n += this.net(w); return n; }
   devBought(): bigint { let n = 0n; for (const w of this.devWallets) n += this.holders.get(w)?.bought ?? 0n; return n; }
+  /** Market cap in USD at the last trade; null until there's a trade and a USD price for the quote coin. */
+  mc(): number | null { return mcUsd(this.lastPrice, this.launch.supply, this.launch.quoteMint); }
   knownShare(): number { let n = 0n; for (const w of Object.keys(KNOWN)) n += this.net(w); return this.share(n); }
 }
 

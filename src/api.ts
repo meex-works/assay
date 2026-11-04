@@ -38,7 +38,7 @@ function summary() {
     launches: l.n, bothFeeds: l.n ? l.both / l.n : null, gaps, leadMs: med(lead),
     judged: j.n, dead: j.dead ?? 0, pureAlive: j.pure ?? 0, fails,
     posted: watched(true), control: watched(false), editLatencyMs: med(lat),
-    feedback: mod.feedback,
+    feedback: mod.feedback, deadMcUsd: mod.dead.enabled ? mod.dead.mcUsd : null,
     health: { lastMetric, rssMb: m?.rssMb ?? null, grpcReconnects: m?.feeds?.grpc?.reconnects ?? null, metaOk: m?.meta ? m.meta.ok / Math.max(1, m.meta.ok + m.meta.failed) : null },
   };
 }
@@ -50,6 +50,7 @@ function tape(limit: number) {
     const fails = (v.checks ?? []).filter((x: any) => x.result === "fail").map((x: any) => ({ check: x.check, fact: x.fact }));
     return { mint: r.mint, symbol: r.symbol, name: r.name, at: r.at_ms, launched: r.seen_ms, mayhem: !!r.mayhem,
       verdict: v.dead ? "dead" : r.pure ? "pure" : fails.length ? "impure" : "not_alive", buyers: v.dead ? v.buyers : null,
+      deadReason: v.dead ? (v.reason ?? "buyers") : null, mcUsd: v.mcUsd ?? null,
       independent: v.independent ?? null, fails };
   });
 }
@@ -62,7 +63,7 @@ function posts(limit: number) {
   return all(`SELECT p.mint, p.posted_ms, p.channel_msg, p.state, p.broke_ms, p.broke_reason, p.events, l.symbol, l.name, l.seen_ms
     FROM posts p JOIN launches l USING (mint) WHERE p.state != 'capped' ORDER BY p.posted_ms DESC LIMIT ?`, limit).map((p) => ({
     mint: p.mint, symbol: p.symbol, name: p.name, launched: p.seen_ms, posted: p.posted_ms, channelMsg: p.channel_msg,
-    kind: p.channel_msg ? "posted" : "control", state: p.state === "broken" ? "broken" : "pure", broke: p.broke_ms, reason: p.broke_reason,
+    kind: p.channel_msg ? "posted" : "control", state: p.state === "broken" || p.state === "dead" ? p.state : "pure", broke: p.broke_ms, reason: p.broke_reason,
     timeline: timelineOf(p.mint),
   }));
 }

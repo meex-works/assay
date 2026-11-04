@@ -37,7 +37,7 @@ function renderStats(s) {
   const live = s.judged - s.dead;
   const tiles = [
     ["Launches", s.launches.toLocaleString(), `seen by both feeds ${pct(s.bothFeeds)}`],
-    ["Live at 0:30", live.toLocaleString(), `of ${s.judged.toLocaleString()} judged; ${s.dead.toLocaleString()} had under 3 outside buyers`],
+    ["Live at 0:30", live.toLocaleString(), `of ${s.judged.toLocaleString()} judged; ${s.dead.toLocaleString()} dead on arrival`],
     ["Pure", s.pureAlive.toLocaleString(), `${pct(live ? s.pureAlive / live : null)} of live coins`],
     ["Posted", s.posted.n.toLocaleString(), `${pct(s.posted.n ? s.posted.broke5 / s.posted.n : null)} broke within 5:00`],
     ["Held back", s.control.n.toLocaleString(), `${pct(s.control.n ? s.control.broke5 / s.control.n : null)} broke within 5:00`],
@@ -57,7 +57,7 @@ function renderPosts(ps) {
   if (!ps.length) { $("#posts").replaceChildren(el("p", { class: "empty", text: "No pure launches yet in this window." })); return; }
   $("#posts").replaceChildren(...ps.map((p) => {
     const last = p.timeline[p.timeline.length - 1];
-    const state = p.kind === "control" ? ["control", p.state === "broken" ? "Held back · broke" : "Held back"] : p.state === "broken" ? ["broken", "Broken"] : ["pure", Date.now() - p.launched < 15.5 * 60_000 ? "Watching" : "Held up"];
+    const state = p.kind === "control" ? ["control", p.state === "broken" ? "Held back · broke" : p.state === "dead" ? "Held back · died" : "Held back"] : p.state === "dead" ? ["dead", "Dead"] : p.state === "broken" ? ["broken", "Broken"] : ["pure", Date.now() - p.launched < 15.5 * 60_000 ? "Watching" : "Held up"];
     return el("a", { class: "post", href: `/c/${p.mint}` },
       el("div", { class: "row" }, el("span", { class: "sym", text: ticker(p.symbol) }), el("span", { class: "name", text: p.name }), pill(state[0], state[1]), el("span", { class: "when", text: `posted ${ago(p.posted)}` })),
       el("div", { class: "last", text: last ? `${clock(last.at_ms - p.launched)}  ${last.text}` : `Pure at ${clock(p.posted - p.launched)}. Nothing since.` }));
@@ -68,7 +68,7 @@ function renderTape(rows) {
   if (!rows.length) { $("#tape").replaceChildren(el("tr", {}, el("td", { colspan: "4", class: "empty", text: "Nothing judged yet." }))); return; }
   $("#tape").replaceChildren(...rows.map((r) => {
     const n = r.buyers ?? 0;
-    const why = r.verdict === "dead" ? `${n} outside ${n === 1 ? "buyer" : "buyers"}` : r.verdict === "pure" ? `${r.independent} independent buyers` : r.verdict === "not_alive" ? `${r.independent ?? 0} independent buyers` : r.fails[0]?.fact ?? "";
+    const why = r.verdict === "dead" && r.deadReason === "mc" ? `Under $${(r.mcUsd / 1000).toFixed(1)}K at 0:30` : r.verdict === "dead" ? `${n} outside ${n === 1 ? "buyer" : "buyers"}` : r.verdict === "pure" ? `${r.independent} independent buyers` : r.verdict === "not_alive" ? `${r.independent ?? 0} independent buyers` : r.fails[0]?.fact ?? "";
     const tr = el("tr", { class: "go", tabindex: "0" },
       el("td", { class: "t", text: ago(r.at) }),
       el("td", { class: "sym" }, el("a", { href: `/c/${r.mint}`, text: ticker(r.symbol) })),
@@ -104,7 +104,7 @@ async function coinPage() {
 
   const ch = c.check;
   if (!ch) $("#checks").replaceChildren(el("li", { class: "empty", text: "Not judged: launched less than 30 seconds ago." }));
-  else if (ch.dead) { $("#checked-at").textContent = `Judged ${clock(ch.at - l.seen_ms)} after launch.`; $("#checks").replaceChildren(el("li", {}, el("span", { class: "mark unknown", text: "dead" }), el("span", { text: `${ch.buyers ?? 0} outside buyers at 0:30. Fewer than three: not checked further.` }))); }
+  else if (ch.dead) { $("#checked-at").textContent = `Judged ${clock(ch.at - l.seen_ms)} after launch.`; $("#checks").replaceChildren(el("li", {}, el("span", { class: "mark unknown", text: "dead" }), el("span", { text: ch.reason === "mc" ? `Market cap about $${Math.round(ch.mcUsd).toLocaleString()} at 0:30: still at, or back at, the bonding curve's floor. Not checked further.` : `${ch.buyers ?? 0} outside buyers at 0:30. Fewer than three: not checked further.` }))); }
   else {
     $("#checked-at").textContent = `Judged ${clock(ch.at - l.seen_ms)} after launch · ${ch.independent} independent buyers · ${ch.pure ? "pure" : "not pure"}.`;
     $("#checks").replaceChildren(

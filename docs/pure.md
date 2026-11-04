@@ -60,6 +60,20 @@ Still pure at 15:00.
 No adjectives doing the work, no jokes, no slang, no emoji, no exclamation marks. Never a prediction, a
 recommendation, or a price on its own.
 
+## Dead on arrival
+
+Most coins never leave the bonding curve's floor, or fall back to it within minutes. Measured on 2026-11-04 (938 coins,
+SOL at $93): a launch starts at about **$2,600**; at 0:30, 47% of coins with trades are under $2.75K; by 5:00, 62%
+are. So a coin under **$2.75K** (`dead.mc_usd`) is dead:
+
+- at 0:30 it isn't posted (recorded as dead, with its market cap);
+- during the watch, a posted coin that falls under it is edited, *"Dead at 4:10 after launch: market cap fell under
+  $2.75K. No longer watched."*, and the watch ends.
+
+Mayhem coins have 2 billion tokens, so they start at twice that and can fall far below it when pump's mayhem agent sells
+its extra supply into the curve. The threshold is in dollars and the floor is in SOL: if SOL moves a lot, the line
+means something different, and the setting should follow.
+
 ## Bundles that arrive after the post
 
 The most common way a pure launch dies is a bundle that buys in *after* launch: a group of wallets buys a large share

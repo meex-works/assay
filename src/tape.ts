@@ -2,24 +2,24 @@
 // moves, and the confirmations at 5:00 and 15:00. Posted coins get every event in their Telegram thread and an edit
 // when purity breaks; control coins (pure, deliberately not posted) are watched identically and only recorded, so the
 // week can compare them (hypothesis H7: does posting draw bundles?).
-import { cfg } from "./config.ts";
+import { cfg, mod } from "./config.ts";
 import { clusters, fundingOf, type Cluster, type Coin } from "./coin.ts";
 import { clock, describeCluster } from "./pure.ts";
-import { insTimeline, setPostBroke, bumpPostEvents } from "./store.ts";
+import { insTimeline, setPostBroke, setPostDead, bumpPostEvents } from "./store.ts";
 import * as tg from "./telegram.ts";
 
 export type Watch = {
   coin: Coin; posted: boolean; channelMsg: number | null; text: string; judgedMs: number;
   pure: boolean; brokeReason: string | null; events: number; lastEventMs: number; pending: string[];
   earlyWallets: Set<string>; bundle: Cluster | null; bundleSoldNoted: boolean; devSoldNoted: number; movesNoted: Set<number>;
-  confirmed: Set<number>; checking: boolean; done: boolean;
+  confirmed: Set<number>; checking: boolean; done: boolean; dead: boolean;
 };
 export const watches = new Map<string, Watch>();
 
 export function startWatch(coin: Coin, posted: boolean, channelMsg: number | null, text: string, judgedMs: number) {
   const w: Watch = { coin, posted, channelMsg, text, judgedMs, pure: true, brokeReason: null, events: 0, lastEventMs: 0, pending: [],
     earlyWallets: new Set(coin.early().map((h) => h.wallet)), bundle: null, bundleSoldNoted: false, devSoldNoted: 0, movesNoted: new Set(),
-    confirmed: new Set(), checking: false, done: false };
+    confirmed: new Set(), checking: false, done: false, dead: false };
   watches.set(coin.launch.mint, w);
   return w;
 }
@@ -54,10 +54,34 @@ async function flush(w: Watch) {
 const lowerFirst = (s: string) => s.charAt(0).toLowerCase() + s.slice(1);
 const pct = (x: number) => `${(x * 100).toFixed(x < 0.1 ? 1 : 0)}%`;
 
+/**
+ * Dead on arrival: the market cap fell under dead.mc_usd. The post is edited to say so, the event is threaded, and the
+ * watch ends: nothing after that is worth a reader's attention.
+ */
+async function checkDead(w: Watch, triggerMs: number) {
+  if (!mod.dead.enabled || w.dead || w.done) return;
+  const mc = w.coin.mc();
+  if (mc == null || mc >= mod.dead.mcUsd) return;
+  w.dead = true;
+  const c = w.coin, at = Date.now();
+  const line = `Dead at ${clock(at - c.launch.seenMs)} after launch: market cap fell under $${(mod.dead.mcUsd / 1000).toFixed(2).replace(/0$/, "")}K.`;
+  if (w.posted && w.channelMsg != null) {
+    w.text = `${w.text}\n\n${line} No longer watched.`;
+    try { await tg.edit(cfg.channel, w.channelMsg, w.text); } catch (e) { console.error(`[tape] edit failed: ${(e as Error).message}`); }
+  }
+  setPostDead.run(at, line, w.text, c.launch.mint);
+  w.pure = false;
+  insTimeline.run(c.launch.mint, at, "dead", line, +w.posted, at - triggerMs);
+  if (w.posted && w.channelMsg != null && w.events < cfg.thread.maxEvents) { w.pending.push(`${clock(at - c.launch.seenMs)}  ${line}`); await flush(w); }
+  w.done = true;
+}
+
 /** Called on every trade of a watched coin. Cheap checks inline; funder-dependent checks run at most one at a time. */
 export function onTrade(w: Watch, triggerMs: number) {
   if (w.done) return;
   const c = w.coin;
+  void checkDead(w, triggerMs);
+  if (w.dead) return;
   // dev selling
   const bought = c.devBought();
   if (bought > 0n) {
@@ -117,6 +141,8 @@ async function independentShare(w: Watch): Promise<number> {
 export async function tick() {
   const now = Date.now();
   for (const w of watches.values()) {
+    if (w.done) continue;
+    await checkDead(w, now);       // a SOL price move can kill a coin between trades
     if (w.done) continue;
     const age = now - w.coin.launch.seenMs;
     if (w.pending.length && now - w.lastEventMs >= cfg.thread.coalesce) await flush(w);

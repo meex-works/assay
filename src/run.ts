@@ -12,12 +12,13 @@ import { fetchMeta, metaStats } from "./meta.ts";
 import { KNOWN, type Decoded, type Launch } from "./pump.ts";
 import { evaluate, postText } from "./pure.ts";
 import { rpcStats } from "./rpc.ts";
+import { priceStats } from "./price.ts";
 import { db, insCheck, insGap, insMetric, insPost, pruneTrades, saveLaunch, saveTrade, setMeta, tx } from "./store.ts";
 import { onTrade, startWatch, tick, watches } from "./tape.ts";
 import * as tg from "./telegram.ts";
 
 const coins = new Map<string, Coin>();
-const stats = { launches: 0, grpcLaunches: 0, heliusLaunches: 0, evaluated: 0, dead: 0, pure: 0, alive: 0, posted: 0, control: 0, capped: 0 };
+const stats = { deadMc: 0, launches: 0, grpcLaunches: 0, heliusLaunches: 0, evaluated: 0, dead: 0, pure: 0, alive: 0, posted: 0, control: 0, capped: 0 };
 const postTimes: number[] = [];
 const CONTROL_SHARE = mod.controlShare;   // this share of pure coins is watched but not posted: the comparison set for H7
 const isControl = (mint: string) => createHash("sha256").update(mint).digest()[0] < 256 * CONTROL_SHARE;
@@ -66,11 +67,18 @@ setInterval(() => {
 async function judge(c: Coin) {
   const l = c.launch;
   if (c.early().length < 3) { stats.dead++; insCheck.run(l.mint, Date.now(), "t30", 0, JSON.stringify({ dead: true, buyers: c.early().length })); return; }
+  // dead on arrival: still at (or back at) the curve's floor
+  const mc = c.mc();
+  if (mod.dead.enabled && mc != null && mc < mod.dead.mcUsd) {
+    stats.dead++; stats.deadMc++;
+    insCheck.run(l.mint, Date.now(), "t30", 0, JSON.stringify({ dead: true, reason: "mc", mcUsd: Math.round(mc), buyers: c.early().length }));
+    return;
+  }
   if (c.metaDone) await Promise.race([c.metaDone, new Promise((r) => setTimeout(r, 5000))]);
   const v = await evaluate(c);
   const at = Date.now();
   stats.evaluated++; if (v.pure) stats.pure++; if (v.alive) stats.alive++;
-  insCheck.run(l.mint, at, "t30", +(v.pure && v.alive), JSON.stringify(v));
+  insCheck.run(l.mint, at, "t30", +(v.pure && v.alive), JSON.stringify({ ...v, mcUsd: mc == null ? null : Math.round(mc) }));
   if (!v.pure || !v.alive) return;
   const text = postText(c, v, at);
   while (postTimes.length && at - postTimes[0] > 3_600_000) postTimes.shift();
@@ -105,9 +113,9 @@ setInterval(() => {
 }, 10_000);
 setInterval(() => pruneTrades.run(Date.now() - mod.keepTradesDays * 86_400_000), 3_600_000);
 setInterval(() => {
-  const m = { ...stats, coins: coins.size, watches: watches.size, feeds: feedStats, rpc: rpcStats, funding: fundStats, meta: metaStats, telegram: tg.tgStats, rssMb: Math.round(process.memoryUsage().rss / 1e6) };
+  const m = { ...stats, coins: coins.size, watches: watches.size, feeds: feedStats, rpc: rpcStats, funding: fundStats, meta: metaStats, prices: priceStats, telegram: tg.tgStats, rssMb: Math.round(process.memoryUsage().rss / 1e6) };
   insMetric.run(Date.now(), JSON.stringify(m));
-  console.log(`[${new Date().toISOString().slice(11, 19)}] launches ${stats.launches} (grpc ${stats.grpcLaunches}, helius ${stats.heliusLaunches}) · judged ${stats.evaluated} · dead ${stats.dead} · pure+alive ${stats.posted + stats.control + stats.capped} (posted ${stats.posted}, control ${stats.control}, capped ${stats.capped}) · meta ${metaStats.ok}/${metaStats.ok + metaStats.failed} · rpc ${rpcStats.calls} (429 ${rpcStats.throttled}) · watches ${watches.size} · ${m.rssMb} MB`);
+  console.log(`[${new Date().toISOString().slice(11, 19)}] launches ${stats.launches} (grpc ${stats.grpcLaunches}, helius ${stats.heliusLaunches}) · judged ${stats.evaluated} · dead ${stats.dead} (under $${mod.dead.mcUsd}: ${stats.deadMc}) · pure+alive ${stats.posted + stats.control + stats.capped} (posted ${stats.posted}, control ${stats.control}, capped ${stats.capped}) · meta ${metaStats.ok}/${metaStats.ok + metaStats.failed} · rpc ${rpcStats.calls} (429 ${rpcStats.throttled}) · watches ${watches.size} · ${m.rssMb} MB`);
 }, 60_000);
 
 // ── resume after a restart: rebuild the last 30 minutes of coins from disk, and the watches of their posts ──────────
