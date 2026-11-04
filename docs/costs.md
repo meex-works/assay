@@ -14,8 +14,10 @@ and the one that sets how many coins the sweep can afford to look at closely.
 | successful only (a gRPC `failed: false` filter) | ~46/s | ~4 KB | ~0.5 TB |
 | launches only (the mint-authority account) | ~34/min | ~4 KB | ~6 GB |
 
-The tape needs every trade on every coin (the wallet-reputation index is cross-coin), so the full successful stream is the
-requirement. Scripts: `research/pump-verify/stream-size.mjs`, `stream-bytes.mjs`.
+The tape needs every successful trade on every coin (the wallet-reputation index is cross-coin). Failed transactions are
+**not ingested**: 85% of the program's traffic, almost all of it sniper bots that lost the race, and nothing in it that
+the successful trades don't already say. That's a decision about signal, not price; if a use turns up, it's one filter
+flag. Scripts: `research/pump-verify/stream-size.mjs`, `stream-bytes.mjs`.
 
 ## Providers for that stream (prices as published, checked 2026-11-04)
 

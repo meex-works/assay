@@ -130,7 +130,7 @@ with X switched off.
 
 | source | trust | why | what counts |
 |---|---|---|---|
-| **on-chain attention** | highest | it costs money | independent buyers (distinct funding clusters), holder growth net of program-held supply, failed snipe attempts (people tried) |
+| **on-chain attention** | highest | it costs money | independent buyers (distinct funding clusters), holder growth net of program-held supply |
 | **Farcaster** | medium-high | Neynar's user scores filter most sybils | casts by scored users, channel activity |
 | **Telegram** | medium | members are cheap, conversation isn't | distinct senders per hour, sender account age, messages not from the team |
 | **Reddit** | medium | account age and karma are visible and slow to fake | posts and comments by aged accounts, outside shill subs |

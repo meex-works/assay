@@ -25,7 +25,7 @@ exists. If it can't, `/v1/stream` (SSE) and webhooks carry the same events.
 | subject | from | data |
 |---|---|---|
 | `pump.launch` | ingest | mint, creator, signature, slot, name, symbol, uri, token program, quote mint, holder-reward / fee-sharing / mode arguments, buys in the create tx |
-| `pump.trade` | ingest | mint, wallet, side, `quote_mint`, `quote_amount`, tokens, curve state after; failed snipe attempts too (an attention signal) |
+| `pump.trade` | ingest | mint, wallet, side, `quote_mint`, `quote_amount`, tokens, curve state after; successful transactions only (failed ones are filtered at the source) |
 | `pump.migrated` | ingest | mint, pool, slot |
 | `assay.obs.<signal>` | any layer | one observation (shape in [schema/report.v1.json](../schema/report.v1.json) `$defs/observation`) |
 | `assay.score` | score | dimensions, composite, confidence, `provisional: true` until L2 has seen the coin once |

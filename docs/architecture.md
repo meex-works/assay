@@ -41,7 +41,7 @@ timer.
 
 | path | how | when to use it |
 |---|---|---|
-| **Yellowstone gRPC** | a transaction subscription filtered to the pump program, at `processed` commitment | the default: the fastest standard way to see a transaction |
+| **Yellowstone gRPC** | a transaction subscription filtered to the pump program, at `processed` commitment, with `failed: false` (failed transactions are never ingested) | the default: the fastest standard way to see a transaction |
 | **RPC websocket, logs** | `logsSubscribe` mentioning the pump program, at `processed`. pump.fun's create and trade events are emitted in the program logs, so they decode straight from the log lines, with **no `getTransaction` round trip** | no gRPC provider; also the independent second source |
 | **RPC websocket, full transactions** | an enhanced `transactionSubscribe` where the provider offers one | when the logs aren't enough (balances, inner instructions) |
 | **shreds** | a shred stream or your own validator | the last few hundred milliseconds, if they ever matter |
