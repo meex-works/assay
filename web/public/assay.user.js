@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         assay overlay for pump.fun
 // @namespace    https://assay.meex.work
-// @version      0.2.0
+// @version      0.3.0
 // @description  assay's verdict on every pump.fun coin: a badge on each coin link, and the evidence on each coin page. Read-only: no wallet access, no prices.
 // @author       SHYGUY LLC
 // @license      MIT
@@ -39,6 +39,8 @@
 
   GM_registerMenuCommand(`${badgesOn ? "Hide" : "Show"} assay badges`, () => { GM_setValue("badges", !badgesOn); location.reload(); });
   GM_registerMenuCommand(`${showUnseen ? "Hide" : "Show"} "not seen" badges`, () => { GM_setValue("unseen", !showUnseen); location.reload(); });
+  let toastsOn = GM_getValue("toasts", true);
+  GM_registerMenuCommand(`${toastsOn ? "Turn off" : "Turn on"} pure-launch toasts`, () => { GM_setValue("toasts", !toastsOn); location.reload(); });
 
   // The glow on a pure coin's card lives in the page (the card is pump.fun's element), under one prefixed attribute.
   const PAGE_CSS = `
@@ -102,6 +104,21 @@
     .t { font: 12px/1.5 ui-monospace, Menlo, monospace; color: #bdb6a8; } .t i { font-style: normal; color: #e8c47a; margin-right: 6px; }
     a { color: #e8c47a; } .small { color: #868d97; font-size: 12px; }
     .min { width: auto; } .min section { display: none; }
+    .toasts { position: fixed; top: 16px; right: 16px; z-index: 2147483647; display: grid; gap: 10px; width: 320px; }
+    .toast { background: #0f1f15; color: #ecfdf3; border: 2px solid #22c55e; border-radius: 12px; padding: 12px 14px;
+             box-shadow: 0 0 0 1px #052e14, 0 0 26px 4px rgba(34,197,94,.55), 0 12px 30px rgba(0,0,0,.5);
+             font: 13px/1.4 -apple-system, system-ui, "Segoe UI", sans-serif; animation: in .25s ease-out, g2 2.4s ease-in-out .25s infinite; }
+    @keyframes in { from { transform: translateY(-8px); opacity: 0; } }
+    @keyframes g2 { 50% { box-shadow: 0 0 0 1px #052e14, 0 0 36px 8px rgba(74,222,128,.75), 0 12px 30px rgba(0,0,0,.5); } }
+    .toast .k { font: 800 11px ui-monospace, Menlo, monospace; letter-spacing: .08em; color: #4ade80; display: flex; justify-content: space-between; }
+    .toast .k button { background: none; border: 0; color: #86efac; font-size: 16px; line-height: 1; cursor: pointer; padding: 0 2px; }
+    .toast .n { font: 600 16px/1.3 Georgia, serif; margin: 4px 0 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .toast .s { color: #a7f3d0; font-size: 12px; }
+    .toast .acts { display: flex; gap: 8px; margin-top: 10px; }
+    .toast .acts button { flex: 1; font: 700 12.5px -apple-system, system-ui, sans-serif; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+    .toast .go { background: #22c55e; color: #052e14; border: 0; } .toast .go:hover { background: #4ade80; }
+    .toast .tab { background: transparent; color: #bbf7d0; border: 1px solid #22c55e88; } .toast .tab:hover { border-color: #4ade80; }
+    @media (prefers-reduced-motion: reduce) { .toast { animation: none; } }
   `;
   const h = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   const clock = (ms) => { const s = Math.max(0, Math.round(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; };
@@ -192,6 +209,48 @@
     document.body.append(panelHost);
   }
 
+  // ── toasts: a coin just posted pure to Assay Office ───────────────────────────────────────────────────────────────
+  // Only coins actually posted (never the held-back comparison set: showing those to people would spoil the comparison).
+  let toastRoot = null;
+  const toasted = new Set(GM_getValue("toasted", []));
+  let since = Date.now() - 60_000;          // a coin posted in the last minute still toasts on page load
+  function toastBox() {
+    if (toastRoot?.host.isConnected) return toastRoot.querySelector(".toasts");
+    const host = document.createElement("div");
+    toastRoot = host.attachShadow({ mode: "open" });
+    toastRoot.append(Object.assign(document.createElement("style"), { textContent: CSS }), h("div", "toasts"));
+    document.body.append(host);
+    return toastRoot.querySelector(".toasts");
+  }
+  function toast(p) {
+    const box = toastBox();
+    while (box.children.length >= 3) box.firstElementChild.remove();
+    const t = h("div", "toast");
+    const k = h("div", "k"); const x = h("button", null, "×"); x.title = "Dismiss"; x.onclick = () => t.remove();
+    k.append(h("span", null, "PURE LAUNCH"), x);
+    const age = Math.max(0, Math.floor((Date.now() - p.launched) / 60000));
+    const url = `https://pump.fun/coin/${p.mint}`;
+    const go = h("button", "go", "Open"); go.onclick = () => { t.remove(); location.assign(url); };
+    const tab = h("button", "tab", "New tab"); tab.onclick = () => { window.open(url, "_blank", "noopener"); };
+    const acts = h("div", "acts"); acts.append(go, tab);
+    t.append(k, h("div", "n", `${p.symbol?.startsWith("$") ? "" : "$"}${p.symbol}  ${p.name}`), h("div", "s", `Posted to Assay Office · launched ${age ? `${age} min` : "under a minute"} ago · watched for 15 minutes`), acts);
+    let hover = false; t.onmouseenter = () => (hover = true); t.onmouseleave = () => (hover = false);
+    const end = Date.now() + 45_000;
+    const tick = setInterval(() => { if (!t.isConnected) return clearInterval(tick); if (!hover && Date.now() > end) { t.remove(); clearInterval(tick); } }, 1000);
+    box.append(t);
+  }
+  async function pollPure() {
+    if (!toastsOn) return;
+    const posts = await get(`${API}/posts?limit=8`);
+    if (!Array.isArray(posts)) return;
+    for (const p of posts.slice().reverse()) {
+      if (p.kind !== "posted" || p.state !== "pure" || p.posted <= since || toasted.has(p.mint)) continue;
+      toasted.add(p.mint); toast(p);
+    }
+    since = Math.max(since, ...posts.map((p) => p.posted));
+    GM_setValue("toasted", [...toasted].slice(-200));
+  }
+
   // ── run ───────────────────────────────────────────────────────────────────────────────────────────────────────────
   let pending = false;
   new MutationObserver(() => { if (pending) return; pending = true; requestAnimationFrame(() => { pending = false; scan(); paint(); }); })
@@ -199,4 +258,5 @@
   let last = "";
   setInterval(() => { if (location.pathname !== last) { last = location.pathname; coinPage(); } scan(); }, 1000);   // SPA navigation
   scan(); coinPage();
+  pollPure(); setInterval(pollPure, 15_000);
 })();

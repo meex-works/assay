@@ -1,7 +1,8 @@
 # The pump.fun overlay
 
-A userscript that puts assay's verdict on pump.fun: a badge on every coin link, and a panel with the checklist and the
-timeline on every coin page. Read-only: no wallet access, no prices. Install page: **https://assay.meex.work/overlay**.
+A userscript that puts assay's verdict on pump.fun: a colour-coded badge on every coin link (pure coins' cards glow
+green), a panel with the checklist and the timeline on every coin page, and a toast with Open / New tab buttons the
+moment a coin is posted pure to Assay Office. Read-only: no wallet access, no prices. Install page: **https://assay.meex.work/overlay**.
 
 - `assay.user.js` is the source. `npm run web` copies it to `web/public/` and deploys the site, so the installed copy
   updates itself (`@updateURL`).
