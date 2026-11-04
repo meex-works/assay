@@ -12,5 +12,7 @@ Step by step, in order. Each one says what you'll end up with, and ends with a c
 | 6 | [The website](06-website.md) | your own copy of assay.meex.work on your domain |
 | 7 | [Operating it](07-operating.md) | reading the report, querying the database, fixing what breaks |
 
+Video walkthroughs of tutorials 1, 3, 5 and 6: [assay.meex.work/tutorials](https://assay.meex.work/tutorials).
+
 Stuck? `npm run doctor` checks everything the enabled modules need and prints the fix for each problem. Still stuck,
 or disagree with a rule? [X](https://x.com/meexworks) · [Telegram](https://t.me/meex_the_dev).

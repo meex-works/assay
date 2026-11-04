@@ -1,5 +1,9 @@
 # Tutorial 6: the website
 
+[![Watch the 1:27 video walkthrough](../img/tutorials/06-website.png)](https://assay.meex.work/tutorials/06-website.mp4)
+
+*Watch the 1:27 walkthrough above, or follow the steps below. All four are at [assay.meex.work/tutorials](https://assay.meex.work/tutorials).*
+
 **You'll end up with:** your own copy of [assay.meex.work](https://assay.meex.work): the live numbers, every post,
 the tape, and a page per coin, on your own domain.
 

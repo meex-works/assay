@@ -1,5 +1,9 @@
 # Tutorial 1: your first dry run
 
+[![Watch the 1:12 video walkthrough](../img/tutorials/01-quickstart.png)](https://assay.meex.work/tutorials/01-quickstart.mp4)
+
+*Watch the 1:12 walkthrough above, or follow the steps below. All four are at [assay.meex.work/tutorials](https://assay.meex.work/tutorials).*
+
 **You'll end up with:** assay running on your own computer, watching every pump.fun launch live, judging each one at
 30 seconds, and printing the posts it *would* make. Nothing gets posted anywhere.
 

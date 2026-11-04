@@ -194,15 +194,19 @@ rest. [Costs →](docs/costs.md)
 
 Step by step, in order. Each one ends with a check that it worked.
 
-| | | |
-|---|---|---|
-| 1 | [Your first dry run](docs/tutorials/01-quickstart.md) | install, keys, doctor, watch it judge live launches without posting |
-| 2 | [Getting the keys](docs/tutorials/02-keys.md) | gRPC, RPC and websocket providers, what each costs, how to test them |
-| 3 | [Your Telegram channel](docs/tutorials/03-telegram.md) | the bot, the channel, the discussion group, admin rights, the first real post |
-| 4 | [Configuration](docs/tutorials/04-configuration.md) | every switch and threshold, overrides, and recipes for common setups |
-| 5 | [Running it on a server](docs/tutorials/05-server.md) | a Linux box, systemd services, logs, updates, backups |
-| 6 | [The website](docs/tutorials/06-website.md) | the read-only API, a Cloudflare tunnel and Worker, your own domain |
-| 7 | [Operating it](docs/tutorials/07-operating.md) | the report, reading the numbers, the database, troubleshooting |
+| | | | video |
+|---|---|---|---|
+| 1 | [Your first dry run](docs/tutorials/01-quickstart.md) | install, keys, doctor, watch it judge live launches without posting | [▶ 1:12](https://assay.meex.work/tutorials/01-quickstart.mp4) |
+| 2 | [Getting the keys](docs/tutorials/02-keys.md) | gRPC, RPC and websocket providers, what each costs, how to test them | |
+| 3 | [Your Telegram channel](docs/tutorials/03-telegram.md) | the bot, the channel, the discussion group, admin rights, the first real post | [▶ 1:18](https://assay.meex.work/tutorials/03-telegram.mp4) |
+| 4 | [Configuration](docs/tutorials/04-configuration.md) | every switch and threshold, overrides, and recipes for common setups | |
+| 5 | [Running it on a server](docs/tutorials/05-server.md) | a Linux box, systemd services, logs, updates, backups | [▶ 1:15](https://assay.meex.work/tutorials/05-server.mp4) |
+| 6 | [The website](docs/tutorials/06-website.md) | the read-only API, a Cloudflare tunnel and Worker, your own domain | [▶ 1:27](https://assay.meex.work/tutorials/06-website.mp4) |
+| 7 | [Operating it](docs/tutorials/07-operating.md) | the report, reading the numbers, the database, troubleshooting | |
+
+[![Watch tutorial 1: your first dry run](docs/img/tutorials/01-quickstart.png)](https://assay.meex.work/tutorials/01-quickstart.mp4)
+
+All four walkthroughs on one page: **[assay.meex.work/tutorials](https://assay.meex.work/tutorials)**.
 
 ## What you see
 

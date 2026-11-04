@@ -146,3 +146,12 @@ footer .grow { flex: 1 1 320px; }
 .fb:hover { background: var(--gold-ink); }
 .fb + .fb { color: var(--ink); background: transparent; border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent); }
 .fb + .fb:hover { border-color: var(--gold); background: transparent; }
+
+/* tutorials */
+.videos { display: grid; gap: 28px; padding-bottom: 40px; }
+.video { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; align-items: start; }
+@media (max-width: 900px) { .video { grid-template-columns: minmax(0, 1fr); } }
+.video video { width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+.vmeta { display: grid; gap: 8px; }
+.vmeta .k { font: 11.5px/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); }
+.vmeta p { margin: 0; color: var(--ink-2); }

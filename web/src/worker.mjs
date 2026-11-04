@@ -11,7 +11,7 @@ const CSP = [
 const TTL = { summary: 15, tape: 5, posts: 5, coin: 10 };
 
 const robots = () => `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${ORIGIN}/sitemap.xml\n`;
-const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
+const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/tutorials</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
 const llms = () => `# Assay Office
 
 > The public end of assay (https://github.com/meex-works/assay): every pump.fun launch checked 30 seconds in; pure
@@ -40,6 +40,24 @@ async function proxy(req, env, ctx, path) {
   return res;
 }
 
+// Videos need byte ranges (Safari won't play an MP4 without 206 responses), and the assets binding returned the whole
+// file to a Range request when reached through this Worker. The tutorial videos are ~1 MB, so serve ranges here.
+async function ranged(req, res) {
+  if (!res.ok) return res;
+  const buf = await res.arrayBuffer(), size = buf.byteLength;
+  const headers = new Headers(res.headers);
+  headers.set("accept-ranges", "bytes");
+  headers.set("cache-control", "public, max-age=86400");
+  const m = /^bytes=(\d*)-(\d*)$/.exec(req.headers.get("range") ?? "");
+  if (!m) { headers.set("content-length", String(size)); return new Response(buf, { status: 200, headers }); }
+  let start = m[1] === "" ? Math.max(0, size - Number(m[2])) : Number(m[1]);
+  let end = m[1] === "" || m[2] === "" ? size - 1 : Math.min(Number(m[2]), size - 1);
+  if (start > end || start >= size) { headers.set("content-range", `bytes */${size}`); return new Response(null, { status: 416, headers }); }
+  headers.set("content-range", `bytes ${start}-${end}/${size}`);
+  headers.set("content-length", String(end - start + 1));
+  return new Response(buf.slice(start, end + 1), { status: 206, headers });
+}
+
 export default {
   async fetch(req, env, ctx) {
     ORIGIN = env.SITE_ORIGIN ?? ORIGIN;
@@ -53,7 +71,8 @@ export default {
     else if (p === "/llms.txt") res = new Response(llms(), { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (p === "/.well-known/security.txt") res = new Response(securityTxt({ contact: "security@meex.work", policy: "https://github.com/meex-works/assay", canonical: `${ORIGIN}/.well-known/security.txt` }), { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (/^\/c\/[1-9A-HJ-NP-Za-km-z]{32,44}\/?$/.test(p)) res = await env.ASSETS.fetch(new Request(new URL("/coin", url), req));   // "/coin.html" would 307 to "/coin" and the browser would follow it
-      else res = await env.ASSETS.fetch(req);
+      else if (/^\/tutorials\/[\w-]+\.mp4$/.test(p)) res = await ranged(req, await env.ASSETS.fetch(new Request(url, { method: "GET" })));
+    else res = await env.ASSETS.fetch(req);
     return hygiene(res, { csp: CSP });
   },
 };

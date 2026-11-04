@@ -1,5 +1,9 @@
 # Tutorial 5: running it on a server
 
+[![Watch the 1:15 video walkthrough](../img/tutorials/05-server.png)](https://assay.meex.work/tutorials/05-server.mp4)
+
+*Watch the 1:15 walkthrough above, or follow the steps below. All four are at [assay.meex.work/tutorials](https://assay.meex.work/tutorials).*
+
 **You'll end up with:** assay running around the clock on a Linux server, restarting itself after a crash or a
 reboot, with logs you can read and a way to update it.
 

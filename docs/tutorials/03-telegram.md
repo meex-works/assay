@@ -1,5 +1,9 @@
 # Tutorial 3: your Telegram channel
 
+[![Watch the 1:18 video walkthrough](../img/tutorials/03-telegram.png)](https://assay.meex.work/tutorials/03-telegram.mp4)
+
+*Watch the 1:18 walkthrough above, or follow the steps below. All four are at [assay.meex.work/tutorials](https://assay.meex.work/tutorials).*
+
 **You'll end up with:** your own channel that posts pure launches, edits a post when purity breaks, and threads each
 coin's history as comments underneath.
 

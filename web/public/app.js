@@ -123,4 +123,4 @@ const page = document.body.dataset.page;
 const run = page === "tape" ? tapePage : page === "coin" ? coinPage : () => api("summary").then(setLive);
 const loop = () => run().catch((e) => { console.error(e); setLive(null); });
 loop();
-if (page !== "how") setInterval(() => { if (!document.hidden) loop(); }, page === "tape" ? 5000 : 10000);
+if (page === "tape" || page === "coin") setInterval(() => { if (!document.hidden) loop(); }, page === "tape" ? 5000 : 10000);
