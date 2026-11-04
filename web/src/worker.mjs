@@ -8,7 +8,7 @@ const CSP = [
   "default-src 'self'", "script-src 'self' https://static.cloudflareinsights.com", "style-src 'self' https://fonts.googleapis.com", "font-src https://fonts.gstatic.com",
   "img-src 'self' data:", "connect-src 'self' https://cloudflareinsights.com", "base-uri 'none'", "form-action 'none'", "frame-ancestors 'none'", "object-src 'none'",
 ].join("; ");
-const TTL = { summary: 15, tape: 5, posts: 5, coin: 10 };
+const TTL = { summary: 15, tape: 5, posts: 5, coin: 10, batch: 10 };
 
 const robots = () => `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${ORIGIN}/sitemap.xml\n`;
 const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/tutorials</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
@@ -35,7 +35,8 @@ async function proxy(req, env, ctx, path) {
   if (res) return res;
   const up = await fetch(`${env.API_ORIGIN}${path}${new URL(req.url).search}`, { headers: { "x-assay-key": env.API_KEY } }).catch(() => null);
   if (!up) return Response.json({ error: "the box is unreachable" }, { status: 502, headers: { "cache-control": "no-store" } });
-  res = new Response(up.body, { status: up.status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": `public, max-age=${ttl}` } });
+  // read-only public data: any origin may read it (the overlay runs on pump.fun's pages)
+  res = new Response(up.body, { status: up.status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": `public, max-age=${ttl}`, "access-control-allow-origin": "*" } });
   if (up.ok) ctx.waitUntil(cache.put(key, res.clone()));
   return res;
 }

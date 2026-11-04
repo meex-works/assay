@@ -82,6 +82,29 @@ function coin(mint: string) {
   };
 }
 
+/**
+ * Compact verdicts for up to 100 mints at once, for the overlay's badges. Mints assay hasn't seen are left out, so an
+ * absent mint means "not seen", never "pure".
+ */
+function batch(mints: string[]) {
+  const out: Record<string, unknown> = {};
+  for (const m of mints) {
+    const l = one(`SELECT symbol, seen_ms FROM launches WHERE mint = ?`, m);
+    if (!l) continue;
+    const c = one(`SELECT at_ms, pure, result_json FROM checks WHERE mint = ? ORDER BY at_ms DESC LIMIT 1`, m);
+    const p = one(`SELECT channel_msg, state, broke_ms, broke_reason FROM posts WHERE mint = ?`, m);
+    const v = c ? parse(c.result_json) ?? {} : null;
+    const fail = v?.checks?.find((x: any) => x.result === "fail");
+    out[m] = {
+      symbol: l.symbol, launched: l.seen_ms,
+      verdict: !v ? "pending" : v.dead ? "dead" : c.pure ? "pure" : fail ? "impure" : "not_alive",
+      reason: !v ? null : v.dead ? (v.reason === "mc" ? `market cap about $${Math.round(v.mcUsd ?? 0).toLocaleString("en-US")} at 0:30` : `${v.buyers ?? 0} outside buyers at 0:30`) : fail?.fact ?? null,
+      post: p ? { kind: p.channel_msg ? "posted" : p.state === "capped" ? "capped" : "control", state: p.state === "broken" || p.state === "dead" ? p.state : "pure", reason: p.broke_reason } : null,
+    };
+  }
+  return out;
+}
+
 const json = (res: any, status: number, body: unknown) => {
   res.writeHead(status, { "content-type": "application/json; charset=utf-8", "cache-control": "no-store" });
   res.end(JSON.stringify(body));
@@ -95,6 +118,10 @@ createServer((req, res) => {
     if (u.pathname === "/api/summary") return json(res, 200, summary());
     if (u.pathname === "/api/tape") return json(res, 200, tape(limit));
     if (u.pathname === "/api/posts") return json(res, 200, posts(limit));
+    if (u.pathname === "/api/batch") {
+      const mints = (u.searchParams.get("mints") ?? "").split(",").filter((m) => MINT.test(m)).slice(0, 100);
+      return json(res, 200, batch(mints));
+    }
     const m = /^\/api\/coin\/([^/]+)$/.exec(u.pathname);
     if (m) {
       if (!MINT.test(m[1])) return json(res, 400, { error: "not a mint address" });
