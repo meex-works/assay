@@ -1,0 +1,19 @@
+# The silent run as a systemd service. Copy to /etc/systemd/system/, replace YOUR_USER and the paths, then:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now assay-silent
+#   journalctl -u assay-silent -f        (live log)
+[Unit]
+Description=assay silent run (pump.fun launches -> pure checklist -> Telegram)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=YOUR_USER
+WorkingDirectory=/home/YOUR_USER/assay
+ExecStart=/usr/bin/node src/run.ts
+Environment=NODE_NO_WARNINGS=1
+Restart=always
+RestartSec=10
+MemoryMax=1200M
+
+[Install]
+WantedBy=multi-user.target

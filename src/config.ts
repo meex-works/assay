@@ -81,7 +81,7 @@ export const cfg = {
     coalesce: ms(lens.thread.coalesce),
     maxEvents: lens.thread.max_events as number,
   },
-  // Operational constants of the silent run (see docs/tutorials/06-configuration.md before changing them).
+  // Operational constants of the silent run (see docs/tutorials/04-configuration.md before changing them).
   earlyWindow: 60_000,          // the "first buyers" are those in the first minute
   freshWallet: 3_600_000,       // a wallet first active less than an hour before it buys is fresh
   fundedTogether: 180_000,      // wallets funded within 3 minutes of each other read as one group

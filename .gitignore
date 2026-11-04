@@ -3,3 +3,4 @@ idl/
 data/
 *.log
 web/.wrangler/
+.env

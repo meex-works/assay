@@ -2,16 +2,17 @@
 // with the shared key and a few seconds of edge cache, so the box never sees viewer traffic directly.
 import { hygiene, securityTxt } from "./hygiene.mjs";
 
-const ORIGIN = "https://assay.meex.work";
+// Your site and your API, from wrangler.toml [vars]: SITE_ORIGIN, API_ORIGIN.
+let ORIGIN = "https://assay.meex.work";
 const CSP = [
   "default-src 'self'", "script-src 'self' https://static.cloudflareinsights.com", "style-src 'self' https://fonts.googleapis.com", "font-src https://fonts.gstatic.com",
   "img-src 'self' data:", "connect-src 'self' https://cloudflareinsights.com", "base-uri 'none'", "form-action 'none'", "frame-ancestors 'none'", "object-src 'none'",
 ].join("; ");
 const TTL = { summary: 15, tape: 5, posts: 5, coin: 10 };
 
-const ROBOTS = `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${ORIGIN}/sitemap.xml\n`;
-const SITEMAP = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
-const LLMS = `# Assay Office
+const robots = () => `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${ORIGIN}/sitemap.xml\n`;
+const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
+const llms = () => `# Assay Office
 
 > The public end of assay (https://github.com/meex-works/assay): every pump.fun launch checked 30 seconds in; pure
 > launches (honest structure: small dev buy, no bundle, no known bad wallets early, original identity, honest links)
@@ -32,7 +33,7 @@ async function proxy(req, env, ctx, path) {
   const key = new Request(new URL(path + new URL(req.url).search, ORIGIN), { method: "GET" });
   let res = await cache.match(key);
   if (res) return res;
-  const up = await fetch(`https://assay-api.meex.work${path}${new URL(req.url).search}`, { headers: { "x-assay-key": env.API_KEY } }).catch(() => null);
+  const up = await fetch(`${env.API_ORIGIN}${path}${new URL(req.url).search}`, { headers: { "x-assay-key": env.API_KEY } }).catch(() => null);
   if (!up) return Response.json({ error: "the box is unreachable" }, { status: 502, headers: { "cache-control": "no-store" } });
   res = new Response(up.body, { status: up.status, headers: { "content-type": "application/json; charset=utf-8", "cache-control": `public, max-age=${ttl}` } });
   if (up.ok) ctx.waitUntil(cache.put(key, res.clone()));
@@ -41,15 +42,15 @@ async function proxy(req, env, ctx, path) {
 
 export default {
   async fetch(req, env, ctx) {
+    ORIGIN = env.SITE_ORIGIN ?? ORIGIN;
     const url = new URL(req.url);
-    if (url.hostname !== "assay.meex.work" && url.hostname.endsWith("meex.work")) return Response.redirect(`${ORIGIN}${url.pathname}${url.search}`, 301);
     if (req.method !== "GET" && req.method !== "HEAD") return new Response("Method not allowed", { status: 405 });
     const p = url.pathname;
     let res;
     if (p.startsWith("/api/")) res = await proxy(req, env, ctx, p);
-    else if (p === "/robots.txt") res = new Response(ROBOTS, { headers: { "content-type": "text/plain; charset=utf-8" } });
-    else if (p === "/sitemap.xml") res = new Response(SITEMAP, { headers: { "content-type": "application/xml; charset=utf-8" } });
-    else if (p === "/llms.txt") res = new Response(LLMS, { headers: { "content-type": "text/plain; charset=utf-8" } });
+    else if (p === "/robots.txt") res = new Response(robots(), { headers: { "content-type": "text/plain; charset=utf-8" } });
+    else if (p === "/sitemap.xml") res = new Response(sitemap(), { headers: { "content-type": "application/xml; charset=utf-8" } });
+    else if (p === "/llms.txt") res = new Response(llms(), { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (p === "/.well-known/security.txt") res = new Response(securityTxt({ contact: "security@meex.work", policy: "https://github.com/meex-works/assay", canonical: `${ORIGIN}/.well-known/security.txt` }), { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (/^\/c\/[1-9A-HJ-NP-Za-km-z]{32,44}\/?$/.test(p)) res = await env.ASSETS.fetch(new Request(new URL("/coin", url), req));   // "/coin.html" would 307 to "/coin" and the browser would follow it
       else res = await env.ASSETS.fetch(req);
