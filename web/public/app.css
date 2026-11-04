@@ -157,3 +157,6 @@ footer .grow { flex: 1 1 320px; }
 .vmeta p { margin: 0; color: var(--ink-2); }
 
 img.shot { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); }
+
+video.shot { width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); }
+.small { color: var(--muted); font-size: 13px; }
