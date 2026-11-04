@@ -35,11 +35,12 @@ flag. Scripts: `research/pump-verify/stream-size.mjs`, `stream-bytes.mjs`.
 
 | job | provider | cost |
 |---|---|---|
-| the trade stream (gRPC, `failed: false`) | Alchemy Solana gRPC, on an app of its own | ~$38 |
+| the trade stream (gRPC, `failed: false`) | Alchemy Solana gRPC, on an app of its own | **measured 1.13 TB/month ≈ $85** (60 s sample; the silent week measures it properly) |
 | the second, independent launch feed | Helius Free, websocket on the mint-authority account only | $0 (~0.12M of 1M credits) |
 | funder lookups, metadata, supply | Alchemy (free compute units first), Helius Free as overflow | $0–20, measured in week one |
 
-Roughly $40–60 a month. The stream has one paid provider; a second stream is worth adding before the channel goes live.
+Measured, roughly $85–105 a month, about the same as Chainstack's flat $98; if the first bill runs higher, Chainstack is
+the fallback. The stream has one paid provider; a second stream is worth adding before the channel goes live.
 
 ## By provider
 

@@ -19,7 +19,7 @@ weekly.
 | ~100k launches a day | **wrong** | **~48,000 a day.** 1,088 in the quietest hour (07:00 UTC), 2,723 in the busiest (19:00 UTC). A further 7.8% of create attempts fail. |
 | launches use `create_v2` (Token-2022) | **mostly** | 99.5% `create_v2` on Token-2022. Legacy `create` (classic SPL) still happens: 2 of 398. |
 | legacy `create` coins can't be bought | **contradicted** | both legacy launches in the sample include a buy in their own transaction. To check against later trades. |
-| events can be decoded straight from the program logs | **verified** | in 398 of 398 launches, `CreateEvent` and `TradeEvent` appear in the logs (`Program data:`) *and* as self-CPI inner instructions. No log truncation seen. A logs subscription is enough for L0. |
+| events can be decoded straight from the program logs | **verified, with a caveat** | in 398 of 398 launches, `CreateEvent` and `TradeEvent` appear in the logs (`Program data:`) *and* as self-CPI inner instructions. No log truncation in create transactions. In the live trade stream, 0.3% of transactions had truncated logs with the event only in the inner instructions, so the decoder reads inner instructions first ([live feeds](#the-live-feeds-2026-11-04-60-s-researchstream-smoke)). |
 | `create_v2` carries launch config | **verified, and there's more** | arguments: `is_mayhem_mode`, `is_cashback_enabled`, `creator_fee_bps`, `is_holder_reward`. `CreateEvent` adds `quote_mint` and `depth`. |
 | mayhem mode mints extra supply | **verified** | every mayhem coin checked has **2,000,000,000** tokens on-chain; `CreateEvent.token_total_supply` says 1,000,000,000 for all coins. Supply must be read from the mint, not the event. |
 | mayhem is a corner case | **wrong** | **36%** of launches are mayhem. |
@@ -50,6 +50,23 @@ transaction). Raw results in [research/pump-verify/results](../research/pump-ver
 | **Some buyers are funded from a program.** One funder (`5cMKyZ…`) is an account owned by a program named `mixp…`, funding 4 early buyers. | A `mixer_funded` signal once the program is identified. |
 | **The one-hop funder heuristic breaks on busy wallets.** For a wallet with more than ~3,000 transactions, the earliest reachable transaction isn't its first, so the "funder" is wrong (it named a pump-program account as the mayhem agent's funder). | Busy wallets get classed by activity (`sniper`, `mayhem_agent`, `router`), never by funder. Funder tracing is only for wallets young enough to have a first transaction in reach, which is exactly the bundle case. |
 | **Cost.** Median 33–55 RPC calls per coin for its first minute plus one-hop funders of every early buyer; maximum 264. 196 funder lookups in run two came down to 79 distinct funders. | In production the trade stream is free; funder lookups are the cost (~2 calls per new wallet), cached across coins. At ~48k launches a day, tracing only coins past the `alive` gate is what makes it affordable. A free RPC tier can't run it live. |
+
+## The live feeds (2026-11-04, 60 s, [research/stream-smoke](../research/stream-smoke))
+
+Both feeds running at once: Alchemy Yellowstone gRPC (every successful pump transaction, `processed`) and a Helius
+websocket on the mint-authority account (launches only).
+
+| check | result |
+|---|---|
+| launches seen | **22 by both, 0 by only one.** The two sources reconcile. |
+| which saw each launch first | **gRPC, all 22**, by a median of **167 ms** |
+| successful pump transactions | 55.5/s, of which 39/s are trades |
+| gRPC bandwidth | **437 KB/s ≈ 1.13 TB a month**, about twice the logs-based estimate: gRPC carries the whole transaction, balances and inner instructions |
+| transactions with no pump event in their logs | 14%. Of those: most never call pump (they only list its address, through a bot's router or a memo); most of the rest are fee instructions or PumpSwap events (a different IDL); **0.3% had truncated logs** and their pump event existed only as an inner instruction |
+
+So events are read from the inner instructions first (gRPC delivers them) and from the logs as a fallback; and the
+subscription filters on pump's **event authority** account rather than the program address, which drops the
+transactions that never call pump.
 
 ## What changed in the plan because of this
 

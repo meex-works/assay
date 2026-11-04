@@ -1,0 +1,1 @@
+{"name":"stream-smoke","private":true,"type":"module","description":"60-second live test of assay's two feeds: Alchemy Yellowstone gRPC (pump, failed:false) and Helius websocket (launches only).","dependencies":{"@coral-xyz/anchor":"^0.31.1","@solana/web3.js":"^1.99.0","@triton-one/yellowstone-grpc":"^4.0.0","bs58":"^6.0.0","ws":"^8.18.0"}}
