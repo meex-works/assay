@@ -19,8 +19,9 @@ GET  /v1/creators/{wallet}                  a creator's lineage: every coin, how
 GET  /v1/narratives?window=24h              clusters, their coins, first movers
 ```
 
-`GET /v1/coins/{mint}` on a coin assay hasn't checked returns the T0 report straight away and queues T2 (demand
-escalation). The response says so: `"pending": ["t2"]`, with `Retry-After`.
+`GET /v1/coins/{mint}` on a coin assay has dropped or not reached returns the latest report straight away and emits
+`assay.demand`, which puts the coin at the top of the next sweep. The response says so: `"pending": ["l2"]`, with
+`Retry-After`.
 
 ## Point-in-time (`as_of`)
 
@@ -33,6 +34,7 @@ remain visible.
 
 ## For agents
 
+- **The bus itself**: subscribe to NATS subjects directly; see [events.md](events.md).
 - **MCP server** (`assay-mcp`): tools `assay_lookup(mint)`, `assay_batch(mints)`, `assay_feed(tier, since)`,
   `assay_explain(mint, dimension)`, which returns the evidence as short sentences with links, ready to quote.
 - **One-call summary**: `GET /v1/coins/{mint}?format=brief` returns ≤ 600 characters of plain text: tier, the five
@@ -41,11 +43,11 @@ remain visible.
 
 ## Auth and limits
 
-- API keys (header `Authorization: Bearer`). A free key for the overlay and light use; paid keys lift the limits and
-  unlock `evidence`, `history`, `as_of`, `stream` and webhooks.
+- assay is self-hosted, so access is up to whoever runs the instance: open, API keys (`Authorization: Bearer`), or
+  both. The reference config is open reads with a per-IP limit, which is what the free demo runs.
 - `ETag` + `Cache-Control: max-age` per tier (unchecked 30 s, checked 5 min, curated 15 min); `If-None-Match` is free.
-- Payment by API key and card to start. Per-call payment over x402 (USDC, no account) is a natural second option for
-  agents: it's a payment header, not a contract.
+- An operator who wants to charge for their instance can put per-call payment (x402) or keys in front of it. The
+  baseline doesn't.
 
 ## Versioning
 

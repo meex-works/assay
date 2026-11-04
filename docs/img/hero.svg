@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="380" viewBox="0 0 1280 380" role="img" aria-label="assay: evidence for the trenches">
+  <defs>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1A1D22"/><stop offset="1" stop-color="#121418"/>
+    </linearGradient>
+    <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="100" y1="0" x2="520" y2="0">
+      <stop offset="0" stop-color="#B8862F" stop-opacity="0.2"/><stop offset="0.15" stop-color="#E2B04F"/><stop offset="0.85" stop-color="#D9A441"/><stop offset="1" stop-color="#B8862F" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="380" rx="18" fill="#1E2227"/>
+  <!-- the touchstone: real gold leaves a bright unbroken streak, fakes leave faint broken ones -->
+  <rect x="56" y="40" width="520" height="284" rx="14" fill="url(#stone)" stroke="#2E343C"/>
+  <g transform="rotate(-9 316 190)" stroke-linecap="round" fill="none">
+    <line x1="110" y1="96"  x2="300" y2="96"  stroke="#9AA1AB" stroke-opacity="0.22" stroke-width="7" stroke-dasharray="18 14"/>
+    <line x1="120" y1="122" x2="380" y2="122" stroke="#9AA1AB" stroke-opacity="0.18" stroke-width="7" stroke-dasharray="6 12"/>
+    <line x1="104" y1="148" x2="512" y2="148" stroke="url(#gold)" stroke-width="9"/>
+    <line x1="130" y1="174" x2="340" y2="174" stroke="#9AA1AB" stroke-opacity="0.2" stroke-width="7" stroke-dasharray="28 10"/>
+    <line x1="112" y1="200" x2="260" y2="200" stroke="#9AA1AB" stroke-opacity="0.16" stroke-width="7" stroke-dasharray="4 10"/>
+    <line x1="140" y1="226" x2="470" y2="226" stroke="url(#gold)" stroke-width="9" stroke-opacity="0.85"/>
+    <line x1="118" y1="252" x2="330" y2="252" stroke="#9AA1AB" stroke-opacity="0.2" stroke-width="7" stroke-dasharray="14 18"/>
+    <line x1="150" y1="278" x2="290" y2="278" stroke="#D6604A" stroke-opacity="0.55" stroke-width="7" stroke-dasharray="10 8"/>
+  </g>
+  <text x="84" y="352" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6F7782" letter-spacing="1.5">TOUCHSTONE · REAL GOLD LEAVES A STREAK</text>
+
+  <text x="636" y="168" font-family="Georgia, 'Times New Roman', serif" font-size="104" fill="#ECE6D8" letter-spacing="-2">assay</text>
+  <text x="640" y="218" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="30" fill="#D9A441">Evidence for the trenches.</text>
+  <text x="640" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#9AA1AB">Every pump.fun launch, scored in a second,</text>
+  <text x="640" y="286" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="15" fill="#9AA1AB">refined every few minutes, weighed by what it costs to fake.</text>
+
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="1">
+    <rect x="640" y="308" width="104" height="26" rx="13" fill="#8A9099" fill-opacity="0.18" stroke="#8A9099"/>
+    <text x="692" y="325" text-anchor="middle" fill="#C3C8CE">UNCHECKED</text>
+    <rect x="754" y="308" width="92" height="26" rx="13" fill="#5B93C7" fill-opacity="0.18" stroke="#5B93C7"/>
+    <text x="800" y="325" text-anchor="middle" fill="#9CC2E6">CHECKED</text>
+    <rect x="856" y="308" width="92" height="26" rx="13" fill="#62A872" fill-opacity="0.18" stroke="#62A872"/>
+    <text x="902" y="325" text-anchor="middle" fill="#9FD3AB">CURATED</text>
+    <rect x="958" y="308" width="92" height="26" rx="13" fill="#D6604A" fill-opacity="0.18" stroke="#D6604A"/>
+    <text x="1004" y="325" text-anchor="middle" fill="#F0A193">FLAGGED</text>
+  </g>
+</svg>

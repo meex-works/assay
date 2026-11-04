@@ -8,6 +8,9 @@
   "tier": "flagged",
   "as_of": "2026-11-03T14:10:00Z",
   "scoring": "2026.11.1",
+  "layer": "l3",
+  "provisional": false,
+  "signals_off": [],
   "pending": [],
   "composite": 41,
   "dimensions": {

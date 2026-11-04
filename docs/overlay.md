@@ -39,8 +39,35 @@ Each line opens its evidence. Flags are shown above everything else.
 | **other frontends** | the same content script with per-site selectors for Axiom, GMGN, Photon, DexScreener, Birdeye |
 | **share card** | `GET /v1/coins/{mint}/card.png`: an OG image of the panel, for posts and Telegram |
 | **Telegram bot** | paste a mint, get the brief; a channel that posts every new `curated` coin with its note |
-| **X account** | posts reviewer notes for new curated coins, and flags on coins above a size threshold |
-| **public pages** | a page per coin, if the "purely a repo" scope ever changes; not in this plan |
+| **X account** | not planned: Telegram is where the trenches read fast |
+
+## The free demo
+
+A public instance at **assay.meex.work**, free, with no account. It's there to show what the baseline does, not to sell
+anything:
+
+- **The tape**: the live bus, as it happens. Launches arriving, L0 decisions in a second, scores refining as each
+  layer lands, flags as they're raised.
+- **A coin page**: the report with every observation and its evidence, and the score history showing each layer's
+  refinement.
+- **The sweep stats**: coins per window, X reads spent, median data age. The honest picture of what the budget buys.
+- A link to this repo on every page: run your own.
+
+## The Telegram channel
+
+A public channel that posts every coin the review agent promotes to `curated`, in one message:
+
+```
+$TICKER · curated · 11 min after launch
+Presence 78 · Authenticity 66 · Mindshare 71 · Coverage 20 · Chain 74
+X account since 2019, one handle. 212 distinct non-team authors in 2 h.
+Creator: first launch, funded from a CEX.
+Note: Real community, early. No coverage yet beyond its own posts.
+assay.meex.work/c/<mint>
+```
+
+Flags on coins above a size threshold go to the same channel. Nothing in it says buy, sell, or where the price is
+going. It's the evidence, fast.
 
 ## The harness side
 

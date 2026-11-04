@@ -13,7 +13,7 @@ observations too, and keep their history.
 
 ## Why keep everything
 
-- **Point-in-time answers** ([api.md](api.md)) need every observation, with the time it was made.
+- **Point-in-time answers** ([api.md](api.md)) and bus replay ([events.md](events.md)) need every observation, with the time it was made.
 - **Deleted promises** are evidence. A capture of a post saying "CEX listing Friday" matters most after it's deleted.
 - **Lineage** compounds. A creator wallet's coin from March is what flags its coin in November.
 - The corpus (templates, bot followers, paid callers, wire outlets) is the moat. It gets cheaper and better with

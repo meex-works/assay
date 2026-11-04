@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="600" viewBox="0 0 1280 600" role="img" aria-label="The five layers: reflex, glance, sweep, deep, review">
+  <rect width="1280" height="600" rx="18" fill="#1E2227"/>
+  <!-- the bus -->
+  <rect x="40" y="40" width="72" height="504" rx="12" fill="#272C33" stroke="#3A414B"/>
+  <text transform="translate(82 292) rotate(-90)" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2" fill="#D9A441">EVENT BUS · NATS JETSTREAM</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <!-- each band: x=160, width shrinks; connectors to the bus -->
+    <g>
+      <path d="M112 84 H160" stroke="#3A414B" stroke-width="2"/><circle cx="112" cy="84" r="4" fill="#D9A441"/>
+      <rect x="160" y="40" width="1060" height="88" rx="12" fill="#272C33" stroke="#3A414B"/>
+      <text x="184" y="76" font-size="22" font-weight="700" fill="#D9A441">L0</text>
+      <text x="230" y="76" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#ECE6D8">reflex</text>
+      <rect x="320" y="58" width="92" height="24" rx="12" fill="#D9A441" fill-opacity="0.14" stroke="#D9A441" stroke-opacity="0.6"/>
+      <text x="366" y="75" text-anchor="middle" font-size="12" fill="#E8C47A">&lt; 1.5 s</text>
+      <text x="184" y="108" font-size="13" fill="#9AA1AB">create tx · creator lineage · funding parent · launch bundle · image hash</text>
+      <text x="1196" y="76" text-anchor="end" font-size="12" fill="#C3C8CE">drop · watch · promote</text>
+      <text x="1196" y="108" text-anchor="end" font-size="12" fill="#6F7782">every launch</text>
+    </g>
+    <g>
+      <path d="M112 188 H160" stroke="#3A414B" stroke-width="2"/><circle cx="112" cy="188" r="4" fill="#D9A441"/>
+      <rect x="160" y="144" width="960" height="88" rx="12" fill="#272C33" stroke="#3A414B"/>
+      <text x="184" y="180" font-size="22" font-weight="700" fill="#D9A441">L1</text>
+      <text x="230" y="180" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#ECE6D8">glance</text>
+      <rect x="320" y="162" width="92" height="24" rx="12" fill="#D9A441" fill-opacity="0.14" stroke="#D9A441" stroke-opacity="0.6"/>
+      <text x="366" y="179" text-anchor="middle" font-size="12" fill="#E8C47A">&lt; 30 s</text>
+      <text x="184" y="212" font-size="13" fill="#9AA1AB">socials · X profile + handle history · site, RDAP, CT log · mint-on-site</text>
+      <text x="1096" y="180" text-anchor="end" font-size="12" fill="#C3C8CE">drop · watch · promote</text>
+      <text x="1096" y="212" text-anchor="end" font-size="12" fill="#6F7782">socials resolve</text>
+    </g>
+    <g>
+      <path d="M112 292 H160" stroke="#3A414B" stroke-width="2"/><circle cx="112" cy="292" r="4" fill="#D9A441"/>
+      <rect x="160" y="248" width="860" height="88" rx="12" fill="#2C3138" stroke="#D9A441" stroke-opacity="0.55"/>
+      <text x="184" y="284" font-size="22" font-weight="700" fill="#D9A441">L2</text>
+      <text x="230" y="284" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#ECE6D8">sweep</text>
+      <rect x="320" y="266" width="124" height="24" rx="12" fill="#D9A441" fill-opacity="0.14" stroke="#D9A441" stroke-opacity="0.6"/>
+      <text x="382" y="283" text-anchor="middle" font-size="12" fill="#E8C47A">every 3 min</text>
+      <text x="184" y="316" font-size="13" fill="#9AA1AB">as many as the window allows · holders · funding · mentions</text>
+      <text x="996" y="284" text-anchor="end" font-size="12" fill="#C3C8CE">demote · hold · promote</text>
+      <text x="996" y="316" text-anchor="end" font-size="12" fill="#6F7782">the watch set</text>
+    </g>
+    <g>
+      <path d="M112 396 H160" stroke="#3A414B" stroke-width="2"/><circle cx="112" cy="396" r="4" fill="#D9A441"/>
+      <rect x="160" y="352" width="760" height="88" rx="12" fill="#272C33" stroke="#3A414B"/>
+      <text x="184" y="388" font-size="22" font-weight="700" fill="#D9A441">L3</text>
+      <text x="230" y="388" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#ECE6D8">deep</text>
+      <rect x="320" y="370" width="92" height="24" rx="12" fill="#D9A441" fill-opacity="0.14" stroke="#D9A441" stroke-opacity="0.6"/>
+      <text x="366" y="387" text-anchor="middle" font-size="12" fill="#E8C47A">minutes</text>
+      <text x="184" y="420" font-size="13" fill="#9AA1AB">follower sample · replies · news class · trace · wash</text>
+      <text x="896" y="388" text-anchor="end" font-size="12" fill="#C3C8CE">flag · hold · review</text>
+      <text x="896" y="420" text-anchor="end" font-size="12" fill="#6F7782">promoted</text>
+    </g>
+    <g>
+      <path d="M112 500 H160" stroke="#3A414B" stroke-width="2"/><circle cx="112" cy="500" r="4" fill="#D9A441"/>
+      <rect x="160" y="456" width="660" height="88" rx="12" fill="#272C33" stroke="#3A414B"/>
+      <text x="184" y="492" font-size="22" font-weight="700" fill="#D9A441">L4</text>
+      <text x="230" y="492" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#ECE6D8">review</text>
+      <rect x="320" y="474" width="92" height="24" rx="12" fill="#D9A441" fill-opacity="0.14" stroke="#D9A441" stroke-opacity="0.6"/>
+      <text x="366" y="491" text-anchor="middle" font-size="12" fill="#E8C47A">agent</text>
+      <text x="184" y="524" font-size="13" fill="#9AA1AB">evidence as quoted data · signed note · gates</text>
+      <text x="796" y="492" text-anchor="end" font-size="12" fill="#C3C8CE">curated · or not</text>
+      <text x="796" y="524" text-anchor="end" font-size="12" fill="#6F7782">review queue</text>
+    </g>
+    <text x="160" y="578" font-size="12" fill="#6F7782">Every layer writes observations and scores back to the bus. The first answer is fast; every later one is better.</text>
+  </g>
+</svg>

@@ -4,7 +4,7 @@ Every signal below lists where it comes from, and its **cost to fake**: low (a f
 money or days of work), high (months, or money that would cost more than the coin is likely to make). The scoring
 weights in [scoring.md](scoring.md) follow that column.
 
-Every observation records `source`, `observed_at`, `method` (API, fetch, chain, model, reviewer) and a pointer to the
+Every observation records `source`, `observed_at`, `method` (api, fetch, chain, model, agent, operator) and a pointer to the
 raw capture it was read from (see [retention.md](retention.md)).
 
 ## 0. Identity: what the coin says it is
@@ -111,7 +111,7 @@ mint, a link to its pages, or it comes from an author whose other posts disambig
 | named author with a history at the outlet | byline lookup | high |
 | "sponsored" / "paid" / "press release" disclosure on the page | page fetch | n/a |
 | mentions by the affiliated party itself (the brand, the person) | their official accounts and press pages | **high** |
-| podcast / Spaces appearances | search, reviewer | medium |
+| podcast / Spaces appearances | search, review agent | medium |
 
 A coin whose only coverage is wire releases is reported as "press releases only", which is accurate and means a lot.
 

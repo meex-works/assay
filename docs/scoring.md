@@ -40,32 +40,42 @@ A red flag puts the coin in `flagged`, whatever the dimensions say. Each is a sp
 - launch bundle above X% of supply from one funding source
 - the image is a byte-for-byte or perceptual match of an earlier coin, and this coin presents itself as the original
 - the linked X account deleted posts promising something (listings, burns, partnerships) after the claim was made
+- the coin's own text (description, site, posts, image) contains instructions aimed at an AI reviewer
 
-Each flag is shown with its evidence, and a flag can be cleared by a reviewer, with a written reason that stays on the
-record.
+Each flag is shown with its evidence. Only the operator of an instance can clear one, with a written reason that stays
+on the record. The review agent can raise flags, never clear them.
 
 ## Tiers
 
 | tier | rule |
 |---|---|
-| `unchecked` | only T0 (see [pipeline.md](pipeline.md)) has run |
-| `checked` | T1 and T2 ran; no red flag |
-| `curated` | a reviewer approved it, wrote a note, and named themselves |
-| `flagged` | any red flag, until a reviewer clears it |
+| `unchecked` | only L0 (and maybe L1) has run; the score is `provisional` (see [architecture.md](architecture.md)) |
+| `checked` | the sweep loop has seen it at least once; no red flag |
+| `curated` | the review agent (L4) promoted it and wrote a note; every gate passed |
+| `flagged` | any red flag, until the operator clears it |
+
+## Scores refine, they don't wait
+
+Each layer recomputes the dimensions from every observation so far. An L0 score has a Chain dimension and almost nothing
+else, with low confidence, and it's marked `provisional`. L1 adds Presence. The sweep loop moves Mindshare and Chain
+every pass. L3 fills in Authenticity and Coverage. A consumer that needs an answer in a second takes L0's and knows its
+confidence; a consumer that can wait listens for the next `assay.score`.
 
 Curated is earned per period: a curated coin is re-reviewed when any dimension moves more than 20 points or a new flag
 appears, and it drops back to `checked` if nobody re-reviews it within 14 days.
 
-## The reviewer
+## The review agent
 
-Automation finds candidates; a person makes the call that goes on the record as `curated`. The reviewer's queue is
-sorted by evidence, not by price: the highest Authenticity × Mindshare coins with confidence above 0.7.
+L4 is an agent loop reading evidence bundles. Its queue is sorted by evidence, not by price: the highest
+Authenticity × Mindshare coins with confidence above 0.7.
 
-A reviewer's note is short and specific, in the house voice: what's real, what isn't, what to watch. Notes are public,
-versioned, and attributed. A reviewer who holds the coin says so in the note. A reviewer is never paid by a coin.
+Its note is short and specific: what's real, what isn't, what to watch, citing the observation ids it relied on. Notes
+are public, versioned, and signed `agent:<model>@<prompt version>`. The operator can override any decision with a note of
+their own, signed with their name. An operator who holds the coin says so in it. Nobody running an instance takes
+payment from a coin for its tier.
 
 ## Calibration
 
-Weights are tuned against a **labelled set**: coins a reviewer classified by hand (real project / low-effort /
+Weights are tuned against a **labelled set**: coins a person classified by hand (real project / low-effort /
 coordinated farm / impersonation), with the label recorded *before* anyone looks at the scores. Price outcomes are
 not labels. "Went up" is not a quality, and calibrating to it turns this into a signal service.

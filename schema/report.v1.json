@@ -3,7 +3,7 @@
   "$id": "https://assay/schema/report.v1.json",
   "title": "assay report v1",
   "type": "object",
-  "required": ["mint", "chain", "launchpad", "tier", "as_of", "scoring", "dimensions", "flags"],
+  "required": ["mint", "chain", "launchpad", "tier", "layer", "provisional", "as_of", "scoring", "dimensions", "flags"],
   "properties": {
     "mint": { "type": "string", "description": "base58 mint address" },
     "chain": { "const": "solana" },
@@ -13,7 +13,10 @@
     "tier": { "enum": ["unchecked", "checked", "curated", "flagged"] },
     "as_of": { "type": "string", "format": "date-time", "description": "the latest observed_at this report includes" },
     "scoring": { "type": "string", "description": "scoring version, e.g. 2026.11.1" },
-    "pending": { "type": "array", "items": { "enum": ["t1", "t2", "t3"] }, "description": "passes queued but not yet run" },
+    "pending": { "type": "array", "items": { "enum": ["l1", "l2", "l3", "l4"] }, "description": "layers queued but not yet run" },
+    "layer": { "enum": ["l0", "l1", "l2", "l3", "l4"], "description": "the deepest layer that has run" },
+    "provisional": { "type": "boolean", "description": "true until the sweep loop has seen the coin once" },
+    "signals_off": { "type": "array", "items": { "type": "string" }, "description": "signals disabled on this instance (a missing key), so confidence can be read correctly" },
     "composite": { "type": ["number", "null"], "minimum": 0, "maximum": 100, "description": "for sorting only; never the headline" },
     "dimensions": {
       "type": "object",
@@ -47,11 +50,11 @@
     "narrative": { "type": ["string", "null"] },
     "note": {
       "type": ["object", "null"],
-      "description": "the reviewer's note; present on curated coins",
+      "description": "the review note; present on curated coins",
       "properties": {
         "text": { "type": "string" },
-        "reviewer": { "type": "string" },
-        "discloses_holding": { "type": "boolean" },
+        "reviewer": { "type": "string", "description": "agent:<model>@<prompt version>, or the operator's name" },
+        "discloses_holding": { "type": ["boolean", "null"], "description": "operator notes only" },
         "written_at": { "type": "string", "format": "date-time" }
       },
       "required": ["text", "reviewer", "discloses_holding", "written_at"]
@@ -78,7 +81,7 @@
         "cost_to_fake": { "enum": ["low", "medium", "high"] },
         "observed_at": { "type": "string", "format": "date-time" },
         "source": { "type": "string" },
-        "method": { "enum": ["api", "fetch", "chain", "model", "reviewer"] },
+        "method": { "enum": ["api", "fetch", "chain", "model", "agent", "operator"] },
         "capture": { "type": ["string", "null"], "description": "sha256 of the raw capture, or null where terms forbid keeping it" },
         "supersedes": { "type": ["string", "null"] }
       }
@@ -87,7 +90,7 @@
       "type": "object",
       "required": ["code", "text", "raised_at", "evidence"],
       "properties": {
-        "code": { "type": "string", "examples": ["mint_mismatch", "handle_renamed_near_launch", "serial_creator", "launch_bundle", "copied_image", "affiliation_unofficial", "deleted_promise"] },
+        "code": { "type": "string", "examples": ["mint_mismatch", "handle_renamed_near_launch", "serial_creator", "launch_bundle", "copied_image", "affiliation_unofficial", "deleted_promise", "prompt_injection"] },
         "text": { "type": "string" },
         "raised_at": { "type": "string", "format": "date-time" },
         "evidence": { "type": "array", "items": { "type": "string", "description": "observation ids" } },

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="600" viewBox="0 0 1280 600" role="img" aria-label="Mockup: the assay panel beside a coin page">
+  <rect width="1280" height="600" rx="18" fill="#1E2227"/>
+  <!-- browser frame -->
+  <rect x="40" y="40" width="1200" height="520" rx="12" fill="#16191D" stroke="#3A414B"/>
+  <path d="M40 52 a12 12 0 0 1 12 -12 H1228 a12 12 0 0 1 12 12 V80 H40 Z" fill="#272C33"/>
+  <circle cx="66" cy="60" r="6" fill="#3A414B"/><circle cx="86" cy="60" r="6" fill="#3A414B"/><circle cx="106" cy="60" r="6" fill="#3A414B"/>
+  <rect x="140" y="49" width="420" height="22" rx="11" fill="#1A1D22"/>
+  <text x="156" y="64" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12" fill="#6F7782">pump.fun/coin/…pump</text>
+
+  <!-- the coin page, sketched -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <rect x="64" y="100" width="44" height="44" rx="22" fill="#2E343C"/>
+    <text x="122" y="118" font-size="16" font-weight="700" fill="#C3C8CE">Lantern</text>
+    <text x="122" y="138" font-size="12" fill="#6F7782">$LANTERN · 47 min old · example coin</text>
+    <rect x="64" y="164" width="700" height="300" rx="8" fill="#1A1D22"/>
+    <polyline fill="none" stroke="#4E5661" stroke-width="2" points="80,430 120,420 160,424 200,380 240,392 280,340 320,352 360,300 400,318 440,262 480,286 520,236 560,250 600,214 640,236 680,198 720,222 748,206"/>
+    <rect x="64" y="480" width="340" height="56" rx="8" fill="#1A1D22"/>
+    <rect x="424" y="480" width="340" height="56" rx="8" fill="#1A1D22"/>
+  </g>
+
+  <!-- the assay panel -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+    <rect x="788" y="100" width="428" height="436" rx="12" fill="#22262B" stroke="#D9A441" stroke-opacity="0.5"/>
+    <text x="808" y="132" font-family="Georgia, 'Times New Roman', serif" font-size="22" fill="#ECE6D8">assay</text>
+    <rect x="882" y="114" width="88" height="24" rx="12" fill="#D6604A" fill-opacity="0.18" stroke="#D6604A"/>
+    <text x="926" y="131" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1" fill="#F0A193">FLAGGED</text>
+    <text x="1196" y="131" text-anchor="end" font-size="11" fill="#6F7782">L3 · 4 min ago</text>
+
+    <!-- flag -->
+    <rect x="808" y="150" width="388" height="34" rx="8" fill="#D6604A" fill-opacity="0.14" stroke="#D6604A" stroke-opacity="0.7"/>
+    <text x="822" y="172" font-size="11" font-weight="700" fill="#F0A193">FLAG</text>
+    <text x="862" y="172" font-size="11" fill="#E9C4BC">X account was @otherhandle until Nov 1</text>
+
+    <!-- rows: label, score, 10-segment bar, evidence -->
+    <g id="rows" font-size="12">
+      <text x="808" y="214" fill="#ECE6D8">Presence</text><text x="1196" y="214" text-anchor="end" fill="#ECE6D8" font-weight="700">78</text>
+      <g fill="#D9A441"><rect x="808" y="222" width="35" height="6" rx="3"/><rect x="847" y="222" width="35" height="6" rx="3"/><rect x="886" y="222" width="35" height="6" rx="3"/><rect x="925" y="222" width="35" height="6" rx="3"/><rect x="964" y="222" width="35" height="6" rx="3"/><rect x="1003" y="222" width="35" height="6" rx="3"/><rect x="1042" y="222" width="35" height="6" rx="3"/><rect x="1081" y="222" width="35" height="6" rx="3"/></g>
+      <g fill="#3A414B"><rect x="1120" y="222" width="35" height="6" rx="3"/><rect x="1159" y="222" width="37" height="6" rx="3"/></g>
+      <text x="808" y="246" font-size="11" fill="#7D8590">site registered the day before launch; shows this mint</text>
+
+      <text x="808" y="276" fill="#ECE6D8">Authenticity</text><text x="1196" y="276" text-anchor="end" fill="#ECE6D8" font-weight="700">31</text>
+      <g fill="#D9A441"><rect x="808" y="284" width="35" height="6" rx="3"/><rect x="847" y="284" width="35" height="6" rx="3"/><rect x="886" y="284" width="35" height="6" rx="3"/></g>
+      <g fill="#3A414B"><rect x="925" y="284" width="35" height="6" rx="3"/><rect x="964" y="284" width="35" height="6" rx="3"/><rect x="1003" y="284" width="35" height="6" rx="3"/><rect x="1042" y="284" width="35" height="6" rx="3"/><rect x="1081" y="284" width="35" height="6" rx="3"/><rect x="1120" y="284" width="35" height="6" rx="3"/><rect x="1159" y="284" width="37" height="6" rx="3"/></g>
+      <text x="808" y="308" font-size="11" fill="#7D8590">62% of followers seen on 410 other coins</text>
+
+      <text x="808" y="338" fill="#ECE6D8">Mindshare</text><text x="1196" y="338" text-anchor="end" fill="#ECE6D8" font-weight="700">52</text>
+      <g fill="#D9A441"><rect x="808" y="346" width="35" height="6" rx="3"/><rect x="847" y="346" width="35" height="6" rx="3"/><rect x="886" y="346" width="35" height="6" rx="3"/><rect x="925" y="346" width="35" height="6" rx="3"/><rect x="964" y="346" width="35" height="6" rx="3"/></g>
+      <g fill="#3A414B"><rect x="1003" y="346" width="35" height="6" rx="3"/><rect x="1042" y="346" width="35" height="6" rx="3"/><rect x="1081" y="346" width="35" height="6" rx="3"/><rect x="1120" y="346" width="35" height="6" rx="3"/><rect x="1159" y="346" width="37" height="6" rx="3"/></g>
+      <text x="808" y="370" font-size="11" fill="#7D8590">41 non-team authors in 24 h</text>
+
+      <text x="808" y="400" fill="#ECE6D8">Coverage</text><text x="1196" y="400" text-anchor="end" fill="#ECE6D8" font-weight="700">10</text>
+      <g fill="#D9A441"><rect x="808" y="408" width="35" height="6" rx="3"/></g>
+      <g fill="#3A414B"><rect x="847" y="408" width="35" height="6" rx="3"/><rect x="886" y="408" width="35" height="6" rx="3"/><rect x="925" y="408" width="35" height="6" rx="3"/><rect x="964" y="408" width="35" height="6" rx="3"/><rect x="1003" y="408" width="35" height="6" rx="3"/><rect x="1042" y="408" width="35" height="6" rx="3"/><rect x="1081" y="408" width="35" height="6" rx="3"/><rect x="1120" y="408" width="35" height="6" rx="3"/><rect x="1159" y="408" width="37" height="6" rx="3"/></g>
+      <text x="808" y="432" font-size="11" fill="#7D8590">press releases only (2 wires)</text>
+
+      <text x="808" y="462" fill="#ECE6D8">Chain</text><text x="1196" y="462" text-anchor="end" fill="#ECE6D8" font-weight="700">60</text>
+      <g fill="#D9A441"><rect x="808" y="470" width="35" height="6" rx="3"/><rect x="847" y="470" width="35" height="6" rx="3"/><rect x="886" y="470" width="35" height="6" rx="3"/><rect x="925" y="470" width="35" height="6" rx="3"/><rect x="964" y="470" width="35" height="6" rx="3"/><rect x="1003" y="470" width="35" height="6" rx="3"/></g>
+      <g fill="#3A414B"><rect x="1042" y="470" width="35" height="6" rx="3"/><rect x="1081" y="470" width="35" height="6" rx="3"/><rect x="1120" y="470" width="35" height="6" rx="3"/><rect x="1159" y="470" width="37" height="6" rx="3"/></g>
+      <text x="808" y="494" font-size="11" fill="#7D8590">creator: 3 earlier coins, 1 graduated</text>
+    </g>
+    <text x="808" y="522" font-size="10" fill="#5E6670">every line opens its evidence · scoring 2026.11.1</text>
+  </g>
+</svg>

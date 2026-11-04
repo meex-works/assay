@@ -1,0 +1,33 @@
+# Every weight, threshold and budget in one place. Public on purpose: see docs/adversarial.md.
+# Starting values from docs/scoring.md. Tune against the hand-labelled set, never against price.
+scoring_version: 2026.11.1
+
+cost_class_weight: { low: 1, medium: 3, high: 9 }
+
+half_life:                    # freshness decay per signal family
+  x.followers: 7d
+  x.engagement: 24h
+  mindshare: 24h
+  chain.holders: 6h
+  site: 30d
+  domain_age: never
+
+layers:
+  l0: { budget_ms: 1500, metadata_timeout_ms: 800 }
+  l1: { budget_s: 30 }
+  l2: { window: 3m, budget: { x_reads: 0, model_tokens: 0, seconds: 170 } }   # set from the week-one measurement
+  l3: { max_promotions_per_hour: 0 }                                           # likewise
+  l4: { min_confidence: 0.7 }
+
+thresholds:                   # set after a week of L0 data (docs/open-questions.md)
+  l0_to_l1: {}
+  l2_to_l3: {}
+
+flags:
+  handle_renamed_within: 7d
+  serial_creator: { coins: 0, window: 30d }      # TBD
+  launch_bundle_supply_pct: 0                    # TBD
+
+curated:
+  rereview_on_dimension_move: 20
+  expires_after: 14d
