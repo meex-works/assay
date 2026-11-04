@@ -5,7 +5,7 @@ import bs58 from "bs58";
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 const key = (s) => execFileSync("security", ["find-generic-password", "-a", "assay", "-s", s, "-w"], { encoding: "utf8" }).trim();
-const idl = JSON.parse(readFileSync(new URL("../pump-verify/idl/pump.json", import.meta.url)));
+const idl = JSON.parse(readFileSync(new URL("../../idl/pump.json", import.meta.url)));
 const coder = new BorshCoder(idl); const PUMP = idl.address;
 const TAG = Buffer.from("e445a52e51cb9a1d", "hex");
 const dec = (b64) => { try { return coder.events.decode(b64); } catch { return null; } };

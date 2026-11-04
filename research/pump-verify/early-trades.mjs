@@ -13,7 +13,7 @@ import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 const arg = (f, d) => { const i = process.argv.indexOf(f); return i < 0 ? d : Number(process.argv[i + 1]); };
 const COINS = arg("--coins", 40), WINDOW = arg("--window", 60);
 const RPC = process.env.RPC; if (!RPC) throw new Error("RPC env var required");
-const idl = JSON.parse(readFileSync(new URL("./idl/pump.json", import.meta.url)));
+const idl = JSON.parse(readFileSync(new URL("../../idl/pump.json", import.meta.url)));
 const coder = new BorshCoder(idl);
 const PUMP = idl.address;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

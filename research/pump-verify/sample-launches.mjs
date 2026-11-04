@@ -20,7 +20,7 @@ const arg = (f, d) => { const i = process.argv.indexOf(f); return i < 0 ? d : Nu
 const PAGES = arg("--pages", 3), SAMPLE = arg("--sample", 300);
 const RPC = process.env.RPC; if (!RPC) throw new Error("RPC env var required");
 const conn = new Connection(RPC, "confirmed");
-const idl = JSON.parse(readFileSync(new URL("./idl/pump.json", import.meta.url)));
+const idl = JSON.parse(readFileSync(new URL("../../idl/pump.json", import.meta.url)));
 const coder = new BorshCoder(idl);
 const PUMP = new PublicKey(idl.address);
 const MINT_AUTHORITY = PublicKey.findProgramAddressSync([Buffer.from("mint-authority")], PUMP)[0];

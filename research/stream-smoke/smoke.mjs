@@ -16,7 +16,7 @@ import { PublicKey } from "@solana/web3.js";
 
 const SECONDS = Number(process.argv[process.argv.indexOf("--seconds") + 1]) || 60;
 const key = (s) => execFileSync("security", ["find-generic-password", "-a", "assay", "-s", s, "-w"], { encoding: "utf8" }).trim();
-const idl = JSON.parse(readFileSync(new URL("../pump-verify/idl/pump.json", import.meta.url)));
+const idl = JSON.parse(readFileSync(new URL("../../idl/pump.json", import.meta.url)));
 const coder = new BorshCoder(idl);
 const PUMP = idl.address;
 const MINT_AUTHORITY = PublicKey.findProgramAddressSync([Buffer.from("mint-authority")], new PublicKey(PUMP))[0].toBase58();
