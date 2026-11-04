@@ -98,7 +98,7 @@ function batch(mints: string[]) {
     out[m] = {
       symbol: l.symbol, launched: l.seen_ms,
       verdict: !v ? "pending" : v.dead ? "dead" : c.pure ? "pure" : fail ? "impure" : "not_alive",
-      reason: !v ? null : v.dead ? (v.reason === "mc" ? `market cap about $${Math.round(v.mcUsd ?? 0).toLocaleString("en-US")} at 0:30` : `${v.buyers ?? 0} outside buyers at 0:30`) : fail?.fact ?? null,
+      reason: !v ? null : v.dead ? (v.reason === "mc" ? `market cap about $${Math.round(v.mcUsd ?? 0).toLocaleString("en-US")} at 0:30` : `${v.buyers ?? 0} outside ${v.buyers === 1 ? "buyer" : "buyers"} at 0:30`) : fail?.fact ?? null,
       post: p ? { kind: p.channel_msg ? "posted" : p.state === "capped" ? "capped" : "control", state: p.state === "broken" || p.state === "dead" ? p.state : "pure", reason: p.broke_reason } : null,
     };
   }

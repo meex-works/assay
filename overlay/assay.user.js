@@ -160,7 +160,7 @@
     const ch = c.check, launched = c.launch.seen_ms;
     const s1 = h("section"); s1.append(h("h4", null, ch ? `Checklist at ${clock(ch.at - launched)}` : "Checklist"));
     if (!ch) s1.append(h("div", "small", "Judged 30 seconds after launch."));
-    else if (ch.dead) s1.append(h("div", "small", ch.reason === "mc" ? `Market cap about $${Math.round(ch.mcUsd).toLocaleString("en-US")} at 0:30: dead on arrival.` : `${ch.buyers ?? 0} outside buyers at 0:30: dead on arrival.`));
+    else if (ch.dead) s1.append(h("div", "small", ch.reason === "mc" ? `Market cap about $${Math.round(ch.mcUsd).toLocaleString("en-US")} at 0:30: dead on arrival.` : `${ch.buyers ?? 0} outside ${ch.buyers === 1 ? "buyer" : "buyers"} at 0:30: dead on arrival.`));
     else for (const x of [...(ch.checks ?? []), ...(ch.facts ?? []).map((f) => ({ result: "fact", fact: f }))]) { const r = h("div", "row"); r.append(h("span", `m ${x.result}`, x.result), h("span", null, x.fact)); s1.append(r); }
     p.append(s1);
     if (c.timeline?.length) {

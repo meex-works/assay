@@ -11,7 +11,7 @@ const CSP = [
 const TTL = { summary: 15, tape: 5, posts: 5, coin: 10, batch: 10 };
 
 const robots = () => `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${ORIGIN}/sitemap.xml\n`;
-const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/tutorials</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
+const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/tutorials</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/overlay</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
 const llms = () => `# Assay Office
 
 > The public end of assay (https://github.com/meex-works/assay): every pump.fun launch checked 30 seconds in; pure

@@ -155,3 +155,5 @@ footer .grow { flex: 1 1 320px; }
 .vmeta { display: grid; gap: 8px; }
 .vmeta .k { font: 11.5px/1.2 var(--mono); text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold); }
 .vmeta p { margin: 0; color: var(--ink-2); }
+
+img.shot { max-width: 100%; height: auto; border-radius: 10px; border: 1px solid var(--line); }

@@ -267,7 +267,7 @@ itself.
 | lenses: the same facts read for different risk profiles | designed (lens files exist) | [lenses](docs/lenses.md) |
 | wallet reputation: predators, dispersers, snipers | dispersers + the mayhem agent running; the rest designed | [signals](docs/signals.md#6-wallet-reputation) |
 | the agent API, MCP server, point-in-time queries | designed | [api](docs/api.md) |
-| the pump.fun overlay | designed | [overlay](docs/overlay.md) |
+| the pump.fun overlay | **userscript running** ([install](https://assay.meex.work/overlay)); browser extension designed | [overlay](overlay/) · [design](docs/overlay.md) |
 | the launch kit for creators | designed | [launch kit](docs/launch-kit.md) |
 
 **The rule behind all of it:** weigh every signal by what it costs to fake. Ten thousand followers are cheap; a

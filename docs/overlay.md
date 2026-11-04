@@ -1,5 +1,9 @@
 # Overlay and other surfaces
 
+> **Status (2026-11-04):** the userscript is built and published: [overlay/](../overlay) · [install](https://assay.meex.work/overlay).
+> It shows the silent run's verdicts (pure / not pure / dead / broke) rather than the full design's tiers and
+> dimensions below, which aren't built yet. The browser extension is next.
+
 ## The pump.fun extension
 
 A Manifest V3 browser extension (Chrome, Brave, Firefox) that adds assay's report to pump.fun's own pages.

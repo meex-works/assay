@@ -13,7 +13,8 @@
     "report": "node src/report.ts",
     "check": "tsc --noEmit",
     "api": "node src/api.ts",
-    "doctor": "node src/doctor.ts"
+    "doctor": "node src/doctor.ts",
+    "web": "cp overlay/assay.user.js web/public/assay.user.js && cd web && npx wrangler deploy"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.1",

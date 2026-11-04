@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>assay overlay for pump.fun</title>
+<meta name="description" content="A badge on every pump.fun coin, and assay&#39;s evidence on every coin page. Read-only: no wallet access, no prices.">
+<link rel="canonical" href="https://assay.meex.work/overlay">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://assay.meex.work/overlay">
+<meta property="og:title" content="How Assay Office works">
+<meta property="og:description" content="A badge on every pump.fun coin, and assay&#39;s evidence on every coin page. Read-only: no wallet access, no prices.">
+<meta property="og:image" content="https://assay.meex.work/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15181c">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body data-page="overlay">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><img src="/logo-256.png" alt="" width="34" height="34"><b>Assay Office</b></a>
+  <span class="live" id="live" title="Feed status"><i></i><span>connecting</span></span>
+  <nav aria-label="Main">
+    <a href="/">Tape</a>
+    <a href="/overlay" aria-current="page">Overlay</a>
+    <a href="/tutorials">Tutorials</a>
+    <a href="/how">How it works</a>
+    <a href="https://t.me/assayoffice">Telegram</a>
+    <a href="https://github.com/meex-works/assay">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<article class="prose">
+  <h1>The overlay for pump.fun</h1>
+  <p>A small userscript that puts assay's verdict on pump.fun itself: a badge on every coin, and on a coin's page, the checklist and what has happened since launch. It's free, it's open source, and it's read-only.</p>
+  <p><a class="fb" href="/assay.user.js">Install the userscript</a></p>
+
+  <h2>Install it</h2>
+  <ol>
+    <li>Install a userscript manager for your browser: <a href="https://www.tampermonkey.net/">Tampermonkey</a> (Chrome, Edge, Firefox, Safari) or <a href="https://violentmonkey.github.io/">Violentmonkey</a> (Chrome, Firefox).</li>
+    <li>Open <a href="/assay.user.js">assay.meex.work/assay.user.js</a>. The manager shows the script and asks to install it. Read it first if you like: it's about 200 lines, with a comment at the top saying everything it does.</li>
+    <li>Open pump.fun. Coins get a badge once assay has judged them, 30 seconds after launch.</li>
+  </ol>
+  <p>In Chrome, Tampermonkey also needs <strong>Allow user scripts</strong> switched on in the extension's details page. The manager asks once whether the script may connect to <code>assay.meex.work</code>: that's the only site it talks to.</p>
+
+  <h2>What you'll see</h2>
+  <p><img src="/overlay-badges.png" alt="Coin cards with assay badges: dead, not pure, pure, not seen" width="940" height="240" class="shot"></p>
+  <ul>
+    <li><strong>pure</strong> or <strong>pure · watching</strong>: passed every check at 0:30, and is inside its fifteen-minute watch.</li>
+    <li><strong>broke</strong> or <strong>died</strong>: was pure, then wasn't. Hover for when and why.</li>
+    <li><strong>not pure</strong>: failed a check at 0:30. Hover for which.</li>
+    <li><strong>dead</strong>: fewer than three outside buyers at 0:30, or a market cap under $2.75K.</li>
+    <li><strong>few buyers</strong>, <strong>judging</strong>, <strong>not seen</strong>: under ten independent buyers; launched less than 30 s ago; or launched before assay started.</li>
+  </ul>
+  <p><img src="/overlay-panel.png" alt="The assay panel on a coin page: the checklist and the timeline" width="370" height="580" class="shot"></p>
+  <p>On a coin's page, a panel in the corner shows the checklist and the timeline. The minus button collapses it, and it stays collapsed. The userscript manager's menu has <em>Hide assay badges</em> if you only want the panel.</p>
+
+  <h2>What it doesn't do</h2>
+  <ul>
+    <li>It never reads or touches your wallet, and never signs anything.</li>
+    <li>It sends assay.meex.work nothing but the mint addresses on the page.</li>
+    <li>It shows no prices, and nothing it shows is a recommendation.</li>
+  </ul>
+  <p>The source is <a href="https://github.com/meex-works/assay/blob/main/overlay/assay.user.js">on GitHub</a>. A browser extension version, which won't need a userscript manager, is next.</p>
+</article>
+<section class="feedback" aria-label="Feedback">
+  <p>Disagree with a rule or finding? Let's chat.</p>
+  <div class="fb-links">
+    <a class="fb" href="https://x.com/meexworks" rel="noopener">Chat on X</a>
+    <a class="fb" href="https://t.me/meex_the_dev" rel="noopener">Chat on Telegram</a>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">
+  <span class="grow">No prices. Not a recommendation: do your own research. assay reads the chain and the web and never signs a transaction.</span>
+  <a href="https://github.com/meex-works/assay">Source (MIT)</a>
+  <a href="https://github.com/meex-works/assay/blob/main/docs/verified.md">Verified on mainnet</a>
+  <a href="/.well-known/security.txt">security.txt</a>
+  <span>© 2026 SHYGUY LLC</span>
+</div></footer>
+<script src="/app.js" defer></script>
+</body>
+</html>
