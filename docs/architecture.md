@@ -187,7 +187,14 @@ stream with the same package.
 The baseline is TypeScript: the language most agents read and change fastest. If the L0 hot path needs to go faster,
 it's the one piece worth rewriting in Rust.
 
-## Repo layout (planned)
+## Repo layout
+
+**Now** (the silent run, one process): `src/feeds.ts` (both feeds), `src/pump.ts` (decoding), `src/coin.ts` (positions,
+funding, clusters), `src/pure.ts` (the checklist and the post), `src/tape.ts` (the watch and the thread),
+`src/telegram.ts`, `src/store.ts` (SQLite), `src/run.ts`, `src/report.ts`. The bus is in-process until there's a second
+process.
+
+**Planned:**
 
 ```
 packages/

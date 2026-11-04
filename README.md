@@ -271,6 +271,12 @@ that pass it. `?lens=volatility` on the API, `assay.lens.volatility` on the bus.
 
 ## Run your own
 
+```sh
+npm install && npm run idl            # dependencies, and pump.fun's IDL at the pinned commit
+ASSAY_POST=0 npm run silent           # the silent run, printing posts instead of sending them
+npm run report -- --posts             # what it saw: launches, gaps, checks, posts, breaks, edit latency
+```
+
 assay is a baseline. Clone it, point your agent at it, change the weights, add signals, drop the ones you don't trust.
 
 You bring the keys; none ship with the repo:
@@ -294,9 +300,11 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 - [x] Design: signals, scoring, layers, bus, API, retention, overlay
 - [x] Assumptions reviewed adversarially; findings in [assumptions](docs/assumptions.md)
 - [x] Verify the launch mechanics against the IDL and real launches ([verified](docs/verified.md))
-- [ ] `bus` + `ingest`: pump program listener, decoders, NATS adapter
+- [x] **Silent run** ([src/](src), running since 2026-11-04): both feeds reconciled, L0 + the tape, the pure checklist
+      (chain, metadata, links), Assay Office posts with edits and threads, a held-out control set, `npm run report`
+- [ ] `bus` + `ingest` as separate packages: NATS, more than one process
 - [ ] **Backfill**: every historical launch, creator, image and early-buyer funding cluster
-- [ ] **L0 reflex** + **the tape**: creator lineage, funding clusters, bundles, wallet classes, live entries
+- [ ] Wallet reputation beyond dispersers: predators, snipers, the entry ledger
 - [ ] Week-one measurement: launch rate, L1 pass rate, X reads per coin → real numbers in [costs](docs/costs.md)
 - [ ] **L1 glance** + the API + `?format=brief`
 - [ ] **L2 sweep loop** with window budgets and `assay.sweep` stats
