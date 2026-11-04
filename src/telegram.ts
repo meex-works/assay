@@ -18,6 +18,7 @@ async function call(method: string, body: Record<string, unknown>): Promise<any>
     if (j.error_code === 429 && i < 5) { await new Promise((z) => setTimeout(z, 1000 * (j.parameters?.retry_after ?? 3))); continue; }
     if (/message is not modified/.test(j.description ?? "")) return null;
     tgStats.errors++;
+    console.error(`[telegram] ${method}: ${j.error_code} ${j.description}`);
     throw new Error(`${method}: ${j.description}`);
   }
 }

@@ -95,7 +95,7 @@ export async function evaluate(c: Coin): Promise<Verdict> {
   if (l.mayhem) facts.push("Mayhem mode.");
   if (l.quoteMint !== SOL_QUOTE) facts.push(`Quoted in ${await quoteName(l.quoteMint)}.`);
   if (l.holderReward && !promises) facts.push("Holder rewards on.");
-  if (l.creatorFeeBps) facts.push(`Creator fee ${(l.creatorFeeBps / 100).toFixed(l.creatorFeeBps % 100 ? 2 : 0)}%.`);
+  if (l.creatorFeeBps) facts.push(`Creator fee ${+(l.creatorFeeBps / 100).toFixed(2)}%.`);
 
   const independent = await independentOf(c, bundles);
   const alive = independent >= cfg.independentBuyersMin;
@@ -126,8 +126,9 @@ function ago(s: number) {
 export function postText(c: Coin, v: Verdict, atMs: number): string {
   const l = c.launch;
   const line = (k: string) => v.checks.find((x) => x.check === k)?.fact;
-  const body = [line("dev_buy"), line("no_bundle"), line("no_known_actors"), line("clean_creator"), ...v.facts.filter((f) => f.startsWith("Creator")), line("original"),
-    ...v.facts.filter((f) => !f.startsWith("Creator")), line("honest_config")].filter(Boolean);
+  const wallet = (f: string) => f.startsWith("Creator wallet");
+  const body = [line("dev_buy"), line("no_bundle"), line("no_known_actors"), line("clean_creator"), ...v.facts.filter(wallet), line("original"),
+    ...v.facts.filter((f) => !wallet(f)), line("honest_config")].filter(Boolean);
   return [
     `PURE LAUNCH  ${l.symbol.startsWith("$") ? "" : "$"}${l.symbol}  ${l.name}`, l.mint, "",
     ...body, "",

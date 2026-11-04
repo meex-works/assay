@@ -11,7 +11,7 @@ import { fetchMeta, metaStats } from "./meta.ts";
 import { KNOWN, type Decoded, type Launch } from "./pump.ts";
 import { evaluate, postText } from "./pure.ts";
 import { rpcStats } from "./rpc.ts";
-import { insCheck, insGap, insMetric, insPost, pruneTrades, saveLaunch, saveTrade, setMeta, tx } from "./store.ts";
+import { db, insCheck, insGap, insMetric, insPost, pruneTrades, saveLaunch, saveTrade, setMeta, tx } from "./store.ts";
 import { onTrade, startWatch, tick, watches } from "./tape.ts";
 import * as tg from "./telegram.ts";
 
@@ -108,7 +108,42 @@ setInterval(() => {
   console.log(`[${new Date().toISOString().slice(11, 19)}] launches ${stats.launches} (grpc ${stats.grpcLaunches}, helius ${stats.heliusLaunches}) · judged ${stats.evaluated} · dead ${stats.dead} · pure+alive ${stats.posted + stats.control + stats.capped} (posted ${stats.posted}, control ${stats.control}, capped ${stats.capped}) · meta ${metaStats.ok}/${metaStats.ok + metaStats.failed} · rpc ${rpcStats.calls} (429 ${rpcStats.throttled}) · watches ${watches.size} · ${m.rssMb} MB`);
 }, 60_000);
 
+// ── resume after a restart: rebuild the last 30 minutes of coins from disk, and the watches of their posts ──────────
+function resume() {
+  const since = Date.now() - cfg.trackFor;
+  const ls = db.prepare(`SELECT * FROM launches WHERE seen_ms > ?`).all(since) as any[];
+  for (const r of ls) {
+    const l: Launch = { sig: r.sig, slot: r.slot, seenMs: r.seen_ms, mint: r.mint, curve: "", creator: r.creator, signer: r.signer, name: r.name,
+      symbol: r.symbol, uri: r.uri, quoteMint: r.quote_mint, mayhem: !!r.mayhem, holderReward: !!r.holder_reward, cashback: !!r.cashback,
+      creatorFeeBps: r.creator_fee_bps, depth: r.depth, tokenProgram: r.token_program, supply: BigInt(r.supply) };
+    const c = new Coin(l);
+    c.tracing = true; c.evaluated = true;
+    for (const t of db.prepare(`SELECT * FROM trades WHERE mint = ? ORDER BY slot, seen_ms`).all(r.mint) as any[])
+      c.add({ sig: t.sig, slot: t.slot, seenMs: t.seen_ms, mint: t.mint, user: t.user, isBuy: !!t.is_buy, tokens: BigInt(t.tokens), quote: BigInt(t.quote), price: t.price, ixName: t.ix }, true);
+    coins.set(r.mint, c);
+    if (c.age() < cfg.minAge) {       // not judged yet when the process stopped
+      c.tracing = false; c.evaluated = false;
+      c.metaDone = fetchMeta(l.uri, l.mint).then((m) => { c.meta = m; });
+      setTimeout(() => judge(c).catch((e) => console.error(`[judge] ${l.mint}: ${e.message}`)), cfg.minAge - c.age());
+    }
+  }
+  let watched = 0;
+  for (const p of db.prepare(`SELECT * FROM posts WHERE posted_ms > ?`).all(since) as any[]) {
+    const c = coins.get(p.mint);
+    if (!c || c.age() > cfg.minAge + cfg.watchFor) continue;
+    const w = startWatch(c, p.channel_msg != null, p.channel_msg, p.text, p.posted_ms);
+    w.pure = p.state !== "broken"; w.brokeReason = p.broke_reason; w.events = p.events ?? 0;
+    for (const at of cfg.confirmAt) if (c.age() >= at) w.confirmed.add(at);   // past confirmations aren't sent late
+    const kinds = new Set((db.prepare(`SELECT kind FROM timeline WHERE mint = ?`).all(p.mint) as any[]).map((x) => x.kind));
+    if (kinds.has("dev_sold")) w.devSoldNoted = 1;
+    if (kinds.has("bundle_selling")) w.bundleSoldNoted = true;
+    watched++;
+  }
+  if (ls.length) console.log(`resumed ${ls.length} coins and ${watched} watches from disk`);
+}
+
 // ── start ────────────────────────────────────────────────────────────────────────────────────────────────────────────
+resume();
 await tg.init(cfg.channel);
 console.log(`assay silent run · ${tg.DRY ? "DRY (not posting)" : `posting to ${cfg.channel}`} · min_age ${cfg.minAge / 1000}s · watch ${cfg.watchFor / 60_000}m`);
 void runGrpc(onTx);

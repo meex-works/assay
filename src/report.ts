@@ -34,7 +34,7 @@ for (const [label, rows] of [["posted", byState("pure")], ["control", byState("c
   const fast = b.filter((r) => r.broke_ms - r.seen_ms <= 5 * 60_000);
   console.log(`  ${label.padEnd(8)}      ${rows.length} watched · broke ${pct(b.length, rows.length)} · broke within 5:00 ${pct(fast.length, rows.length)}`);
 }
-console.log(`break reasons   ${Object.entries(broke.reduce((a: Record<string, number>, r) => { const k = r.broke_reason.split(":")[0].replace(/[0-9.%]+/g, "N"); a[k] = (a[k] ?? 0) + 1; return a; }, {})).map(([k, n]) => `${k} ×${n}`).join(" · ") || "none"}`);
+console.log(`break reasons   ${Object.entries(broke.reduce((a: Record<string, number>, r) => { const k = r.broke_reason.split(":")[0].replace(/\d+(\.\d+)?%?/g, "N").replace(/\.$/, ""); a[k] = (a[k] ?? 0) + 1; return a; }, {})).map(([k, n]) => `${k} ×${n}`).join(" · ") || "none"}`);
 console.log(`edit latency    median ${med(lat.map((x) => x.l))} ms from the triggering trade (n=${lat.length})`);
 if (m) { const j = JSON.parse(m.json); console.log(`last metrics    rpc ${j.rpc.calls} calls (429 ${j.rpc.throttled}) · funder lookups ${j.funding.lookups} · meta ${j.meta?.ok}/${(j.meta?.ok ?? 0) + (j.meta?.failed ?? 0)} · ${j.rssMb} MB · grpc reconnects ${j.feeds.grpc.reconnects}`); }
 

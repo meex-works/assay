@@ -70,14 +70,14 @@ export class Coin {
   share(tokens: bigint) { return Number((tokens * 1_000_000n) / this.launch.supply) / 1_000_000; }
   net(w: string) { const h = this.holders.get(w); return h ? h.bought - h.sold : 0n; }
 
-  add(t: Trade) {
+  add(t: Trade, replay = false) {
     this.trades.push(t);
     if (t.price) { if (!this.firstPrice) this.firstPrice = t.price; this.lastPrice = t.price; }
     let h = this.holders.get(t.user);
     if (!h) {
       h = { wallet: t.user, firstMs: t.seenMs, firstSlotOffset: t.slot - this.launch.slot, bought: 0n, sold: 0n, peak: 0n, buyQuote: 0n };
       this.holders.set(t.user, h);
-      if (t.isBuy && t.seenMs - this.launch.seenMs <= cfg.earlyWindow && !KNOWN[t.user]) {
+      if (!replay && t.isBuy && t.seenMs - this.launch.seenMs <= cfg.earlyWindow && !KNOWN[t.user]) {
         insEarly.run(this.launch.mint, t.user, t.seenMs, h.firstSlotOffset);
         bumpEarly.run(t.user);
       }
