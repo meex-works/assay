@@ -33,6 +33,7 @@ only reading.
 | **clean book** | not being someone else's exit | no `predator_entered`, bundle < 10% and sold down, no caller with a front-running history | — |
 | **beta** | plays on a coin that's already running | `vamp_of` or narrative siblings of a coin in its first run, the fastest sibling with the preferred config | relaunches by the original's creator |
 | **original** | only the first of a narrative | first in its cluster, `vamp_of` empty, image not seen before | every copy |
+| **pure** | honest structure at launch, nothing about quality ([pure.md](pure.md)) | a small dev buy and nothing hidden, original identity, honest links and config | every risk trait, every integrity flag |
 
 These are starting points. Writing a new one is the expected way to use assay.
 

@@ -55,19 +55,9 @@ anything:
 
 ## The Telegram channel
 
-A public channel that posts every coin the review agent promotes to `curated`, in one message:
-
-```
-$TICKER · curated · 52 min after launch
-Presence 78 · Authenticity 66 · Mindshare 71 · Coverage 20 · Chain 74
-X account since 2019, one handle. 212 distinct non-team authors in 2 h.
-Creator: first launch, funded from a CEX.
-Note: Real community, early. No coverage yet beyond its own posts.
-assay.meex.work/c/<mint>
-```
-
-Flags on coins above a size threshold go to the same channel. Nothing in it says buy, sell, or where the price is
-going. It's the evidence, fast.
+The channel posts **pure launches**: structurally honest at launch, decided within seconds, with no market details,
+so readers do their own research. It doesn't post "good" coins. When a posted coin stops being pure, the original
+message is edited to say when and why. The checklist, the post format and the trade-offs are in [pure.md](pure.md).
 
 ## The harness side
 

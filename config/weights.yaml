@@ -4,6 +4,17 @@ scoring_version: 2026.11.1
 
 cost_class_weight: { low: 1, medium: 3, high: 9 }
 
+source_trust:                 # how much each source counts toward Mindshare (docs/signals.md#3-mindshare-are-other-people-talking-about-it)
+  onchain: 1.0
+  farcaster: 0.7
+  telegram: 0.5
+  reddit: 0.5
+  youtube_tiktok: 0.3
+  pump_comments: 0.15
+  x: 0.2
+  paid_placement: 0
+x_share_max: 0.3              # X never supplies more than 30% of Mindshare
+
 half_life:                    # freshness decay per signal family
   x.followers: 7d
   x.engagement: 24h

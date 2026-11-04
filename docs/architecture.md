@@ -32,6 +32,53 @@ Everything goes over the bus, in both directions. A layer reads events, writes *
 snapshots** back to it, and moves on. The API, the Telegram channel, the overlay and anyone's agent are all just
 consumers of the same bus.
 
+## Speed
+
+The rule on the hot path: **push, never poll.** Nothing between a launch landing and a pure-launch post waits on a
+timer.
+
+### Getting the launch
+
+| path | how | when to use it |
+|---|---|---|
+| **Yellowstone gRPC** | a transaction subscription filtered to the pump program, at `processed` commitment | the default: the fastest standard way to see a transaction |
+| **RPC websocket, logs** | `logsSubscribe` mentioning the pump program, at `processed`. pump.fun's create and trade events are emitted in the program logs, so they decode straight from the log lines, with **no `getTransaction` round trip** | no gRPC provider; also the independent second source |
+| **RPC websocket, full transactions** | an enhanced `transactionSubscribe` where the provider offers one | when the logs aren't enough (balances, inner instructions) |
+| **shreds** | a shred stream or your own validator | the last few hundred milliseconds, if they ever matter |
+
+Two sources run at once and reconcile. A launch seen by only one is logged as a gap.
+
+`processed` is fast and can be dropped by a fork. Every observation records the commitment it was made at; the tape
+re-checks at `confirmed`, and a transaction that never confirms gets a retracting observation.
+
+### Watching what matters after launch
+
+| what | how |
+|---|---|
+| every trade on every coin | the same program subscription; the tape reads it |
+| the bonding curve of each watched coin | `accountSubscribe` on the curve account: state on every change, nothing to parse |
+| creator wallets, fee vaults, predator clusters | **RPC webhooks** (address-watching webhooks from the RPC provider): thousands of addresses without holding thousands of subscriptions, pushed within seconds. Used where a few seconds is fine: dev transfers, fee claims, a known cluster moving funds before it buys |
+
+### Inside the process
+
+- Ingest, decode, L0 and the tape run in **one process** with the caches in memory: no network hop and no database
+  read before an L0 decision. The bus publish is local.
+- L1's fetches run **in parallel** with tight timeouts: the metadata JSON is raced across several IPFS gateways (first
+  answer wins), the image is fetched and hashed as it streams, RDAP and the site fetch go out at the same moment.
+- Funding traces read the cached cluster index first; only an unknown wallet costs an RPC walk, and the walk is
+  limited by `trace_hops`.
+- The Telegram post goes out as soon as the pure checklist passes and `min_age` has elapsed.
+
+### Latency targets (to be measured, not promised)
+
+| step | target |
+|---|---|
+| launch transaction produced → seen (gRPC, `processed`) | under 0.5 s |
+| decode + L0 decision | under 50 ms |
+| early-buyer funding clusters (cached) | under 1 s |
+| L1: metadata, image, links (parallel, raced) | 2–10 s |
+| pure-launch post, from launch | `min_age` (30 s by default) once everything above has passed |
+
 ## The event bus
 
 **NATS JetStream** by default: a single binary, durable streams, consumers that resume where they stopped, and replay
@@ -158,7 +205,7 @@ packages/
   overlay/      the browser extension
 config/
   weights.yaml  every weight, threshold and budget, in one file
-  lenses/       curator, volatility, runner, clean-book, beta, original
+  lenses/       curator, volatility, runner, clean-book, beta, original, pure
 .env.example    every key, supplied by whoever runs it
 ```
 
@@ -169,8 +216,9 @@ assay ships with no keys and no hosted dependency. Whoever runs an instance supp
 | key | for | required |
 |---|---|---|
 | `SOLANA_RPC_URL` | reads, history | yes |
-| `SOLANA_GRPC_URL` / `SOLANA_WS_URL` | the launch stream | one of them |
-| `X_BEARER_TOKEN` | X profile, timeline, followers, search (first-party X API) | for L1+ social signals |
+| `SOLANA_GRPC_URL` / `SOLANA_WS_URL` | the launch stream; run both for reconciliation | at least one; both recommended |
+| `SOLANA_WEBHOOK_SECRET` | verifying the RPC provider's address webhooks (creator wallets, vaults, clusters) | optional |
+| `X_BEARER_TOKEN` | X identity checks, the author index, X's capped share of Mindshare (first-party X API) | optional |
 | `MODEL_API_KEY` + `MODEL_*` | classification, extraction, the review agent | for L1+ text signals and L4 |
 | `NEWS_API_KEY` | news search | for Coverage |
 | `TELEGRAM_BOT_TOKEN` | channel counts, the calls channel | optional |

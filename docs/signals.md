@@ -123,9 +123,27 @@ This is where the money goes, and it is what makes assay worth paying for.
 Mindshare is measured **net of the team**: anything posted by the coin's own accounts, its X Community admins, or
 accounts in its amplification cluster is excluded before counting.
 
+**X is one source, not the source.** It's the largest and the most manipulated: bought followers, reply farms, paid
+calls, engagement pods. So assay uses X mainly for identity (does the linked account exist, how old is it, was it
+renamed) and for the author index, and caps how much X can contribute to Mindshare. Mindshare has to be computable
+with X switched off.
+
+| source | trust | why | what counts |
+|---|---|---|---|
+| **on-chain attention** | highest | it costs money | independent buyers (distinct funding clusters), holder growth net of program-held supply, failed snipe attempts (people tried) |
+| **Farcaster** | medium-high | Neynar's user scores filter most sybils | casts by scored users, channel activity |
+| **Telegram** | medium | members are cheap, conversation isn't | distinct senders per hour, sender account age, messages not from the team |
+| **Reddit** | medium | account age and karma are visible and slow to fake | posts and comments by aged accounts, outside shill subs |
+| **YouTube / TikTok** | medium-low | views are buyable, comments less so | distinct commenters, channel age |
+| **pump.fun comments, livestream viewers** | low | free and botted | distinct commenting wallets with history |
+| **X** | **low by default, capped** | the most manipulated ocean | only authors with an established quality score in the author index; never more than `x_share_max` of the dimension (config) |
+| **paid placement** (DexScreener boosts, paid trending, paid calls) | zero | it's an ad | reported as a fact ("boosted at +4 min"), never counted |
+
+Weights per source live in `config/weights.yaml` (`source_trust`), so an operator who trusts X more, or less, can say so.
+
 | signal | method | cost to fake |
 |---|---|---|
-| distinct authors mentioning `$TICKER` or the mint, per hour | X search (recent), deduplicated by author | low raw / **high** when weighted by author quality |
+| distinct authors mentioning `$TICKER` or the mint, per hour, per source | each source's search, deduplicated by author | low raw / **high** when weighted by author quality and source trust |
 | author-quality-weighted mentions: account age, follower quality, history of *not* posting every coin | author scoring, cached per author | high |
 | **paid-call detection**: the author's history of posting a coin then deleting the post, the "not financial advice, DYOR, CA:" format, a post minutes after the creator wallet funded something | author history + chain timing | medium |
 | first organic mention timestamp vs launch | search | n/a |

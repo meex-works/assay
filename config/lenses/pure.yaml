@@ -1,0 +1,21 @@
+# Pure launches: structure is honest. Not "good". Posted to Telegram with no market details. See docs/pure.md.
+lens: pure
+version: 1
+show_integrity_flags: true
+uses_outcome_history: false
+gate:
+  - no_integrity_flags: true
+  - trait: dev_buy_share
+    max: 0.05                    # dev_buy_max
+  - no_traits: [bundled, serial_creator, vamp_of, relaunch_of, web_image, predator_entered]
+  - no_clusters_among_first_buyers: [bundler, predator]
+  - creator_funding_clean: { trace_hops: 3 }
+  - config_matches_description: true
+  - independent_buyers_min: 10   # alive; never shown in the post
+post:
+  channel: telegram
+  market_details: false
+  min_age: 30s
+  stay_pure_for: 0s
+  max_posts_per_hour: 30
+  edit_on_break: true

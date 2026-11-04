@@ -11,7 +11,7 @@
   <img alt="agents: MCP" src="https://img.shields.io/badge/agents-MCP-8A9099?style=flat-square">
   <img alt="keys: bring your own" src="https://img.shields.io/badge/keys-bring%20your%20own-8A9099?style=flat-square">
   <img alt="contracts: none" src="https://img.shields.io/badge/contracts-none-8A9099?style=flat-square">
-  <img alt="lenses: 6" src="https://img.shields.io/badge/lenses-6-8A9099?style=flat-square">
+  <img alt="lenses: 7" src="https://img.shields.io/badge/lenses-7-8A9099?style=flat-square">
   <img alt="assumptions: reviewed" src="https://img.shields.io/badge/assumptions-reviewed-8A9099?style=flat-square">
 </p>
 
@@ -26,6 +26,7 @@
   <a href="#the-rule">The rule</a> ·
   <a href="#what-you-get">What you get</a> ·
   <a href="#lenses">Lenses</a> ·
+  <a href="#pure-launches">Pure launches</a> ·
   <a href="#for-agents">For agents</a> ·
   <a href="#run-your-own">Run your own</a> ·
   <a href="#roadmap">Roadmap</a> ·
@@ -72,7 +73,9 @@ Every launch goes onto an **event bus**. Five layers listen to it, and each one 
   minutes in. It writes a note signed with its exact model. It can't promote past a failed gate, and it can't clear a
   flag.
 
-No layer waits for the next one. A consumer that needs an answer in a second takes L0's, along with its confidence; a
+**Push, never poll.** Launches arrive over Yellowstone gRPC and an RPC websocket at `processed` commitment, decoded
+straight from pump.fun's program logs; curves are watched with account subscriptions, and creator wallets, fee vaults
+and known clusters with RPC address webhooks. No layer waits for the next one. A consumer that needs an answer in a second takes L0's, along with its confidence; a
 consumer that can wait listens for the next score. [Architecture →](docs/architecture.md)
 
 ## The rule
@@ -106,7 +109,7 @@ Every coin gets a **tier** and five **dimensions**, each with a confidence and t
 |---|---|
 | **Presence** | Does anything exist off-chain? X, Telegram, a website, GitHub, Farcaster |
 | **Authenticity** | Is that presence real? Follower quality, overlap with known farms, reply patterns, renamed accounts |
-| **Mindshare** | Are people outside the team talking about it, and are they people whose attention costs something? |
+| **Mindshare** | Are people outside the team talking about it, on-chain, on Farcaster, Telegram, Reddit and X, weighted by how hard each source is to fake? |
 | **Coverage** | Has anyone credible written about it, or is it press releases only? |
 | **Chain** | The creator's history, funding sources, launch bundles, holder diversity, wash trading |
 
@@ -138,10 +141,35 @@ a week and the whole point to someone scalping its volatility. So assay keeps th
 | **clean book** | no predatory wallets, a small and sold-down bundle, no caller with a front-running history |
 | **beta** | the copies and siblings of a coin that's already running |
 | **original** | only the first of a narrative |
+| **pure** | honest structure at launch, nothing about quality: what the Telegram channel posts |
 
 A lens is a short YAML file. Writing your own is the expected way to use assay. Lenses other than the curator can also
 read **outcome history**: what coins with the same traits did before, with the sample size. That's history about other
 coins, never a prediction about this one. [Lenses →](docs/lenses.md)
+
+## Pure launches
+
+The Telegram channel doesn't post good coins. It posts **pure launches**: coins whose structure is honest at launch,
+decided within seconds, with **no market details** at all. No price, no market cap, no volume, no holder count. If you
+want those, go and look, and do your own research while you're there.
+
+```
+PURE LAUNCH  $TICKER  Name
+<mint>
+
+Dev bought 2.1% in the create transaction, nothing since.
+No bundle. No known bundler or predator wallets among the first buyers.
+Creator's first launch, funded from an exchange.
+Original image and metadata.
+The site and X account show this mint.
+
+Pure as of 0:34 after launch. Not a recommendation: do your own research.
+```
+
+Pure means: a small dev buy and nothing hidden, no bundle, no known bad wallets early, a creator with a clean history,
+an original image and metadata, links that show this mint, and a fee setup that matches what it promises. A coin with
+no socials can still be pure. When a posted coin stops being pure (the dev dumps, a predator buys in), **the original
+message is edited in place** to say when and why. [Pure launches →](docs/pure.md)
 
 ## What assay looks for that the chain doesn't say out loud
 
@@ -164,7 +192,7 @@ Every one starts as a [hypothesis](docs/hypotheses.md) with a test, and becomes 
 | surface | |
 |---|---|
 | **pump.fun overlay** | a browser extension: a badge on every coin card, the evidence panel on every coin page. No wallet access, ever. |
-| **Telegram channel** | every coin the review agent promotes, in one message, with its note and the strongest evidence |
+| **Telegram channel** | pure launches, within seconds, with no market details; edited in place if purity breaks |
 | **free demo** | assay.meex.work: the live tape of launches and decisions, a page per coin, the sweep's real stats |
 | **your agent** | the bus, the API, or the MCP server |
 
@@ -211,12 +239,13 @@ You bring the keys; none ship with the repo:
 | key | turns on |
 |---|---|
 | `SOLANA_RPC_URL` + `SOLANA_GRPC_URL` or `SOLANA_WS_URL` | the launch stream, L0, the Chain dimension |
-| `X_BEARER_TOKEN` | Presence, Authenticity and Mindshare on X (first-party X API) |
+| `X_BEARER_TOKEN` | identity checks on linked X accounts, X's capped share of Mindshare (first-party X API; optional) |
 | `MODEL_API_KEY` | classification, extraction, the L4 review agent |
 | `NEWS_API_KEY` | Coverage |
 | `TELEGRAM_BOT_TOKEN` · `NEYNAR_API_KEY` | Telegram counts and the channel · Farcaster |
 
-X is the expensive one, so assay never spends an X read on a coin until the chain says it's alive.
+X is optional. It's one mindshare source among several, the most manipulated one, and weighted that way; assay never
+spends an X read on a coin until the chain says it's alive, and works with no X key at all.
 
 A missing key switches its signals off and lowers confidence. A run without X data never passes itself off as one
 with it. Every weight, threshold and budget lives in one file, `config/weights.yaml`. [Costs →](docs/costs.md)
@@ -233,7 +262,8 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 - [ ] **L1 glance** + the API + `?format=brief`
 - [ ] **L2 sweep loop** with window budgets and `assay.sweep` stats
 - [ ] **L3 deep** + **L4 review agent**
-- [ ] Lenses: the evaluator, the six built-ins, `?lens=`
+- [ ] **Pure launches**: the checklist, the Telegram channel, edit-on-break, the measured bot effect
+- [ ] Lenses: the evaluator, the seven built-ins, `?lens=`
 - [ ] Hypothesis tests H1–H6 on the first month of data
 - [ ] MCP server, Telegram channel, free demo at assay.meex.work
 - [ ] pump.fun overlay (userscript first, then the store extension)
@@ -243,11 +273,12 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 
 | | |
 |---|---|
-| [architecture](docs/architecture.md) | the bus, the five layers, the tape, the sweep loop, the cross-coin indexes, the review agent, keys |
+| [architecture](docs/architecture.md) | speed (streams, logs, webhooks), the bus, the five layers, the tape, the sweep loop, the indexes, keys |
 | [events](docs/events.md) | topics, envelope, examples, subscribing and replay |
 | [signals](docs/signals.md) | every signal, its source, what it costs to fake |
 | [scoring](docs/scoring.md) | observations → dimensions → tiers; integrity flags and risk traits; calibration |
 | [lenses](docs/lenses.md) | the same facts read for different risk profiles; writing your own |
+| [pure launches](docs/pure.md) | the checklist, the Telegram post, edit-on-break, the trade-offs |
 | [hypotheses](docs/hypotheses.md) | trench beliefs (bundles, predators, callouts, category, pairing, vamps) and the test for each |
 | [assumptions](docs/assumptions.md) | every load-bearing assumption, its verdict, and what changed |
 | [api](docs/api.md) | REST, batch, stream, webhooks, MCP, point-in-time |

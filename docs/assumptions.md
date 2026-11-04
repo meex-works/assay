@@ -35,6 +35,5 @@ current IDL and on-chain accounts before any code depends on them.
 
 ## Open, from the review
 
-- **What the Telegram channel is.** A channel listing coins is a call channel whatever its wording, and it will move
-  what it posts. Options: measure that effect and publish it (planned either way), post with a delay, or post evidence
-  and flags only. See [open-questions.md](open-questions.md).
+- ~~What the Telegram channel is.~~ Decided: it posts pure launches with no market details ([pure.md](pure.md)). It
+  will still move what it posts (bots will snipe the feed); that effect is measured on every post and published.
