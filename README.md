@@ -343,7 +343,8 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 ## Brand
 
 The mark is a hallmark: the stamp an assay office strikes on metal that passes. [brand/logo.png](brand/logo.png)
-(1024², the PNG is canonical; the SVG sets its letter in Georgia) · palette touchstone `#1A1D22`, gold `#D9A441`,
+(1024², the PNG is canonical; the SVG sets its letter in Georgia), and the records mark for the discussion group,
+[brand/records.png](brand/records.png): the same stamp holding a log, on bone · palette touchstone `#1A1D22`, gold `#D9A441`,
 bone `#ECE6D8`.
 
 ## License
