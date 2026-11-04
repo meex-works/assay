@@ -36,8 +36,9 @@
 > [!NOTE]
 > **What's running and what's designed.** The [silent run](#how-it-works) (both feeds, the pure checklist, posting to
 > [Assay Office](https://t.me/assayoffice), the 15-minute watch, the [live site](https://assay.meex.work)) is built and
-> running. Everything under [The full design](#the-full-design) (the event bus, layers L1–L4, lenses, the agent API,
-> the overlay, the launch kit) is a written design that isn't built yet. Each section says which it is.
+> running. The [pump.fun overlay](https://assay.meex.work/overlay) (a userscript) is built too. Everything under
+> [The full design](#the-full-design) (the event bus, layers L1–L4, lenses, the agent API, the launch kit) is a written
+> design that isn't built yet. Each section says which it is.
 
 ## Quick start
 

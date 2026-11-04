@@ -11,7 +11,7 @@ const CSP = [
 const TTL = { summary: 15, tape: 5, posts: 5, coin: 10, batch: 10 };
 
 const robots = () => `User-agent: *\nAllow: /\nDisallow: /api/\nSitemap: ${ORIGIN}/sitemap.xml\n`;
-const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/tutorials</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/overlay</loc><changefreq>monthly</changefreq></url>\n</urlset>\n`;
+const sitemap = () => `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><changefreq>always</changefreq></url>\n  <url><loc>${ORIGIN}/how</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/tutorials</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/overlay</loc><changefreq>monthly</changefreq></url>\n  <url><loc>${ORIGIN}/terms</loc><changefreq>yearly</changefreq></url>\n  <url><loc>${ORIGIN}/privacy</loc><changefreq>yearly</changefreq></url>\n</urlset>\n`;
 const llms = () => `# Assay Office
 
 > The public end of assay (https://github.com/meex-works/assay): every pump.fun launch checked 30 seconds in; pure
@@ -70,7 +70,7 @@ export default {
     else if (p === "/robots.txt") res = new Response(robots(), { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (p === "/sitemap.xml") res = new Response(sitemap(), { headers: { "content-type": "application/xml; charset=utf-8" } });
     else if (p === "/llms.txt") res = new Response(llms(), { headers: { "content-type": "text/plain; charset=utf-8" } });
-    else if (p === "/.well-known/security.txt") res = new Response(securityTxt({ contact: "security@meex.work", policy: "https://github.com/meex-works/assay", canonical: `${ORIGIN}/.well-known/security.txt` }), { headers: { "content-type": "text/plain; charset=utf-8" } });
+    else if (p === "/.well-known/security.txt") res = new Response(securityTxt({ contact: "security@meex.work", policy: `${ORIGIN}/terms`, canonical: `${ORIGIN}/.well-known/security.txt` }), { headers: { "content-type": "text/plain; charset=utf-8" } });
     else if (/^\/c\/[1-9A-HJ-NP-Za-km-z]{32,44}\/?$/.test(p)) res = await env.ASSETS.fetch(new Request(new URL("/coin", url), req));   // "/coin.html" would 307 to "/coin" and the browser would follow it
       else if (/^\/tutorials\/[\w-]+\.mp4$/.test(p)) res = await ranged(req, await env.ASSETS.fetch(new Request(url, { method: "GET" })));
     else res = await env.ASSETS.fetch(req);

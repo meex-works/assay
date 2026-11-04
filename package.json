@@ -14,7 +14,8 @@
     "check": "tsc --noEmit",
     "api": "node src/api.ts",
     "doctor": "node src/doctor.ts",
-    "web": "cp overlay/assay.user.js web/public/assay.user.js && cd web && npx wrangler deploy"
+    "web": "node scripts/build-extension.mjs && cp overlay/assay.user.js web/public/assay.user.js && cp extension/assay-extension.zip web/public/assay-extension.zip && cd web && npx wrangler deploy",
+    "extension": "node scripts/build-extension.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.1",

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · Assay Office</title>
+<meta name="description" content="What happens with your data when you use assay.meex.work, the overlay and the Assay Office channel.">
+<link rel="canonical" href="https://assay.meex.work/privacy">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://assay.meex.work/privacy">
+<meta property="og:title" content="How Assay Office works">
+<meta property="og:description" content="What happens with your data when you use assay.meex.work, the overlay and the Assay Office channel.">
+<meta property="og:image" content="https://assay.meex.work/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15181c">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body data-page="legal">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><img src="/logo-256.png" alt="" width="34" height="34"><b>Assay Office</b></a>
+  <span class="live" id="live" title="Feed status"><i></i><span>connecting</span></span>
+  <nav aria-label="Main">
+    <a href="/">Tape</a>
+    <a href="/overlay">Overlay</a>
+    <a href="/tutorials">Tutorials</a>
+    <a href="/how">How it works</a>
+    <a href="https://t.me/assayoffice">Telegram</a>
+    <a href="https://github.com/meex-works/assay">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<article class="prose">
+  <h1>Privacy</h1>
+  <p class="notice">Last updated 4 November 2026.</p>
+  <p>assay doesn't have accounts, doesn't set cookies, and doesn't collect personal information. This page lists what does happen when you use it, by SHYGUY LLC ("we").</p>
+
+  <h2>The Site</h2>
+  <ul>
+    <li><strong>Hosting.</strong> The Site runs on Cloudflare, which processes your IP address and request details to serve and protect it, under <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare's privacy policy</a>. Cloudflare Web Analytics counts page views without cookies.</li>
+    <li><strong>Fonts.</strong> Pages load their fonts from Google Fonts, so Google receives your IP address when you open a page (<a href="https://policies.google.com/privacy">Google's privacy policy</a>).</li>
+    <li><strong>Your browser</strong> stores nothing from the Site.</li>
+  </ul>
+
+  <h2>The overlay (userscript and extension)</h2>
+  <ul>
+    <li>It sends assay.meex.work the <strong>mint addresses</strong> of the coins on the pump.fun page you're viewing, and nothing else: not your wallet, not your browsing history, not the page's content.</li>
+    <li>It stores two settings in your browser (whether badges are shown, and whether the panel is collapsed). They never leave your browser.</li>
+    <li>Its requests reach us through Cloudflare, as above. We don't log which mints a given visitor asked about.</li>
+  </ul>
+
+  <h2>The Telegram channel</h2>
+  <p>Assay Office posts on Telegram, and its discussion group is read-only. If you follow it or react to a post, Telegram processes that under <a href="https://telegram.org/privacy">Telegram's privacy policy</a>. Our bot only reads the channel's own posts.</p>
+
+  <h2>What assay records</h2>
+  <p>assay records public data: pump.fun launches and trades from the Solana blockchain (wallet addresses included, as they appear on-chain), coins' public metadata and links, and its own findings. It does not try to link wallets to people.</p>
+
+  <h2>Questions</h2>
+  <p><a href="mailto:assay@meex.work">assay@meex.work</a>. If we change this page, the date above changes.</p>
+</article>
+<section class="feedback" aria-label="Feedback">
+  <p>Disagree with a rule or finding? Let's chat.</p>
+  <div class="fb-links">
+    <a class="fb" href="https://x.com/meexworks" rel="noopener">Chat on X</a>
+    <a class="fb" href="https://t.me/meex_the_dev" rel="noopener">Chat on Telegram</a>
+  </div>
+</section>
+</main>
+<footer><div class="wrap">
+  <span class="grow">No prices. Not a recommendation: do your own research. assay reads the chain and the web and never signs a transaction.</span>
+  <a href="https://github.com/meex-works/assay">Source (MIT)</a>
+  <a href="https://github.com/meex-works/assay/blob/main/docs/verified.md">Verified on mainnet</a>
+  <a href="/terms">Terms</a>
+  <a href="/privacy">Privacy</a>
+  <a href="/.well-known/security.txt">security.txt</a>
+  <span>© 2026 SHYGUY LLC</span>
+</div></footer>
+<script src="/app.js" defer></script>
+</body>
+</html>

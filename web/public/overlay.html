@@ -65,7 +65,14 @@
     <li>It sends assay.meex.work nothing but the mint addresses on the page.</li>
     <li>It shows no prices, and nothing it shows is a recommendation.</li>
   </ul>
-  <p>The source is <a href="https://github.com/meex-works/assay/blob/main/overlay/assay.user.js">on GitHub</a>. A browser extension version, which won't need a userscript manager, is next.</p>
+  <h2>Or the browser extension</h2>
+  <p>The same code as an extension, no userscript manager needed. It's on its way to the Chrome and Firefox stores; until then, Chrome, Edge and Brave can load it by hand:</p>
+  <ol>
+    <li>Download <a href="/assay-extension.zip">assay-extension.zip</a> and unzip it.</li>
+    <li>Open <code>chrome://extensions</code>, switch on <strong>Developer mode</strong>, and choose <strong>Load unpacked</strong>.</li>
+    <li>Pick the unzipped folder. It asks for access to pump.fun and assay.meex.work only.</li>
+  </ol>
+  <p>The source is <a href="https://github.com/meex-works/assay/blob/main/overlay/assay.user.js">on GitHub</a>; the extension is built from it by <a href="https://github.com/meex-works/assay/blob/main/scripts/build-extension.mjs">one script</a>, so the two never differ. See <a href="/privacy">privacy</a> for exactly what it sends.</p>
 </article>
 <section class="feedback" aria-label="Feedback">
   <p>Disagree with a rule or finding? Let's chat.</p>
@@ -79,6 +86,8 @@
   <span class="grow">No prices. Not a recommendation: do your own research. assay reads the chain and the web and never signs a transaction.</span>
   <a href="https://github.com/meex-works/assay">Source (MIT)</a>
   <a href="https://github.com/meex-works/assay/blob/main/docs/verified.md">Verified on mainnet</a>
+  <a href="/terms">Terms</a>
+  <a href="/privacy">Privacy</a>
   <a href="/.well-known/security.txt">security.txt</a>
   <span>© 2026 SHYGUY LLC</span>
 </div></footer>
