@@ -10,7 +10,7 @@ and the one that sets how many coins the sweep can afford to look at closely.
 
 | need | provider | pricing shape | status |
 |---|---|---|---|
-| X reads: profiles, timelines, followers, search | X API (first-party) | per resource read | **measure first**: see below |
+| X reads: profiles, timelines, followers, search | X API (first-party) | per resource read; tiers and pay-per-use have both existed, and follower endpoints may need a higher tier | **measure first**: see below. The biggest risk to the design, so every read is gated on the chain |
 | launch stream | Yellowstone gRPC (Triton, Helius, or your own node); PumpPortal websocket as a free cross-check | monthly plan | verify |
 | RPC + history | any Solana RPC provider | credits per call | verify. 🔴 Monitor credits, not health: an exhausted key can still answer `getHealth: ok` |
 | model calls: classification, extraction, review | a small fast model for bulk L1–L3 classification; a stronger one for L4 review | per token | verify; batch where latency allows |
@@ -27,7 +27,7 @@ The figures to measure in the first week, with the X API's real prices:
 | layer | coins per day | X reads per coin | model tokens per coin | cost per coin |
 |---|---|---|---|---|
 | L0 | every launch | 0 | 0 | RPC only |
-| L1 | coins with resolving socials | 1–3 | ~2k | |
+| L1 | coins whose curve came alive | ≤ 1 | ~2k | |
 | L2 | the watch set, per pass | 0–5 per pass (deltas only) | ~1k per pass | × passes |
 | L3 | promoted coins | 50–200 | ~30k | |
 | L4 | review queue | 0 | ~15k | |

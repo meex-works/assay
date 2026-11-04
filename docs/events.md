@@ -24,20 +24,22 @@ exists. If it can't, `/v1/stream` (SSE) and webhooks carry the same events.
 
 | subject | from | data |
 |---|---|---|
-| `pump.launch` | ingest | mint, creator, signature, slot, name, symbol, uri, token program, buys in the create tx |
-| `pump.trade` | ingest | mint, wallet, side, sol, tokens, curve state after |
+| `pump.launch` | ingest | mint, creator, signature, slot, name, symbol, uri, token program, quote mint, holder-reward / fee-sharing / mode arguments, buys in the create tx |
+| `pump.trade` | ingest | mint, wallet, side, `quote_mint`, `quote_amount`, tokens, curve state after; failed snipe attempts too (an attention signal) |
 | `pump.migrated` | ingest | mint, pool, slot |
 | `assay.obs.<signal>` | any layer | one observation (shape in [schema/report.v1.json](../schema/report.v1.json) `$defs/observation`) |
 | `assay.score` | score | dimensions, composite, confidence, `provisional: true` until L2 has seen the coin once |
 | `assay.decision` | each layer | `drop` / `watch` / `promote` / `demote`, with the rule that fired |
-| `assay.flag` | score, L3, L4 | a raised or cleared flag |
+| `assay.flag` | score, L3, L4 | a raised or cleared integrity flag |
+| `assay.trait` | any layer | a trait added, changed or removed (`bundled`, `predator_entered`, `vamp_of`…) |
+| `assay.lens.<name>` | lens evaluator | a coin started or stopped passing a built-in lens, with its rank |
 | `assay.tier` | score | old → new tier |
 | `assay.note` | L4, operator | the review note |
 | `assay.demand` | API, overlay | someone looked this coin up; L2 bumps its priority |
 | `assay.sweep` | L2 | per window: seen, skipped, X reads, tokens, median data age |
 
-Subscribe to `assay.>` for everything assay says, `assay.tier` for just the tier changes, or `assay.obs.x.>` for every
-X observation.
+Subscribe to `assay.>` for everything assay says, `assay.tier` for just the tier changes, `assay.lens.volatility` for
+one lens, `assay.trait` to watch for `predator_entered`, or `assay.obs.x.>` for every X observation.
 
 ## Examples
 

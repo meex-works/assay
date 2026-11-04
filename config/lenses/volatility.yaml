@@ -1,0 +1,12 @@
+# For traders who want price action and accept why it happens. Reads what the curator avoids.
+lens: volatility
+version: 1
+show_integrity_flags: true
+uses_outcome_history: true
+gate:
+  - trait: bundled
+    min: 0.20
+  - dimension: chain
+    confidence_min: 0.6
+prefer: { realized_vol_1h: 3, sniper_share: 2, bundle_unsold_share: 2, mindshare: 1 }
+ignore: [authenticity, coverage]

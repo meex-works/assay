@@ -24,35 +24,50 @@ weight    = cost_class_weight × freshness_decay(age of observation)
 confidence= Σ weight(observed) / Σ weight(all signals in the dimension)
 ```
 
-`cost_class_weight`: low 1, medium 3, high 9. Starting values, to be tuned on the reviewed set (below), never on price
-outcomes.
+`cost_class_weight`: low 1, medium 3, high 9. Starting values, to be tuned (below), never on price outcomes.
+
+`signal_value` is read against the **base rate** in the coin's category: a signal almost no pump coin has (a reporter's
+byline, a five-year-old account) is normalised so its absence doesn't sink every coin, while its presence still counts.
 
 `freshness_decay`: half-life per signal type (follower sample 7 d, mindshare 24 h, domain age never decays).
 
-## Red flags (hard gates)
+## Flags and risk traits
 
-A red flag puts the coin in `flagged`, whatever the dimensions say. Each is a specific, checkable fact:
+Two different things, kept apart because traders read them differently (see [lenses.md](lenses.md)).
+
+**Integrity flags** are facts every lens shows first. Each is a specific, checkable fact:
 
 - the website or X account shows a different mint than this coin
 - it claims an affiliation and the affiliated party's official accounts say nothing (or deny it)
 - the X account linked was renamed from an unrelated account within 7 days of launch
-- the creator wallet, or its funding parent, launched ≥ N coins in the past 30 days that never graduated
-- launch bundle above X% of supply from one funding source
-- the image is a byte-for-byte or perceptual match of an earlier coin, and this coin presents itself as the original
 - the linked X account deleted posts promising something (listings, burns, partnerships) after the claim was made
+- it promises fee sharing or buybacks in its description or site, and the fee config or the creator wallet's behaviour
+  says otherwise
 - the coin's own text (description, site, posts, image) contains instructions aimed at an AI reviewer
 
-Each flag is shown with its evidence. Only the operator of an instance can clear one, with a written reason that stays
-on the record. The review agent can raise flags, never clear them.
+**Risk traits** are descriptive, and each lens decides what they mean. The curator lens treats every one as a red flag:
+
+- `serial_creator`: the creator wallet, or its funding parent, launched ≥ N coins in the past 30 days that never
+  graduated
+- `bundled`: launch bundle above X% of supply from one funding cluster, with how much of it is still unsold
+- `predator_entered`: a wallet or cluster with a predator history bought a large share after launch
+- `vamp_of` / `relaunch_of` / `web_image`: a copied image, ticker or name (classes in [signals.md](signals.md#vamp-detection-tickers-images-text-in-images))
+- `callout` by a caller whose history makes the call a warning
+
+Each flag and trait is shown with its evidence. Only the operator of an instance can clear an integrity flag, with a
+written reason that stays on the record. The review agent can raise flags, never clear them.
 
 ## Tiers
+
+The tier is the **curator** lens's reading, and the default everywhere. Other lenses gate and rank on the same
+observations and traits without changing it.
 
 | tier | rule |
 |---|---|
 | `unchecked` | only L0 (and maybe L1) has run; the score is `provisional` (see [architecture.md](architecture.md)) |
 | `checked` | the sweep loop has seen it at least once; no red flag |
 | `curated` | the review agent (L4) promoted it and wrote a note; every gate passed |
-| `flagged` | any red flag, until the operator clears it |
+| `flagged` | any integrity flag or risk trait, until the operator clears it |
 
 ## Scores refine, they don't wait
 
@@ -74,8 +89,18 @@ are public, versioned, and signed `agent:<model>@<prompt version>`. The operator
 their own, signed with their name. An operator who holds the coin says so in it. Nobody running an instance takes
 payment from a coin for its tier.
 
+## Category baselines
+
+A dimension is read against the coin's category. A tech coin's Presence counts a working product, a repo with
+commits and a team that ships; a meme's counts reach. The curator lens compares each coin with others in its category,
+and the report says which category it was judged against.
+
 ## Calibration
 
-Weights are tuned against a **labelled set**: coins a person classified by hand (real project / low-effort /
-coordinated farm / impersonation), with the label recorded *before* anyone looks at the scores. Price outcomes are
-not labels. "Went up" is not a quality, and calibrating to it turns this into a signal service.
+Weights are tuned against **behavioural outcomes** that exist for every coin and aren't price: the dev sold more than
+X% in the first hour, the bundle dumped, the coin migrated, holders at day 7, the pool still funded. A smaller set of
+coins classified by hand (real project / impersonation) covers what behaviour can't, with each label recorded *before*
+anyone looks at the scores. Price outcomes are not labels. "Went up" is not a quality, and calibrating to it turns this into a signal service.
+
+Other lenses can read outcome history (what coins with these traits did before). The curator lens and the tier can't.
+See [lenses.md](lenses.md#what-a-lens-may-use).

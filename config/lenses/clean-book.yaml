@@ -1,0 +1,13 @@
+# Not being someone else's exit.
+lens: clean-book
+version: 1
+show_integrity_flags: true
+uses_outcome_history: true
+gate:
+  - no_traits: [predator_entered]
+  - trait: bundled
+    max: 0.10
+  - trait: bundle_unsold_share
+    max: 0.25
+  - no_callers_with_class: [front_run, exit_liquidity]
+prefer: { chain: 3, authenticity: 2, mindshare: 1 }

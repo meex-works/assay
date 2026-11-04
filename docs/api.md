@@ -8,6 +8,10 @@ is [schema/report.v1.json](../schema/report.v1.json).
 ```
 GET  /v1/coins/{mint}                       the report: tier, dimensions, flags, top evidence, note
 GET  /v1/coins/{mint}?as_of=2026-11-02T18:00Z   the report as assay knew it at that moment (see below)
+GET  /v1/coins/{mint}?lens=volatility        the report read through a lens: passes, rank, why, outcome history
+GET  /v1/lenses/{name}/passing?since=        coins currently passing a built-in lens, ranked
+GET  /v1/wallets/{wallet}                    a wallet's class and the history behind it
+GET  /v1/callers/{x_user_id}                 a caller's history: their calls and what followed, with N
 GET  /v1/coins/{mint}/evidence?dimension=authenticity&limit=50
 GET  /v1/coins/{mint}/history?from=&to=     dimension snapshots over time
 GET  /v1/coins/{mint}/related               same creator, same funding parent, same template, same follower cluster

@@ -1,0 +1,9 @@
+# Plays on a coin that's already running: its vamps and narrative siblings.
+lens: beta
+version: 1
+show_integrity_flags: true
+uses_outcome_history: true
+gate:
+  - any_trait: [vamp_of, sibling_of_runner]
+  - no_traits: [relaunch_of]
+prefer: { config_vs_meta: 3, launch_recency: 3, mindshare: 2 }

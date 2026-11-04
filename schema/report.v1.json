@@ -48,6 +48,53 @@
       }
     },
     "narrative": { "type": ["string", "null"] },
+    "category": {
+      "type": ["object", "null"],
+      "properties": {
+        "class": { "enum": ["meme", "tech", "culture", "event", "community", "other"] },
+        "evidence": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "traits": {
+      "type": "array",
+      "description": "descriptive labels built from observations; each lens decides what they mean",
+      "items": {
+        "type": "object",
+        "required": ["code", "evidence"],
+        "properties": {
+          "code": { "type": "string", "examples": ["bundled", "bundle_unsold_share", "sniped", "serial_creator", "predator_entered", "vamp_of", "ticker_reused", "relaunch_of", "cto_of", "template", "web_image", "callout", "influencer_involved", "fee_sharing", "config_vs_meta"] },
+          "value": {},
+          "ref": { "type": ["string", "null"], "description": "a related mint or wallet, e.g. the original a vamp copies" },
+          "evidence": { "type": "array", "items": { "type": "string", "description": "observation ids" } }
+        }
+      }
+    },
+    "config": {
+      "type": ["object", "null"],
+      "description": "pairing and rewards",
+      "properties": {
+        "quote_mint": { "type": "string", "description": "SOL for most; some USDC or whitelisted pump coins (verify)" },
+        "mode": { "type": ["string", "null"], "description": "launch mode from create_v2 arguments (verify the list against the IDL)" },
+        "holder_reward": { "type": ["boolean", "null"] },
+        "sharing_permanent": { "type": ["boolean", "null"] },
+        "pool": { "type": ["string", "null"] },
+        "fee_recipients": { "type": "array", "items": { "type": "object", "properties": { "address": { "type": "string" }, "share_bps": { "type": "integer" }, "role": { "type": "string" } } } },
+        "fee_behaviour": { "enum": ["unclaimed", "kept", "shared", "buyback_burn", "mixed", "unknown"] }
+      }
+    },
+    "siblings": { "type": "array", "items": { "type": "string" }, "description": "mints on the same narrative, ticker or image" },
+    "lens": {
+      "type": ["object", "null"],
+      "description": "present when the report was requested with ?lens=",
+      "properties": {
+        "name": { "type": "string" },
+        "version": { "type": "integer" },
+        "passes": { "type": "boolean" },
+        "rank": { "type": ["number", "null"] },
+        "why": { "type": "array", "items": { "type": "string" } },
+        "outcome_history": { "type": "array", "description": "descriptive statistics about past coins with these traits; never a prediction for this one", "items": { "type": "object", "properties": { "text": { "type": "string" }, "n": { "type": "integer" }, "window": { "type": "string" } } } }
+      }
+    },
     "note": {
       "type": ["object", "null"],
       "description": "the review note; present on curated coins",
@@ -90,7 +137,7 @@
       "type": "object",
       "required": ["code", "text", "raised_at", "evidence"],
       "properties": {
-        "code": { "type": "string", "examples": ["mint_mismatch", "handle_renamed_near_launch", "serial_creator", "launch_bundle", "copied_image", "affiliation_unofficial", "deleted_promise", "prompt_injection"] },
+        "code": { "type": "string", "description": "integrity flags only; risk traits live in traits[]", "examples": ["mint_mismatch", "handle_renamed_near_launch", "affiliation_unofficial", "deleted_promise", "broken_fee_promise", "prompt_injection"] },
         "text": { "type": "string" },
         "raised_at": { "type": "string", "format": "date-time" },
         "evidence": { "type": "array", "items": { "type": "string", "description": "observation ids" } },

@@ -67,5 +67,14 @@
   },
   "affiliation": null,
   "narrative": "lights / cozy",
+  "category": { "class": "meme", "evidence": ["ob_09"] },
+  "traits": [
+    { "code": "bundled", "value": 0.22, "ref": null, "evidence": ["ob_10"] },
+    { "code": "bundle_unsold_share", "value": 0.6, "ref": null, "evidence": ["ob_10", "ob_11"] },
+    { "code": "vamp_of", "value": "perceptual hash distance 4", "ref": "EXAMPLE_EARLIER_MINT", "evidence": ["ob_12"] }
+  ],
+  "config": { "quote_mint": "So11111111111111111111111111111111111111112", "mode": null, "holder_reward": false, "sharing_permanent": null, "pool": null, "fee_recipients": [], "fee_behaviour": "unclaimed" },
+  "siblings": ["EXAMPLE_EARLIER_MINT"],
+  "lens": null,
   "note": null
 }

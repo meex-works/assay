@@ -49,14 +49,25 @@ the next layer now).
 
 | layer | budget | reads | decides |
 |---|---|---|---|
-| **L0 reflex** | p95 < 1.5 s after the create tx lands | the create tx itself, on-chain metadata, in-memory caches: creator lineage, funding parents, image hashes, ticker collisions, launch bundle | drop / watch / promote |
-| **L1 glance** | < 30 s | metadata JSON (socials), one X profile read, website fetch + RDAP + CT log, Telegram count, mint-on-site, link shape | drop / watch / promote |
-| **L2 sweep** | a loop, every 3 min (configurable) | every coin in the watch set that fits the window: holder growth + funding diversity (incremental), new mentions, X engagement deltas, trade-graph deltas | demote / hold / promote |
-| **L3 deep** | minutes | follower sample, reply clustering, mindshare search, news + outlet class, full funding trace, wash analysis | flag / hold / promote to review |
-| **L4 review** | minutes | the whole evidence bundle, as quoted data | `curated` or not, with a written note |
+| **L0 reflex** | p95 < 1.5 s after the create tx lands | on-chain arguments only (launch config, quote, holder-reward and sharing settings), in-memory caches: creator lineage, funding clusters, ticker collisions (with homoglyphs), metadata URI/CID reuse, wallet classes of the first buyers. No network calls | drop / watch / promote |
+| **L1 glance** | < 30 s, **only once the curve is alive** (≥ x SOL from ≥ y independent funding sources) | metadata JSON (socials), image hash + embedding + OCR, **at most one X user lookup**, website fetch + RDAP, Telegram count, mint-on-site, link shape, category | drop / watch / promote |
+| **L2 sweep** | a loop, every 3 min (configurable): the cadence for **social reads** | every coin in the watch set that fits the window's budget: new mentions and callouts, X engagement deltas, Telegram growth, sibling versions | demote / hold / promote |
+| **L3 deep** | minutes | follower sample, reply clustering, mindshare search (the only layer that reads followers or searches X), news + outlet class, full funding trace, wash analysis, reverse image search, callout event study | flag / hold / promote to review |
+| **L4 review** | minutes; a coin realistically reaches it 30–90 min after launch | the whole evidence bundle, as quoted data | `curated` or not, with a written note |
 
-L0 never makes a network call it can't afford to lose. If the metadata JSON hasn't arrived within 800 ms, L0 decides on
-the chain alone and L1 fills in the rest. A late answer from a layer is never thrown away; it updates the coin's
+### The tape
+
+Alongside the layers, **the tape** processes every `pump.trade` as it arrives and keeps the Chain dimension current
+within seconds: classed wallets entering (`predator_entered`), bundle and dev sells, fee claims, holder growth net of
+program-held balances. It's the cheapest part of assay and the part trench traders need first, so it never waits for
+a sweep. The sweep loop is for what costs money to read: social data.
+
+**Decisions are taken for every enabled lens, not just the curator.** A coin is dropped only when no enabled lens
+could want it. A heavy bundle sends a coin out of the curator's path and straight into the volatility lens's, so it
+stays on the watch set. An instance that only runs the curator lens drops more and spends less.
+
+L0 makes no network calls. Everything it needs is in the create transaction or already in memory; the metadata JSON
+and the image are L1's. A late answer from a layer is never thrown away; it updates the coin's
 score whenever it lands.
 
 ### The sweep loop
@@ -84,7 +95,36 @@ The `curated` tier is decided by an agent reading the evidence, not by a person 
   dimension). It can raise a flag. It can't clear one.
 - The note is signed `agent:<model>@<prompt version>`, so a change of model or prompt shows up on every report it
   touches.
+- The exact model ID is part of that signature, and the deterministic gates are re-run before any note is trusted.
 - Whoever runs the instance can override any decision. The override is a signed observation that stays on the record.
+
+## The cross-coin indexes
+
+What makes assay better every week is what it learns across coins, kept as shared indexes that every layer reads:
+
+| index | built from | feeds |
+|---|---|---|
+| wallet reputation (wallet and funding cluster → class) | every pump.fun trade since launch, plus a backfill | L0 first buyers, `predator_entered`, `bundled`, Chain |
+| creator lineage | every launch | `serial_creator`, `relaunch_of` |
+| image index (hashes + embedding vectors) | every coin image | the vamp pipeline |
+| author index (X user ID → quality, caller history, handle history) | every author assay has read | Mindshare, callouts, `influencer_involved` |
+| follower classes | every follower sampled | Authenticity |
+| outcome history (traits × outcomes, by window) | assay's own records | lenses only; never the curator lens |
+| meta preference (pairing and fee config → what the market chose) | narrative clusters with several versions, daily | `config_vs_meta` |
+| templates (site fingerprints, meme templates) | every crawl and image | Presence, vamp `template` class |
+
+### Backfill before day one
+
+L0 is only as good as its caches. Before an instance goes live, it backfills every historical pump.fun launch: creators,
+tickers, metadata URIs, images (hashes and embeddings), and the funding clusters of early buyers. Empty caches make
+lineage, copies and relaunches invisible on day one. Follower overlap can't be backfilled; until it has history, its
+confidence says so.
+
+## Lenses
+
+Lenses ([lenses.md](lenses.md)) run after scoring: a small evaluator reads observations, traits and dimensions, applies
+a lens file, and emits `assay.lens.<name>`. The built-in lenses run on the instance; a harness can run its own over the
+stream with the same package.
 
 ## Where it runs
 
@@ -108,7 +148,9 @@ packages/
   ingest/       pump program listener, decoders for create / create_v2 / trade / migrate
   signals/      one module per signal: read → observation
   layers/       l0-reflex, l1-glance, l2-sweep, l3-deep, l4-review
-  score/        observations → dimensions, flags, tiers
+  score/        observations → traits, dimensions, flags, tiers
+  lens/         the lens evaluator (also published on its own, for harnesses)
+  index/        wallet reputation, image index, author index, outcome history, meta preference
   store/        Postgres schema + migrations, capture bucket
   api/          REST + SSE + webhooks
   mcp/          the MCP server
@@ -116,6 +158,7 @@ packages/
   overlay/      the browser extension
 config/
   weights.yaml  every weight, threshold and budget, in one file
+  lenses/       curator, volatility, runner, clean-book, beta, original
 .env.example    every key, supplied by whoever runs it
 ```
 

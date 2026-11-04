@@ -1,0 +1,12 @@
+# Memes with the basics and someone with reach behind them.
+lens: runner
+version: 1
+show_integrity_flags: true
+uses_outcome_history: true
+gate:
+  - category: [meme, culture]
+  - trait: influencer_involved
+  - dimension: presence
+    min: 60
+  - no_traits: [predator_entered]
+prefer: { config_vs_meta: 3, mindshare: 3, authenticity: 2, presence: 1 }

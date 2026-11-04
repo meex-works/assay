@@ -1,0 +1,12 @@
+# The default lens. Its reading is the tier. Never reads outcome history.
+lens: curator
+version: 1
+show_integrity_flags: true
+uses_outcome_history: false
+gate:
+  - no_integrity_flags: true
+  - no_traits: [serial_creator, bundled, predator_entered, vamp_of, relaunch_of, web_image]
+  - dimension: authenticity
+    min: 50
+prefer: { authenticity: 3, mindshare: 3, presence: 2, chain: 2, coverage: 1 }
+judge_by_category: true

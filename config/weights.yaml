@@ -13,8 +13,8 @@ half_life:                    # freshness decay per signal family
   domain_age: never
 
 layers:
-  l0: { budget_ms: 1500, metadata_timeout_ms: 800 }
-  l1: { budget_s: 30 }
+  l0: { budget_ms: 1500, network_calls: none }
+  l1: { budget_s: 30, alive: { curve_sol_min: 0, funding_sources_min: 0 }, x_reads_max: 1 }   # TBD from week one
   l2: { window: 3m, budget: { x_reads: 0, model_tokens: 0, seconds: 170 } }   # set from the week-one measurement
   l3: { max_promotions_per_hour: 0 }                                           # likewise
   l4: { min_confidence: 0.7 }

@@ -38,7 +38,9 @@ This is the part that constrains the design, so it gets settled before code. Rai
 ## People
 
 assay reports on coins and the public accounts they link, never on private individuals behind them. It doesn't resolve
-wallets to names, doesn't publish anyone's location, and doesn't store personal data beyond public handles and IDs.
+wallets to names or publish anyone's location. X user IDs are personal data too, and the follower index needs them
+across coins, so the index stores **hashed** ID sets (enough to compute overlap), handles raw IDs only transiently,
+and runs a scheduled deletion-compliance sweep.
 A creator wallet's history is reported as a wallet's history.
 
 A takedown/correction address is published, and every correction is a superseding observation that stays on the

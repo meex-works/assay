@@ -11,6 +11,8 @@
   <img alt="agents: MCP" src="https://img.shields.io/badge/agents-MCP-8A9099?style=flat-square">
   <img alt="keys: bring your own" src="https://img.shields.io/badge/keys-bring%20your%20own-8A9099?style=flat-square">
   <img alt="contracts: none" src="https://img.shields.io/badge/contracts-none-8A9099?style=flat-square">
+  <img alt="lenses: 6" src="https://img.shields.io/badge/lenses-6-8A9099?style=flat-square">
+  <img alt="assumptions: reviewed" src="https://img.shields.io/badge/assumptions-reviewed-8A9099?style=flat-square">
 </p>
 
 <p align="center">
@@ -23,6 +25,7 @@
   <a href="#how-it-works">How it works</a> ·
   <a href="#the-rule">The rule</a> ·
   <a href="#what-you-get">What you get</a> ·
+  <a href="#lenses">Lenses</a> ·
   <a href="#for-agents">For agents</a> ·
   <a href="#run-your-own">Run your own</a> ·
   <a href="#roadmap">Roadmap</a> ·
@@ -52,16 +55,22 @@ and anyone can change.
 
 Every launch goes onto an **event bus**. Five layers listen to it, and each one answers faster than the next:
 
-- **L0 reflex** scores a coin within a second of its create transaction, from the chain alone: who created it, what
-  else they've launched, where their SOL came from, whether the launch was bundled, whether the image is a copy.
-- **L1 glance** follows its links within 30 seconds. Does the X account exist, and has it always been this account?
-  Was the website registered yesterday? Does it show the right mint?
-- **L2 sweep** is a loop. Every few minutes it works through the watch set, ranked by activity and staleness, and
-  measures as many coins as its budget allows. More budget means more coins and fresher data.
+- **L0 reflex** scores a coin within a second of its create transaction, from the chain and memory alone: how it was
+  launched, who created it, what else they've launched, where their SOL came from, whether the launch was bundled,
+  whether its metadata is a reused upload.
+- **L1 glance** runs once the coin's curve comes alive, within 30 seconds. Is the image a copy (hashes, embeddings,
+  OCR)? Does the X account exist, and has it always been this account? Was the website registered yesterday? Does it
+  show the right mint?
+- **The tape** reads every trade as it lands and keeps the chain picture current within seconds: who just entered,
+  whether the bundle or the dev is selling, where the fees went.
+- **L2 sweep** is a loop for the reads that cost money. Every few minutes it works through the watch set, ranked by
+  activity and staleness, and checks as many coins' socials as its budget allows: new mentions, callouts, engagement,
+  rival versions. More budget means more coins and fresher data.
 - **L3 deep** spends real money on the coins that earn it: follower samples, reply clustering, mindshare net of the
   team, news sorted by whether the outlet sells placement, full funding traces, wash detection.
-- **L4 review** is an agent that reads the evidence, as data, and decides whether a coin is `curated`. It writes a
-  signed note. It can't promote past a failed gate, and it can't clear a flag.
+- **L4 review** is an agent that reads the evidence, as data, and decides whether a coin is `curated`, typically 30–90
+  minutes in. It writes a note signed with its exact model. It can't promote past a failed gate, and it can't clear a
+  flag.
 
 No layer waits for the next one. A consumer that needs an answer in a second takes L0's, along with its confidence; a
 consumer that can wait listens for the next score. [Architecture →](docs/architecture.md)
@@ -107,11 +116,44 @@ built from observations and always link back to them.
 > *The linked X account (created 2021-03-09) was @otherhandle until 2026-11-01.*
 > `x.handle_history` · cost to fake: high · L1 · observed 2026-11-03T09:05Z
 
-Hard red flags (wrong mint on the site, a celebrity link the celebrity never mentions, a renamed account, a serial
-creator, a bundled launch, a copied image, deleted promises, text written to manipulate an AI reviewer) override every
-score. [Scoring →](docs/scoring.md)
+Two kinds of warning, kept apart. **Integrity flags** are facts everyone is shown first: the wrong mint on the site,
+a celebrity link the celebrity never made, a renamed account, deleted promises, a fee-sharing promise the config
+doesn't keep, text written to manipulate an AI reviewer. **Risk traits** (bundled, sniped, a serial creator, a
+predatory wallet entering, a copied image or ticker, a caller with a bad history) are descriptions, and what they mean
+depends on who's reading. [Scoring →](docs/scoring.md)
 
 assay never says buy, sell, or what a coin is worth. It says what's there.
+
+## Lenses
+
+The same facts read differently depending on who's trading. A heavily bundled coin is a warning to someone holding for
+a week and the whole point to someone scalping its volatility. So assay keeps the facts the same for everyone and lets
+**lenses** do the interpreting:
+
+| lens | reads the coin as |
+|---|---|
+| **curator** (default, sets the tier) | is there something real here? |
+| **volatility** | bundles, snipers and a thin book: price action, and the reason for it |
+| **runner** | a meme with the basics, the pairing the market prefers right now, and someone with reach involved |
+| **clean book** | no predatory wallets, a small and sold-down bundle, no caller with a front-running history |
+| **beta** | the copies and siblings of a coin that's already running |
+| **original** | only the first of a narrative |
+
+A lens is a short YAML file. Writing your own is the expected way to use assay. Lenses other than the curator can also
+read **outcome history**: what coins with the same traits did before, with the sample size. That's history about other
+coins, never a prediction about this one. [Lenses →](docs/lenses.md)
+
+## What assay looks for that the chain doesn't say out loud
+
+| | |
+|---|---|
+| **predatory wallets** | funding clusters that enter after launch, take a large share and exit into the buyers they draw. Classed by their history across every pump coin, and caught entering within seconds |
+| **callouts** | a call by an influencer can mark a top. assay records every call against the caller's history and tests five explanations for why (exit liquidity, paid because demand was missing, late, front-run by bots, a few good callers hidden by many bad ones). assay's own channel gets the same treatment |
+| **category** | a tech coin won't run like a meme with an influencer behind it. Each coin is judged against its own category, and "tech" stays "tech (claimed)" until a product backs it |
+| **pairing and rewards** | coins that don't share rewards or aren't on the quote the market prefers get passed over for a version that does. assay reads the fee and sharing config, checks it against what the creator actually did, and compares it with what the market is choosing this week |
+| **vamps** | copied tickers and images, caught with metadata reuse, perceptual hashes, image embeddings, OCR on text in the image, and reverse image search for art lifted from the web; reported with both the first and the largest earlier coin |
+
+Every one starts as a [hypothesis](docs/hypotheses.md) with a test, and becomes a trait only when assay's own data backs it.
 
 ## Where it shows up
 
@@ -157,8 +199,8 @@ Presence 78 · Authenticity 31 · Mindshare 52 · Coverage 10 · Chain 60
 **Plug in the MCP server.** `assay_lookup`, `assay_batch`, `assay_feed`, `assay_explain`, which returns the evidence as
 sentences your agent can quote.
 
-The intended use in a trading harness is a **gate**, not a signal: *only look at coins that are `checked` or better,
-with Authenticity ≥ 50 and no flags.* [API →](docs/api.md) · [Events →](docs/events.md)
+The intended use in a trading harness is a **gate**, not a signal: pick a lens (or write one) and only look at coins
+that pass it. `?lens=volatility` on the API, `assay.lens.volatility` on the bus. [API →](docs/api.md) · [Events →](docs/events.md)
 
 ## Run your own
 
@@ -174,18 +216,25 @@ You bring the keys; none ship with the repo:
 | `NEWS_API_KEY` | Coverage |
 | `TELEGRAM_BOT_TOKEN` · `NEYNAR_API_KEY` | Telegram counts and the channel · Farcaster |
 
+X is the expensive one, so assay never spends an X read on a coin until the chain says it's alive.
+
 A missing key switches its signals off and lowers confidence. A run without X data never passes itself off as one
 with it. Every weight, threshold and budget lives in one file, `config/weights.yaml`. [Costs →](docs/costs.md)
 
 ## Roadmap
 
 - [x] Design: signals, scoring, layers, bus, API, retention, overlay
+- [x] Assumptions reviewed adversarially; findings in [assumptions](docs/assumptions.md)
+- [ ] Verify the `create_v2` arguments, fee and sharing configs against the current IDL
 - [ ] `bus` + `ingest`: pump program listener, decoders, NATS adapter
-- [ ] **L0 reflex** with creator lineage, funding parents, bundles, image hashes
+- [ ] **Backfill**: every historical launch, creator, image and early-buyer funding cluster
+- [ ] **L0 reflex** + **the tape**: creator lineage, funding clusters, bundles, wallet classes, live entries
 - [ ] Week-one measurement: launch rate, L1 pass rate, X reads per coin → real numbers in [costs](docs/costs.md)
 - [ ] **L1 glance** + the API + `?format=brief`
 - [ ] **L2 sweep loop** with window budgets and `assay.sweep` stats
 - [ ] **L3 deep** + **L4 review agent**
+- [ ] Lenses: the evaluator, the six built-ins, `?lens=`
+- [ ] Hypothesis tests H1–H6 on the first month of data
 - [ ] MCP server, Telegram channel, free demo at assay.meex.work
 - [ ] pump.fun overlay (userscript first, then the store extension)
 - [ ] More launchpads
@@ -194,10 +243,13 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 
 | | |
 |---|---|
-| [architecture](docs/architecture.md) | the bus, the five layers, the sweep loop, the review agent, bring-your-own keys |
+| [architecture](docs/architecture.md) | the bus, the five layers, the tape, the sweep loop, the cross-coin indexes, the review agent, keys |
 | [events](docs/events.md) | topics, envelope, examples, subscribing and replay |
 | [signals](docs/signals.md) | every signal, its source, what it costs to fake |
-| [scoring](docs/scoring.md) | observations → dimensions → tiers; red flags; calibration |
+| [scoring](docs/scoring.md) | observations → dimensions → tiers; integrity flags and risk traits; calibration |
+| [lenses](docs/lenses.md) | the same facts read for different risk profiles; writing your own |
+| [hypotheses](docs/hypotheses.md) | trench beliefs (bundles, predators, callouts, category, pairing, vamps) and the test for each |
+| [assumptions](docs/assumptions.md) | every load-bearing assumption, its verdict, and what changed |
 | [api](docs/api.md) | REST, batch, stream, webhooks, MCP, point-in-time |
 | [retention](docs/retention.md) | what's kept, for how long, and what each platform's terms allow |
 | [overlay](docs/overlay.md) | the extension, the demo, the Telegram channel |
@@ -212,8 +264,9 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
   30 days", never "scam".
 - **Read-only.** No contracts, no transactions, no wallets, no keys of yours beyond the API keys you choose to give
   your own instance.
-- **Calibrated on quality, not price.** Weights are tuned against coins a person classified by hand. "Went up" isn't a
-  quality.
+- **Facts for everyone, readings for each.** Observations and traits are the same for every reader; lenses interpret.
+- **Calibrated on behaviour, not price.** The curator's weights are tuned against what the dev, the bundle and the
+  holders actually did. "Went up" isn't a quality.
 - **Nothing rewritten.** Corrections add a new observation; the old one stays on the record.
 
 ## License

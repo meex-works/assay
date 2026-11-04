@@ -58,7 +58,7 @@ anything:
 A public channel that posts every coin the review agent promotes to `curated`, in one message:
 
 ```
-$TICKER · curated · 11 min after launch
+$TICKER · curated · 52 min after launch
 Presence 78 · Authenticity 66 · Mindshare 71 · Coverage 20 · Chain 74
 X account since 2019, one handle. 212 distinct non-team authors in 2 h.
 Creator: first launch, funded from a CEX.

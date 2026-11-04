@@ -1,0 +1,9 @@
+# Only the first of a narrative.
+lens: original
+version: 1
+show_integrity_flags: true
+uses_outcome_history: false
+gate:
+  - no_traits: [vamp_of, relaunch_of, web_image]
+  - first_in_narrative_cluster: true
+prefer: { authenticity: 2, mindshare: 2, presence: 2 }
