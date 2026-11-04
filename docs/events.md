@@ -37,6 +37,8 @@ exists. If it can't, `/v1/stream` (SSE) and webhooks carry the same events.
 | `assay.note` | L4, operator | the review note |
 | `assay.demand` | API, overlay | someone looked this coin up; L2 bumps its priority |
 | `assay.sweep` | L2 | per window: seen, skipped, X reads, tokens, median data age |
+| `assay.declared` | API | a plan was declared for a mint that doesn't exist yet |
+| `assay.plan_match` | L0 | a declared mint launched: matched its plan, or which fields differed |
 
 Subscribe to `assay.>` for everything assay says, `assay.tier` for just the tier changes, `assay.lens.volatility` for
 one lens, `assay.trait` to watch for `predator_entered`, or `assay.obs.x.>` for every X observation.

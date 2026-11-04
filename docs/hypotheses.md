@@ -85,6 +85,16 @@ isn't fee-sharing; the version that is has 4× the holders".
 **Test:** vamp launches per hour around a coin's peak, and the vamps' own outcome history. **Becomes:** the beta lens,
 and the `vamp_of` trait linked both ways (a runner's report lists its vamps).
 
+## H7. Pure launches die to late bundles
+
+**Belief:** many pure launches die within five minutes because a bundle buys in after launch, runs the price, and
+dumps on whoever arrived.
+
+**Test:** for every pure launch, whether a late bundle crossed the threshold, how soon, and what happened to holder
+count and the bundle's own position over the next 15 minutes. Separately: late-bundle rate on coins the channel posted
+against pure coins it didn't. **Becomes:** the `late_bundle` trait, the post's watch window and confirmation times,
+and the published measure of whether posting draws bundles.
+
 ## Assumptions under review
 
 The design's own assumptions, stress-tested: see the review in [assumptions.md](assumptions.md).

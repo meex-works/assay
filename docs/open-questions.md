@@ -15,6 +15,8 @@
 | public surface | a free demo at assay.meex.work and a Telegram channel; no X account |
 | the channel | posts pure launches, not good coins; no market details; edits a post in place when purity breaks ([pure.md](pure.md)) |
 | X | one mindshare source among several, low trust and capped; optional |
+| channel timing | post at 30 s; watch for 15 min, confirm at 5 and 15 min, edit within seconds if a late bundle breaks purity |
+| launch kit | the creators' checklist + a read-only preflight + declared launches; free, never buys a post |
 | speed | push, never poll: gRPC + websocket at `processed`, logs decoded directly, address webhooks for wallets and vaults |
 | weights | public, in `config/weights.yaml` |
 | repo | public, MIT; a baseline others clone and change |
@@ -30,5 +32,6 @@
 5. **Other launchpads.** The schema is launchpad-agnostic (`launchpad: "pump.fun"`). Bags, Bonk's launchpad and Meteora
    DBC are the obvious next ones.
 6. **Name.**
-7. **`min_age` and `stay_pure_for`** for the channel: fastest (30 s) vs fewer bots (minutes). Set from the measured
-   bot effect on the first weeks of posts. `assay` is a working name.
+7. **A launch page.** The kit is preflight-only. A page that builds the create transaction for the creator's own wallet
+   to sign (assay never holding a key) would make a pure launch one click; it also makes assay part of the launch
+   path. Later, if at all. `assay` is a working name.

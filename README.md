@@ -27,6 +27,7 @@
   <a href="#what-you-get">What you get</a> ·
   <a href="#lenses">Lenses</a> ·
   <a href="#pure-launches">Pure launches</a> ·
+  <a href="#launch-kit">Launch kit</a> ·
   <a href="#for-agents">For agents</a> ·
   <a href="#run-your-own">Run your own</a> ·
   <a href="#roadmap">Roadmap</a> ·
@@ -168,8 +169,31 @@ Pure as of 0:34 after launch. Not a recommendation: do your own research.
 
 Pure means: a small dev buy and nothing hidden, no bundle, no known bad wallets early, a creator with a clean history,
 an original image and metadata, links that show this mint, and a fee setup that matches what it promises. A coin with
-no socials can still be pure. When a posted coin stops being pure (the dev dumps, a predator buys in), **the original
-message is edited in place** to say when and why. [Pure launches →](docs/pure.md)
+no socials can still be pure.
+
+Pure launches often die in the first five minutes because a bundle buys in *after* launch and dumps on whoever
+arrived. So a posted coin is watched for 15 minutes. The tape clusters late buyers by funding, by when they were
+funded, by slot and amount, and if a group crosses the line the post is **edited in place within seconds**: *"No longer
+pure at 2:14: 9 wallets funded within 3 minutes of each other bought 31% of supply."* A coin that gets through says so:
+*"Still pure at 5:00."* [Pure launches →](docs/pure.md)
+
+## Launch kit
+
+For creators who want a pure launch: the checklist, and a **preflight** that runs it before the coin exists.
+
+```sh
+npx @assay/preflight plan.json
+```
+```
+PASS  dev wallet: funded from an exchange 9 days ago, no earlier launches
+PASS  dev buy: 0.5 SOL ≈ 1.8% of supply at launch
+FAIL  image: perceptual match (distance 3) with $LANTRN, launched 2 days ago
+FAIL  website: does not show the mint yet; add <mint> to the page
+WAIT  alive: decided after launch
+```
+
+A passing plan can be **declared**, keyed by the mint's public key, so the launch is checked against it in seconds.
+Free, read-only, public keys only, and it never buys a post. [Launch kit →](docs/launch-kit.md)
 
 ## What assay looks for that the chain doesn't say out loud
 
@@ -262,7 +286,8 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 - [ ] **L1 glance** + the API + `?format=brief`
 - [ ] **L2 sweep loop** with window budgets and `assay.sweep` stats
 - [ ] **L3 deep** + **L4 review agent**
-- [ ] **Pure launches**: the checklist, the Telegram channel, edit-on-break, the measured bot effect
+- [ ] **Pure launches**: the checklist, late-bundle detection, the Telegram channel, edit-on-break, the measured bot and bundle effect
+- [ ] **Launch kit**: preflight CLI + API, declared launches
 - [ ] Lenses: the evaluator, the seven built-ins, `?lens=`
 - [ ] Hypothesis tests H1–H6 on the first month of data
 - [ ] MCP server, Telegram channel, free demo at assay.meex.work
@@ -278,7 +303,8 @@ with it. Every weight, threshold and budget lives in one file, `config/weights.y
 | [signals](docs/signals.md) | every signal, its source, what it costs to fake |
 | [scoring](docs/scoring.md) | observations → dimensions → tiers; integrity flags and risk traits; calibration |
 | [lenses](docs/lenses.md) | the same facts read for different risk profiles; writing your own |
-| [pure launches](docs/pure.md) | the checklist, the Telegram post, edit-on-break, the trade-offs |
+| [pure launches](docs/pure.md) | the checklist, late bundles, the Telegram post, edit-on-break, the trade-offs |
+| [launch kit](docs/launch-kit.md) | the creators' checklist, preflight, declared launches |
 | [hypotheses](docs/hypotheses.md) | trench beliefs (bundles, predators, callouts, category, pairing, vamps) and the test for each |
 | [assumptions](docs/assumptions.md) | every load-bearing assumption, its verdict, and what changed |
 | [api](docs/api.md) | REST, batch, stream, webhooks, MCP, point-in-time |

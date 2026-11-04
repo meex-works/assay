@@ -21,6 +21,8 @@ than it's worth, and to notice when it happens.
 | fake fee sharing: "fees go to holders" in the description, nothing in the config | Configuration | promised vs actual is checked against the config accounts and where claimed fees actually went; a broken promise is an integrity flag |
 | beating the vamp check: crops, mirrors, AI re-draws, new ticker | identity | embeddings and OCR catch what hashes miss; reverse image search catches art lifted from the web; the `template` list keeps common memes from matching everything |
 | callers gaming their own history: deleting bad calls, posting from a second account | callouts | assay captures the call when it's made; a deleted call stays in the caller's history as "deleted"; second accounts are linked by shared wallets and posting patterns |
+| declaring a clean plan, then launching differently | pure | L0 compares the launch with the plan field by field; a mismatch is an observation on the record, and the live checks decide purity regardless |
+| a late bundle timed for the channel's readers | pure | the tape breaks purity within seconds of the bundle's buys and the post is edited; posted vs unposted late-bundle rates are published |
 | learning the weights | everything | weights are public (it's evidence, not a secret), but cost-to-fake weighting means the cheap fixes don't move the score |
 
 **Drift watch**: every week, compare the distribution of each signal across new coins with the previous four weeks.
