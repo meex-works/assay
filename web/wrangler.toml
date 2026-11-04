@@ -1,0 +1,13 @@
+name = "assay-web"
+main = "src/worker.mjs"
+compatibility_date = "2026-10-01"
+workers_dev = false
+
+[assets]
+directory = "public"
+binding = "ASSETS"
+html_handling = "drop-trailing-slash"
+not_found_handling = "404-page"
+
+routes = [{ pattern = "assay.meex.work", custom_domain = true }]
+# secret: API_KEY (= Keychain assay-api-key / assay), set with `wrangler secret put API_KEY`

@@ -2,3 +2,4 @@ node_modules/
 idl/
 data/
 *.log
+web/.wrangler/

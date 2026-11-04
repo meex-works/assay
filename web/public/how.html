@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Assay Office works</title>
+<meta name="description" content="How assay decides a pump.fun launch is pure, and how each post is watched.">
+<link rel="canonical" href="https://assay.meex.work/how">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://assay.meex.work/how">
+<meta property="og:title" content="How Assay Office works">
+<meta property="og:description" content="How assay decides a pump.fun launch is pure, and how each post is watched.">
+<meta property="og:image" content="https://assay.meex.work/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15181c">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body data-page="how">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><img src="/logo-256.png" alt="" width="34" height="34"><b>Assay Office</b></a>
+  <span class="live" id="live" title="Feed status"><i></i><span>connecting</span></span>
+  <nav aria-label="Main">
+    <a href="/">Tape</a>
+    <a href="/how" aria-current="page">How it works</a>
+    <a href="https://t.me/assayoffice">Telegram</a>
+    <a href="https://github.com/meex-works/assay">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<article class="prose">
+  <h1>How it works</h1>
+  <p>Assay Office is the public end of <a href="https://github.com/meex-works/assay">assay</a>, an open curation system for pump.fun coins. It doesn't post good coins. It posts <strong>pure launches</strong>: coins whose structure is honest at launch. Whether a coin is worth anything is for you to find out.</p>
+
+  <h2>Seeing every launch</h2>
+  <p>Two independent feeds watch pump.fun: a gRPC stream of every successful pump transaction and a websocket on launches only. Each launch is checked against both, and anything only one of them saw is logged as a gap.</p>
+
+  <h2>The checklist, at 0:30</h2>
+  <ul>
+    <li><strong>Dev buy:</strong> the creator bought 5% of supply or less, and still holds it.</li>
+    <li><strong>No bundle:</strong> no group among the first buyers that was funded by the creator, funded by one wallet, created in the last hour and bought in the launch's first slots, or funded within minutes of each other, holding 3% or more.</li>
+    <li><strong>No known bad actors:</strong> no early buyers funded by a wallet that has funded early buyers in other coins.</li>
+    <li><strong>Clean creator:</strong> not a creator, or a signing wallet, with several other launches in the last day.</li>
+    <li><strong>Original:</strong> no earlier coin with the same metadata, the same image, or the same name or ticker in the last day.</li>
+    <li><strong>Honest links and config:</strong> linked accounts exist, and any promise of holder rewards matches the launch's settings.</li>
+    <li><strong>Alive:</strong> at least ten buyers from independent funding sources. This only keeps the channel readable; it's never shown.</li>
+  </ul>
+  <p>pump.fun's own mayhem agent, which buys most mayhem coins in their first seconds, is known by address and never counts against a coin.</p>
+
+  <h2>The watch, for fifteen minutes</h2>
+  <p>Every trade on a posted coin is read as it lands. If a late bundle buys in, if the dev sells, or if the coin is pumped by wallets that aren't independent, the post is edited to say when and why, and the event goes into the coin's thread. Coins that hold get "Still pure at 5:00" and "Still pure at 15:00".</p>
+
+  <h2>The comparison set</h2>
+  <p>One pure coin in five is watched exactly the same way but never posted. Comparing the two answers a question the channel has to face: does posting a coin draw the bundles that kill it?</p>
+
+  <h2>What assay doesn't do</h2>
+  <p>No prices, no market caps, no predictions, no recommendations. No contracts, no wallets, no signing. The weights and thresholds are public, in <a href="https://github.com/meex-works/assay/blob/main/config/lenses/pure.yaml">pure.yaml</a>, and every claim about pump.fun's mechanics was <a href="https://github.com/meex-works/assay/blob/main/docs/verified.md">checked against mainnet</a>.</p>
+</article>
+</main>
+<footer><div class="wrap">
+  <span class="grow">No prices. Not a recommendation: do your own research. assay reads the chain and the web and never signs a transaction.</span>
+  <a href="https://github.com/meex-works/assay">Source (MIT)</a>
+  <a href="https://github.com/meex-works/assay/blob/main/docs/verified.md">Verified on mainnet</a>
+  <a href="/.well-known/security.txt">security.txt</a>
+  <span>© 2026 SHYGUY LLC</span>
+</div></footer>
+<script src="/app.js" defer></script>
+</body>
+</html>

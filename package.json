@@ -4,12 +4,15 @@
   "type": "module",
   "description": "Curation scoring for pump.fun coins. This package is the silent-run service: L0, the tape, the pure checklist and the Assay Office poster.",
   "license": "MIT",
-  "engines": { "node": ">=22.18" },
+  "engines": {
+    "node": ">=22.18"
+  },
   "scripts": {
     "idl": "sh scripts/fetch-idl.sh",
     "silent": "node src/run.ts",
     "report": "node src/report.ts",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "api": "node src/api.ts"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.1",
@@ -19,5 +22,9 @@
     "ws": "^8.18.0",
     "yaml": "^2.6.0"
   },
-  "devDependencies": { "typescript": "^5.9.0", "@types/node": "^22.18.0", "@types/ws": "^8.5.0" }
+  "devDependencies": {
+    "typescript": "^5.9.0",
+    "@types/node": "^22.18.0",
+    "@types/ws": "^8.5.0"
+  }
 }

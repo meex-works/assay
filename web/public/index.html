@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assay Office</title>
+<meta name="description" content="Pure pump.fun launches, checked thirty seconds in and watched for fifteen minutes. No prices.">
+<link rel="canonical" href="https://assay.meex.work/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://assay.meex.work/">
+<meta property="og:title" content="Assay Office">
+<meta property="og:description" content="Pure pump.fun launches, checked thirty seconds in and watched for fifteen minutes. No prices.">
+<meta property="og:image" content="https://assay.meex.work/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#15181c">
+<link rel="icon" href="/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body data-page="tape">
+<header class="top"><div class="wrap">
+  <a class="brand" href="/"><img src="/logo-256.png" alt="" width="34" height="34"><b>Assay Office</b></a>
+  <span class="live" id="live" title="Feed status"><i></i><span>connecting</span></span>
+  <nav aria-label="Main">
+    <a href="/" aria-current="page">Tape</a>
+    <a href="/how">How it works</a>
+    <a href="https://t.me/assayoffice">Telegram</a>
+    <a href="https://github.com/meex-works/assay">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<section class="intro">
+  <h1>Every pump.fun launch, checked thirty seconds in. <em>The pure ones are posted.</em></h1>
+  <p>A launch is pure when its structure is honest: a small dev buy and nothing hidden, no bundle, no known bad wallets among the first buyers, an original image and metadata, and links that say what they claim. Each post is watched for fifteen minutes and edited the moment that stops being true. Nothing here is a price.</p>
+  <p class="notice">Silent run, started 4 November 2026. The numbers below are live and unfiltered.</p>
+</section>
+
+<section aria-label="The last 24 hours">
+  <div class="stats" id="stats">
+    <div class="stat"><span class="k">Launches</span><span class="v">—</span><span class="s">&nbsp;</span></div>
+  </div>
+  <p class="window" id="window">&nbsp;</p>
+</section>
+
+<div class="grid">
+  <section>
+    <h2>Posts</h2>
+    <p class="sub">Pure at 0:30 and posted, or held back as the comparison set. Newest first.</p>
+    <div class="panel" id="posts"><p class="empty">Loading.</p></div>
+    <h2 style="margin-top:28px">Why coins fail</h2>
+    <p class="sub">Failed checks among coins with real buyers, last 24 hours.</p>
+    <div class="panel reasons" id="reasons"><p class="empty">Loading.</p></div>
+  </section>
+  <section>
+    <h2>The tape</h2>
+    <p class="sub">Every coin judged at 0:30, newest first. Coins with fewer than three outside buyers are marked dead.</p>
+    <div class="panel scroll">
+      <table class="tape">
+        <thead><tr><th>Judged</th><th>Coin</th><th>Verdict</th><th class="hide-s">Why</th></tr></thead>
+        <tbody id="tape"><tr><td colspan="4" class="empty">Loading.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+</main>
+<footer><div class="wrap">
+  <span class="grow">No prices. Not a recommendation: do your own research. assay reads the chain and the web and never signs a transaction.</span>
+  <a href="https://github.com/meex-works/assay">Source (MIT)</a>
+  <a href="https://github.com/meex-works/assay/blob/main/docs/verified.md">Verified on mainnet</a>
+  <a href="/.well-known/security.txt">security.txt</a>
+  <span>© 2026 SHYGUY LLC</span>
+</div></footer>
+<script src="/app.js" defer></script>
+</body>
+</html>
