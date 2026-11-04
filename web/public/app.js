@@ -24,13 +24,21 @@ const LABEL = {
 const VERDICT = { pure: "Pure", impure: "Not pure", dead: "Dead", not_alive: "Too few buyers" };
 const pill = (kind, text) => el("span", { class: `pill ${kind}`, text });
 
-function setLive(s) {
+// The dot in the header. "feed paused" means the silent run itself hasn't reported for 2.5 minutes; "site offline" means
+// this page couldn't reach the API twice in a row. One failed request changes nothing.
+let lastMetric = null, failures = 0;
+function paintLive() {
   const live = $("#live");
   if (!live) return;
-  const fresh = s?.health?.lastMetric && Date.now() - s.health.lastMetric < 150_000;
-  live.className = `live ${fresh ? "on" : "off"}`;
-  live.lastElementChild.textContent = fresh ? "live" : "feed paused";
+  const [cls, text] = failures >= 2 ? ["off", "site offline"] : lastMetric == null ? ["", "connecting"] : Date.now() - lastMetric < 150_000 ? ["on", "live"] : ["off", "feed paused"];
+  live.className = `live ${cls}`;
+  live.lastElementChild.textContent = text;
 }
+function setLive(s) {
+  if (s?.health?.lastMetric) { lastMetric = s.health.lastMetric; failures = 0; } else failures++;
+  paintLive();
+}
+setInterval(paintLive, 10_000);
 
 // ── the tape page ─────────────────────────────────────────────────────────────────────────────────────────────────
 function renderStats(s) {
@@ -120,7 +128,10 @@ async function coinPage() {
 
 // ── boot ──────────────────────────────────────────────────────────────────────────────────────────────────────────
 const page = document.body.dataset.page;
-const run = page === "tape" ? tapePage : page === "coin" ? coinPage : () => api("summary").then(setLive);
+const live = () => api("summary").then(setLive);
+const run = page === "tape" ? tapePage : page === "coin" ? coinPage : live;
 const loop = () => run().catch((e) => { console.error(e); setLive(null); });
 loop();
 if (page === "tape" || page === "coin") setInterval(() => { if (!document.hidden) loop(); }, page === "tape" ? 5000 : 10000);
+else setInterval(() => { if (!document.hidden) live().catch(() => setLive(null)); }, 30_000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) loop(); });   // fresh on return to the tab
